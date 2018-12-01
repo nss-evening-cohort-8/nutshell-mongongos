@@ -4,3 +4,98 @@
 body {
   background-color: $darkgray;
 }
+
+.sb {
+  display: inline-block;
+  height: 40px;
+  color: white !important;
+  font-family: sans-serif;
+  padding-right: 15px;
+  font-size: 15px;
+  text-decoration: none;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+.sb::before {
+  font-family: 'Font Awesome 5 Brands';
+  text-align: center;
+  width: 40px;
+  height: 100%;
+  display: inline-block;
+  font-size: 25px;
+  margin-right: 10px;
+  line-height: 40px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
+.sb:hover {
+  text-decoration: none;
+  color: white !important;
+}
+.sb.sb-nb {
+  border: 1px solid transparent;
+}
+.sb.sb-ct {
+  text-align: center;
+}
+.sb.sb-fw {
+  width: 220px;
+}
+.sb.sb-m-2 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.sb.sb-m-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.sb.sb-m-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sb.sb-b {
+  display: block;
+}
+.sb.sb-br-2 {
+  border-radius: 2px;
+}
+.sb.sb-br-5 {
+  border-radius: 5px;
+}
+.sb.sb-br-10 {
+  border-radius: 10px;
+}
+.sb.sb-fw.sb-xs {
+  width: 180px;
+}
+.sb.sb-xs {
+  font-size: 12px;
+  height: 30px;
+}
+.sb.sb-xs::before {
+  font-size: 15px;
+  line-height: 30px;
+  width: 30px;
+}
+button.sb::before {
+  padding-left: 0px !important;
+  margin-left: -10px !important;
+}
+button.sb.sb-fw::before {
+  padding-left: 0px !important;
+  margin-left: -15px !important;
+}
+.sb-google {
+  background-color: #f7533f;
+  border-color: #e12009;
+}
+.sb-google::before {
+  background-color: #f63d27;
+  content: '\f0d5';
+}
+.sb-google:hover::before {
+  background-color: #f7533f;
+}
+.sb-google:hover {
+  background-color: #f86958;
+}
