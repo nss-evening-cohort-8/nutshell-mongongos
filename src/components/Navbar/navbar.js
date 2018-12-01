@@ -1,13 +1,11 @@
 // import firebase from 'firebase/app';
 // import 'firebase/auth';
 import $ from 'jquery';
-// import 'bootstrap';
 
 import './navbar.scss';
 
-// const navbarEvents = () => {
+// const navbarEvents = () => { };
 
-// };
 const buildNavbar = () => {
   const domString = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light">

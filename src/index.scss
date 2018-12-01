@@ -5,6 +5,7 @@ body {
   background-color: $darkgray;
 }
 
+// Start Google Social Button styling
 .sb {
   display: inline-block;
   height: 40px;
@@ -99,3 +100,4 @@ button.sb.sb-fw::before {
 .sb-google:hover {
   background-color: #f86958;
 }
+// End Google Social button Styling
