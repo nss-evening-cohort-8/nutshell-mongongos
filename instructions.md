@@ -73,8 +73,8 @@ Each collection should have data in the following structure:
 ```json
 {
     "userUid": "5ykBb0xyadPZLgH4EPO4i88HIql2",
-    "city": "Nashville,TN",
-    "isCurrentLocation": true
+    "zipcode": 37209,
+    "isCurrent": true
 }
 ```
 
