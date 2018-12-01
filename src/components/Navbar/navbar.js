@@ -16,7 +16,7 @@ const buildNavbar = () => {
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a id="nav-add-task" class="nav-link" href="#"><i class="fas fa-users fa-lg mx-1"></i></i>Friends</a>
+          <a id="nav-friends" class="nav-link" href="#"><i class="fas fa-users fa-lg mx-1"></i></i>Friends</a>
         </li>
         <li class="nav-item">
           <a id="nav-logout" class="nav-link" href="#"><i class="fas fa-sign-out-alt fa-lg mx-1"></i>Logout</a>
