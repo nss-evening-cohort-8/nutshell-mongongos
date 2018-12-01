@@ -11,6 +11,7 @@ const initialize = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   auth.autheEvents();
   navbar.buildNavbar();
+  navbar.navbarEvents();
   authHelper.checkLoginStatus();
 };
 

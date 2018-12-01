@@ -1,10 +1,8 @@
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import $ from 'jquery';
 
 import './navbar.scss';
-
-// const navbarEvents = () => { };
 
 const buildNavbar = () => {
   const domString = `
@@ -26,7 +24,26 @@ const buildNavbar = () => {
   </nav>
   `;
   $('#nav-bar').html(domString);
-  // navbarEvents();
 };
 
-export default { buildNavbar };
+const appLogout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      $('#nav-friends').hide();
+      $('#nav-logout').hide();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const navbarEvents = () => {
+  $('body').on('click', '#nav-friends', () => {
+    console.log('Friends button clicked');
+  });
+  $('body').on('click', '#nav-logout', appLogout);
+};
+
+export default { buildNavbar, navbarEvents };
