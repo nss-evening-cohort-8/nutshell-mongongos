@@ -34,19 +34,19 @@ const isExistingUserName = userName => new Promise((resolve, reject) => {
     });
 });
 
-const hasUserName = (userId) => {
+const hasUserName = userId => new Promise((resolve, reject) => {
   axios.get(`${fireBaseUrl}/users.json?orderBy="uid"&equalTo="${userId}"`)
     .then((result) => {
       const usersObj = result.data;
       if (Object.getOwnPropertyNames(usersObj).length !== 0) {
-        return true;
+        resolve(true);
       }
-      return false;
+      resolve(false);
     })
     .catch((error) => {
-      console.log(error);
+      reject(error);
     });
-};
+});
 
 const createUserData = usersObj => axios.post(`${fireBaseUrl}/users.json`, JSON.stringify(usersObj));
 

@@ -2,6 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import usersData from '../Helpers/Data/usersData';
 
+// Build the Modal if we have determined there is no Username for the existing User
 const userNameModal = (userId) => {
   const newUsernameModal = `
   <div class="modal fade" id="users-modal" tabindex="-1" role="dialog">
@@ -30,41 +31,17 @@ const userNameModal = (userId) => {
   $('#new-user-modal').html(newUsernameModal);
 };
 
-const validateUsername = (e) => {
-  const userInput = e.target;
-  if (e.key === 'Enter' && userInput.value.length > 0) {
-    $('#username-input').removeClass('is-invalid is-valid');
-    usersData.isExistingUserName(userInput.value)
-      .then((result) => {
-        if (result) {
-          // Username exists
-          $('#username-input').addClass('is-invalid');
-          $('#validate-text').html('<small id="validate-username">User name Exists</small>');
-        } else {
-          $('#username-input').addClass('is-valid');
-          $('#validate-text').html('<small id="validate-username">User name is Valid</small>');
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else if (e.key === 'Enter' && userInput.value.length === 0) {
-    $('#username-input').addClass('is-invalid');
-    $('#validate-text').html('<small id="validate-username">User name cannot be blank</small>');
-  } else {
-    $('#username-input').removeClass('is-invalid is-valid');
-    $('#validate-text').html('');
-  }
-};
-
 const createUserName = (e) => {
-  e.preventDefault();
+  // Handle "Enter Key" && Save Button Events
+  if (e.target.id === 'username-save-btn') {
+    e.preventDefault();
+  }
   const userInput = $('#username-input').val();
   const userId = $('#username-input').data('uid');
-  console.log('UserId', userId);
-  if (e.key === 'Enter' && userInput.value.length > 0) {
+  // if (e.key === 'Enter' || e.target.id === 'username-save-btn') {
+  if (userInput.length > 0) {
     $('#username-input').removeClass('is-invalid is-valid');
-    usersData.isExistingUserName(userInput.value)
+    usersData.isExistingUserName(userInput)
       .then((result) => {
         if (result) {
           // Username exists
@@ -74,39 +51,49 @@ const createUserName = (e) => {
           // This is a VALID user so create it
           $('#username-input').addClass('is-valid');
           $('#validate-text').html('<small id="validate-username">User name is Valid</small>');
-
+          // Create new user Object to send to Firebase
           const newUserObject = {
-            userName: `'${userInput}'`,
-            uid: `'${userId}'`,
+            userName: `${userInput}`,
+            uid: `${userId}`,
           };
+          // Pass the data to our Axios Create
           usersData.createUserData(newUserObject)
             .then(() => {
+              // Want to refresh any user data here.  Like maybe a profile section on the Navbar?
+              $('#users-modal').modal('hide');
               console.log('Created a new user yo');
             })
             .catch((error) => {
-              console.error(error);
+              console.error('An error occured creating a new user Object', error);
             });
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.error('An error occurred while checking for an existing user name in the DB', error);
       });
-  } else if (e.key === 'Enter' && userInput.value.length === 0) {
+  } else if (userInput.length === 0) {
+    // Input field is empty so mark it as invalid
     $('#username-input').addClass('is-invalid');
     $('#validate-text').html('<small id="validate-username">User name cannot be blank</small>');
   } else {
+    // Things are looking okay so clear any valid/non valid classes and remove validation text
     $('#username-input').removeClass('is-invalid is-valid');
     $('#validate-text').html('');
   }
-
-  const validUsername = $('#username-input').hasClass('is-valid');
-  console.log('Is it a valid user?', validUsername);
-  console.log('Clicked Save Button on Username Modal', validUsername);
 };
 
 const usersEvents = () => {
-  $('body').on('keypress', '#username-input', validateUsername);
+  // Only fire create event if it is the "Enter" key
+  $('body').on('keypress', '#username-input', (e) => {
+    if (e.key === 'Enter') {
+      createUserName(e);
+    }
+  });
+
+  // Click event for the save button on username Modal
   $('body').on('click', '#username-save-btn', createUserName);
+
+  // Set the focus on the input box for the Modal
   $('body').on('shown.bs.modal', () => {
     $('#username-input').trigger('focus');
   });

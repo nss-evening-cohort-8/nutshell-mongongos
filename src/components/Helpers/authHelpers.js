@@ -8,10 +8,16 @@ import users from '../Users/users';
 // Checks if am Authenticated User has a username in the DB
 // Presents Modal to create/Edit a userName
 const userNameExists = (userId) => {
-  if (!(usersData.hasUserName(userId))) {
-    users.userNameModal(userId);
-    $('#users-modal').modal('show');
-  }
+  usersData.hasUserName(userId)
+    .then((result) => {
+      if (result === false) {
+        users.userNameModal(userId);
+        $('#users-modal').modal('show');
+      }
+    })
+    .catch((error) => {
+      console.error('An error occured checking for existing user name', error);
+    });
 };
 
 const checkLoginStatus = () => {
