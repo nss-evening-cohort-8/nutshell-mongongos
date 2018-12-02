@@ -1,0 +1,71 @@
+import $ from 'jquery';
+import './losers.scss';
+import losersData from './losersData';
+import authHelpers from '../Helpers/authHelpers';
+
+const addOneLoserClicked = () => {
+  $('.addOneLoserButton').on('click', (event) => {
+    losersData.sendLoserRequest(event.dataset.loserUid)
+      .then(() => {
+        const sentString = `
+                            <p class='sentRequest'>Friend Request Sent</p>`;
+        $(event.target).parent().append(sentString);
+        $(event.target).remove();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
+const addLosersClicked = () => {
+  $('#addLosersButton').on('click', () => {
+    losersData.getOtherLosers(authHelpers.getCurrentUid())
+      .then((losers) => {
+        let loserString = '';
+        losers.forEach((loser) => {
+          loserString += `<div class='oneLoserDiv'>
+                            <img class='oneLoserAvatar' src='${loser.avatar}'/>
+                            <p class='oneLoserName'>${loser.name}</p>
+                            <button type='button' class='btn btn-info btn-sm addOneLoserButton' data-loser-uid='${loser.uid}'>+</button>
+                          </div>`;
+        });
+        $('#losersTitle').text('Add a Friend');
+        $('#losersBody').html(loserString);
+        addOneLoserClicked();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
+const losersBuilder = () => {
+  const loserString = `
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id='losersTitle'>Friends</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class='modal-body' id='losersBody'>
+        <div>
+          <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
+        </div>
+        <div class="modal-body" id='losersDiv'>
+        </div>
+        <div class='modal-body' id='losersPendingDiv'>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  $('#losersModal').html(loserString);
+  addLosersClicked();
+};
+
+export default {
+  losersBuilder,
+  addLosersClicked,
+};

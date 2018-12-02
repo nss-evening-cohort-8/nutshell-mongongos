@@ -1,11 +1,11 @@
 {
-  "friend1": {
+  "friendRequest1": {
     "userUid": "12345",
     "friendUid": "67890",
     "isAccepted": true,
     "isPending": false
   },
-  "friend2": {
+  "friendRequest2": {
     "userUid": "12345",
     "friendUid": "12680",
     "isAccepted": false,
