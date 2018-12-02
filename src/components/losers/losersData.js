@@ -42,8 +42,13 @@ const sendLoserRequest = (user) => {
     });
 };
 
+const getPendingLosers = (uid) => {
+  axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${uid}"`);
+};
+
 export default {
   getOtherLosers,
   sendLoserRequest,
   getOneUser,
+  getPendingLosers,
 };
