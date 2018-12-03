@@ -40,18 +40,37 @@ const addLosersClicked = () => {
   });
 };
 
+const acceptLoser = () => {
+  $('.acceptLoser').on('click', (event) => {
+    losersData.completeRequest(event.target.dataset.loserUid);
+    losersData.addLoserToUser();
+  });
+};
+
+const declineLoser = () => {
+  $('.declineLoser').on('click', (event) => {
+    losersData.completeRequest(event.target.dataset.loserUid);
+  });
+};
+
 const pendingLoserRequests = () => {
   losersData.getPendingLosers(authHelpers.getCurrentUid())
-    .then((pendingLosers) => {
-      let pendingLoserString = '';
-      pendingLosers.forEach((pendingLoser) => {
-        pendingLoserString += `<div class='onePendingLoserDiv>
-                                <img class='onePendingLoserAvatar' src='${pendingLoser.avatar}'/>
-                                <p class='onePendingLoserName'>${pendingLoser.name}</p>
-                                <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser.uid}'>Accept</button>
-                                <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser.uid}'>Decline</button>`
-      });
-      $('#losersPendingDiv').html(pendingLoserString);
+    .then((requests) => {
+      losersData.getUsersByRequests(requests)
+        .then((pendingLosers) => {
+          let pendingLoserString = '';
+          pendingLosers.forEach((pendingLoser) => {
+            pendingLoserString += `<div class='onePendingLoserDiv'>
+                                    <img class='onePendingLoserAvatar' src='${pendingLoser.avatar}'/>
+                                    <p class='onePendingLoserName'>${pendingLoser.name}</p>
+                                    <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser.uid}'>Accept</button>
+                                    <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser.uid}'>Decline</button>`
+          });
+          $('#losersPendingDiv').html(pendingLoserString);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -88,4 +107,8 @@ export default {
   addLosersClicked,
   addOneLoserClicked,
   pendingLoserRequests,
+  acceptLoser,
+  declineLoser,
 };
+
+
