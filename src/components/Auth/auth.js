@@ -1,3 +1,6 @@
+// Authors: Marco Crank
+// Purpose: Handle Authentication into the Nutshell App.
+
 import $ from 'jquery';
 import firebase from 'firebase/app';
 import 'firebase/auth';
