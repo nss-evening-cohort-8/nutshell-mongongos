@@ -17,7 +17,7 @@ const userNameModal = (userId) => {
         <div class="modal-body">
           <form class="needs-validation" novalidate>
             <input type="text" id="username-input" class="form-control" data-uid="${userId}" placeholder="Username" required>
-            <input type="text" id="username-input-sanitized" class="form-control mt-2" disabled>
+            <input type="text" id="username-input-sanitized" class="form-control mt-2" disabled style="display: none;">
             <div id="validate-text"><small id="validate-username"></small></div>
           </form>
         </div>
@@ -31,29 +31,31 @@ const userNameModal = (userId) => {
   $('#new-user-modal').html(newUsernameModal);
 };
 
+// This is a pretty big function.  Maybe break out the validation to its own function?
 const createUserName = (e) => {
   // Handle "Enter Key" && Save Button Events
   if (e.target.id === 'username-save-btn') {
     e.preventDefault();
   }
+  const sanitizedUser = $('#username-input-sanitized').val();
   const userInput = $('#username-input').val();
   const userId = $('#username-input').data('uid');
-  // if (e.key === 'Enter' || e.target.id === 'username-save-btn') {
   if (userInput.length > 0) {
     $('#username-input').removeClass('is-invalid is-valid');
-    usersData.isExistingUserName(userInput.toLocaleLowerCase())
+    usersData.isExistingUserName(sanitizedUser)
       .then((result) => {
         if (result) {
           // Username exists
           $('#username-input').addClass('is-invalid');
-          $('#validate-text').html('<small id="validate-username">User name Exists</small>');
+          $('#validate-text').html('<small class="text-danger" id="validate-username">User name Exists</small>');
         } else {
           // This is a VALID user so create it
           $('#username-input').addClass('is-valid');
-          $('#validate-text').html('<small id="validate-username">User name is Valid</small>');
+          $('#validate-text').html('<small class="text-success" id="validate-username">User name is Valid</small>');
           // Create new user Object to send to Firebase
           const newUserObject = {
             userName: `${userInput}`,
+            santizedUserName: `${sanitizedUser}`,
             uid: `${userId}`,
           };
           // Pass the data to our Axios Create
@@ -61,7 +63,6 @@ const createUserName = (e) => {
             .then(() => {
               // Want to refresh any user data here.  Like maybe a profile section on the Navbar?
               $('#users-modal').modal('hide');
-              console.log('Created a new user yo');
             })
             .catch((error) => {
               console.error('An error occured creating a new user Object', error);
@@ -74,7 +75,7 @@ const createUserName = (e) => {
   } else if (userInput.length === 0) {
     // Input field is empty so mark it as invalid
     $('#username-input').addClass('is-invalid');
-    $('#validate-text').html('<small id="validate-username">User name cannot be blank</small>');
+    $('#validate-text').html('<small class="text-danger" id="validate-username">User name cannot be blank</small>');
   } else {
     // Things are looking okay so clear any valid/non valid classes and remove validation text
     $('#username-input').removeClass('is-invalid is-valid');
@@ -82,11 +83,9 @@ const createUserName = (e) => {
   }
 };
 
-const sanitizeUserName = (e) => {
-  const typedUserName = $('#username-input').val();
-  const sanitizedUser = typedUserName.split(' ').join('_').toLocaleLowerCase();
+const sanitizeUserName = () => {
+  const sanitizedUser = $('#username-input').val().toLocaleLowerCase();
   $('#username-input-sanitized').val(sanitizedUser);
-  console.log(e.target);
 };
 
 const usersEvents = () => {

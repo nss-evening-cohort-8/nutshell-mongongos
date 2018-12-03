@@ -1,3 +1,6 @@
+// Authors: Marco Crank
+// Purpose: Entry point into the Nutshell App.
+
 import firebase from 'firebase/app';
 import 'bootstrap';
 import navbar from './components/Navbar/navbar';

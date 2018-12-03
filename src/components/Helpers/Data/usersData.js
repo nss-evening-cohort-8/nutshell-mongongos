@@ -1,3 +1,6 @@
+// Author: Marco Crank
+// Purpose: Handle all the Axios call to Firebase for the Users collection
+
 import axios from 'axios';
 import apiKeys from '../../../../db/apiKeys.json';
 
@@ -21,7 +24,7 @@ const getAllUserNames = () => new Promise((resolve, reject) => {
 });
 
 const isExistingUserName = userName => new Promise((resolve, reject) => {
-  axios.get(`${fireBaseUrl}/users.json?orderBy="username"&equalTo="${userName}"`)
+  axios.get(`${fireBaseUrl}/users.json?orderBy="santizedUserName"&equalTo="${userName}"`)
     .then((result) => {
       const usersObj = result.data;
       if (Object.getOwnPropertyNames(usersObj).length !== 0) {
