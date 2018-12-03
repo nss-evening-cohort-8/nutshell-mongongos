@@ -114,8 +114,27 @@ const completeRequest = (loser) => {
     });
 };
 
-const addLoserToUser = (user, userWithLoser) => {
-  axios.put(`${URL}/users/${user}.json`, JSON.stringify(userWithLoser));
+const addLoserToUser = (loserUid) => {
+  let userWithLoser;
+  getOneUser(authHelpers.getCurrentUid())
+    .then((userData) => {
+      userWithLoser = userData.data;
+      getOneUser(loserUid)
+        .then((loserData) => {
+          const loserInfo = {
+            name: loserData.data.name,
+            uid: loserData.data.uid,
+          };
+          userWithLoser.friends[loserData.data.uid] += loserInfo;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  axios.put(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`, JSON.stringify(userWithLoser));
 };
 
 export default {

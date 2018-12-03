@@ -43,7 +43,7 @@ const addLosersClicked = () => {
 const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
     losersData.completeRequest(event.target.dataset.loserUid);
-    losersData.addLoserToUser();
+    losersData.addLoserToUser(event.target.dataset.loserUid);
   });
 };
 
@@ -110,5 +110,3 @@ export default {
   acceptLoser,
   declineLoser,
 };
-
-
