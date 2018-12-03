@@ -1,3 +1,6 @@
+// Author: Marco Crank
+// Purpose: Handle all the Displaying and events related to the userName feature of the app.
+
 import $ from 'jquery';
 import 'bootstrap';
 import usersData from '../Helpers/Data/usersData';
@@ -5,23 +8,20 @@ import usersData from '../Helpers/Data/usersData';
 // Build the Modal if we have determined there is no Username for the existing User
 const userNameModal = (userId) => {
   const newUsernameModal = `
-  <div class="modal fade" id="users-modal" tabindex="-1" role="dialog">
+  <div class="modal fade" id="users-modal" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Please Enter a User Name</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <form class="needs-validation" novalidate>
             <input type="text" id="username-input" class="form-control" data-uid="${userId}" placeholder="Username" required>
+            <input type="text" id="username-input-sanitized" class="form-control mt-2" disabled>
             <div id="validate-text"><small id="validate-username"></small></div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" id="username-save-btn" class="btn btn-primary">Save changes</button>
         </div>
       </div>
@@ -41,7 +41,7 @@ const createUserName = (e) => {
   // if (e.key === 'Enter' || e.target.id === 'username-save-btn') {
   if (userInput.length > 0) {
     $('#username-input').removeClass('is-invalid is-valid');
-    usersData.isExistingUserName(userInput)
+    usersData.isExistingUserName(userInput.toLocaleLowerCase())
       .then((result) => {
         if (result) {
           // Username exists
@@ -82,6 +82,13 @@ const createUserName = (e) => {
   }
 };
 
+const sanitizeUserName = (e) => {
+  const typedUserName = $('#username-input').val();
+  const sanitizedUser = typedUserName.split(' ').join('_').toLocaleLowerCase();
+  $('#username-input-sanitized').val(sanitizedUser);
+  console.log(e.target);
+};
+
 const usersEvents = () => {
   // Only fire create event if it is the "Enter" key
   $('body').on('keypress', '#username-input', (e) => {
@@ -96,6 +103,13 @@ const usersEvents = () => {
   // Set the focus on the input box for the Modal
   $('body').on('shown.bs.modal', () => {
     $('#username-input').trigger('focus');
+  });
+
+  // Create sanitized username
+  $('body').on('keyup', '#username-input', (e) => {
+    if (e.key !== 'Enter') {
+      sanitizeUserName(e);
+    }
   });
 };
 
