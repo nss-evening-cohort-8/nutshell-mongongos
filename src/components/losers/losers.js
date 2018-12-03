@@ -40,6 +40,12 @@ const addLosersClicked = () => {
   });
 };
 
+const removeLoserClicked = () => {
+  $('.removeLoserButton').on('click', (event) => {
+    losersData.deleteLoser(event.target.dataset.loserUid);
+  });
+};
+
 const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
     losersData.completeRequest(event.target.dataset.loserUid);
@@ -102,8 +108,28 @@ const losersBuilder = () => {
   addLosersClicked();
 };
 
+const losersListBuilder = () => {
+  losersData.getMyLosers()
+    .then((losersArray) => {
+      let loserListString = '';
+      losersArray.forEach((loser) => {
+        loserListString += `<div class='oneLoserDiv'>
+                              <img class='oneLoserAvatar' src='${loser.avatar}'/>
+                              <p class='oneLoserName'>${loser.name}</p>
+                              <button type='button' class='btn btn-danger btn-sm removeLoserButton' data-loser-uid='${loser.uid}'>X</button>
+                            </div>`;
+      });
+      $('#losersDiv').html(loserListString);
+      removeLoserClicked();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export default {
   losersBuilder,
+  losersListBuilder,
   addLosersClicked,
   addOneLoserClicked,
   pendingLoserRequests,

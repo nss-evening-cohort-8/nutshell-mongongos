@@ -21,6 +21,23 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
     });
 });
 
+const getMyLosers = () => new Promise((resolve, reject) => {
+  axios.get(`${URL}/users?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`)
+    .then((data) => {
+      const userObject = data.data;
+      const losersArray = [];
+      if (userObject.friends != null) {
+        Object.keys(userObject.friends).forEach((friend) => {
+          losersArray.push(userObject.friends[friend]);
+        });
+      }
+      resolve(losersArray);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
 const getOneUser = (user) => {
   axios.get(`${URL}/users/${user}.json`);
 };
@@ -137,6 +154,10 @@ const addLoserToUser = (loserUid) => {
   axios.put(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`, JSON.stringify(userWithLoser));
 };
 
+const deleteLoser = (loserId) => {
+  axios.delete(`${URL}/users/${authHelpers.getCurrentUid()}/${loserId}.json`);
+};
+
 export default {
   getOtherLosers,
   sendLoserRequest,
@@ -145,4 +166,6 @@ export default {
   completeRequest,
   addLoserToUser,
   getUsersByRequests,
+  getMyLosers,
+  deleteLoser,
 };
