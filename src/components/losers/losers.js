@@ -42,7 +42,13 @@ const addLosersClicked = () => {
 
 const removeLoserClicked = () => {
   $('.removeLoserButton').on('click', (event) => {
-    losersData.deleteLoser(event.target.dataset.loserUid);
+    losersData.deleteLoser(event.target.dataset.loserUid)
+      .then(() => {
+        initializeLosers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
 
