@@ -23,13 +23,14 @@ const userNameExists = (userId) => {
     });
 };
 
-const checkLoginStatus = () => {
+const checkLoginStatus = (articleComponent) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       userNameExists(user.uid);
       $('#login-page').html('');
       $('#nav-logout').show();
       $('#nav-friends').show();
+      articleComponent();
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
@@ -42,4 +43,6 @@ const getUsderId = () => {
   firebase.auth().onAuthStateChanged(user => user.uid);
 };
 
-export default { checkLoginStatus, getUsderId };
+const getCurrentUid = () => firebase.auth().currentUser.uid;
+
+export default { checkLoginStatus, getUsderId, getCurrentUid };
