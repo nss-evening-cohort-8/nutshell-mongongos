@@ -22,4 +22,15 @@ const getAllWeatherObjects = uid => new Promise((resolve, reject) => {
     });
 });
 
-export default { getAllWeatherObjects };
+const getWeatherApi = zipcode => new Promise((resolve, reject) => {
+  axios.get(`https://api.weatherbit.io/v2.0/current?&postal_code=${zipcode}&country=US&key=${apiKeys.weatherbitKey.apiKey}`)
+    .then((result) => {
+      console.log(result);
+      resolve(result);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+export default { getAllWeatherObjects, getWeatherApi };

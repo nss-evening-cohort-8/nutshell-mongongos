@@ -10,13 +10,19 @@ const buildDropdown = (weatherArray) => {
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (weatherArray.length) {
     weatherArray.forEach((weather) => {
-      domString += `<div class="dropdown-item" data-dropdown-id=${weather.id}>${weather.zipcode}</div>`;
+      domString += `<div class="dropdown-item get-zip" data-dropdown-zipcode=${weather.zipcode}>${weather.zipcode}</div>`;
     });
   } else {
     domString += '<div class="dropdown-item">You have no locations.</div>';
   }
   domString += '</div></div>';
   $('#dropdown-container').html(domString);
+};
+
+const printWeatherApi = (weather) => {
+  console.log(weather);
+  const domString = '';
+  $('#weather-container').html(domString);
 };
 
 const weatherComponent = () => {
@@ -30,4 +36,17 @@ const weatherComponent = () => {
     });
 };
 
-export default { weatherComponent };
+const weatherApi = (e) => {
+  const zipcode = e.target.dataset.dropdownId;
+  weatherData.getWeatherApi(zipcode)
+    .then((weather) => {
+      printWeatherApi(weather);
+    })
+    .catch((error) => {
+      console.error('error on weatherApi', error);
+    });
+};
+
+$('body').on('.get-zip', 'click', weatherApi);
+
+export default { weatherComponent, weatherApi };
