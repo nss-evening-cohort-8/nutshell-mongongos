@@ -1,12 +1,52 @@
 {
   "weather1": {
-    "userUid": "12345",
-    "zipcode": 94598,
+    "userUid": "RQyjwnXjihcdsC183ZxoBC29waI2",
+    "zipcode": 37129,
     "isCurrent": true
   },
   "weather2": {
-    "userUid": "12345",
-    "zipcode": 37215,
+    "userUid": "RQyjwnXjihcdsC183ZxoBC29waI2",
+    "zipcode": 37210,
+    "isCurrent": false
+  },
+  "weather3": {
+    "userUid": "f9islzWb6jYi1oHbJXkKrPm0UP62",
+    "zipcode": 37130,
+    "isCurrent": true
+  },
+  "weather4": {
+    "userUid": "f9islzWb6jYi1oHbJXkKrPm0UP62",
+    "zipcode": 37210,
+    "isCurrent": false
+  },
+  "weather5": {
+    "userUid": "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
+    "zipcode": 37027,
+    "isCurrent": true
+  },
+  "weather6": {
+    "userUid": "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
+    "zipcode": 37210,
+    "isCurrent": false
+  },
+  "weather7": {
+    "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
+    "zipcode": 37027,
+    "isCurrent": true
+  },
+  "weather8": {
+    "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
+    "zipcode": 37210,
+    "isCurrent": false
+  },
+  "weather9": {
+    "userUid": "rich",
+    "zipcode": 37090,
+    "isCurrent": true
+  },
+  "weather10": {
+    "userUid": "rich",
+    "zipcode": 37210,
     "isCurrent": false
   }
 }
