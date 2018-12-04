@@ -79,21 +79,21 @@ const getPendingLosers = uid => new Promise((resolve, reject) => {
 
 const getUsersByRequests = (requests) => {
   const usersArray = [];
-  let axiosCounter = 0;
+  const promisesArray = [];
   requests.forEach((request) => {
     const user = request.friendUid;
-    axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${user}"`)
-      .then((userObject) => {
-        usersArray.push(userObject.data);
-        axiosCounter += 1;
-        if (axiosCounter === requests.length) {
-          return usersArray;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    promisesArray.push(axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${user}"`));
   });
+  Promise.all(promisesArray)
+    .then((promisesReturnedArray) => {
+      promisesReturnedArray.forEach((userObject) => {
+        usersArray.push(userObject.data);
+      });
+      return usersArray;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const getRequestsByUser = () => new Promise((resolve, reject) => {
@@ -155,7 +155,7 @@ const addLoserToUser = (loserUid) => {
 };
 
 const deleteLoser = (loserId) => {
-  axios.delete(`${URL}/users/${authHelpers.getCurrentUid()}/${loserId}.json`);
+  axios.delete(`${URL}/users/?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"/${loserId}.json`);
 };
 
 export default {

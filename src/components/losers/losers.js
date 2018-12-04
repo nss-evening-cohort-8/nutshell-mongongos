@@ -70,7 +70,7 @@ const pendingLoserRequests = () => {
                                     <img class='onePendingLoserAvatar' src='${pendingLoser.avatar}'/>
                                     <p class='onePendingLoserName'>${pendingLoser.name}</p>
                                     <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser.uid}'>Accept</button>
-                                    <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser.uid}'>Decline</button>`
+                                    <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser.uid}'>Decline</button>`;
           });
           $('#losersPendingDiv').html(pendingLoserString);
         })
@@ -127,6 +127,16 @@ const losersListBuilder = () => {
     });
 };
 
+const initializeLosers = () => {
+  losersBuilder();
+  losersListBuilder();
+  pendingLoserRequests();
+};
+
+const initializeAddLosers = () => {
+  addLosersClicked();
+};
+
 export default {
   losersBuilder,
   losersListBuilder,
@@ -135,4 +145,6 @@ export default {
   pendingLoserRequests,
   acceptLoser,
   declineLoser,
+  initializeLosers,
+  initializeAddLosers,
 };
