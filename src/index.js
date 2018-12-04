@@ -7,6 +7,7 @@ import navbar from './components/Navbar/navbar';
 import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
+import initializeEventsPage from './components/Events/EventsData/eventsData';
 
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
@@ -17,7 +18,7 @@ const initialize = () => {
   users.usersEvents();
   navbar.buildNavbar();
   navbar.navbarEvents();
-  authHelper.checkLoginStatus();
+  authHelper.checkLoginStatus(initializeEventsPage);
 };
 
 initialize();
