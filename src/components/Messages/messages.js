@@ -8,18 +8,21 @@ import moment from 'moment';
 import authHelpers from '../Helpers/authHelpers';
 import messagesData from '../Helpers/Data/messagesData';
 
+
+const scrollToBottom = () => {
+  $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 1000);
+};
+
 const msgOutput = (messagesArr) => {
   const currentUid = authHelpers.getCurrentUid();
   const currentProfilePic = authHelpers.getProfilePic();
-  console.log(currentUid, currentProfilePic);
-  console.log(messagesArr);
 
   let newMsgString = `
   <div class="messages mt-5">
   <div class="msg-history">
   `;
   messagesArr.forEach((message) => {
-    const msgtimeStamp = moment(message.timestamp).format('LT');
+    const msgtimeStamp = moment(message.timestamp).format('LTS');
     const msgDate = moment(message.timestamp).format('MMM D');
     if (message.userUid === currentUid) {
       // If it is my UID then it is outgoing
@@ -28,7 +31,7 @@ const msgOutput = (messagesArr) => {
         <div class="outgoing-msg-img"> <img alt="Test" src="${currentProfilePic}"> </div>
         <div class="sent-msg">
           <p>${message.message}</p>
-          <span class="time-date"> ${msgtimeStamp} | ${msgDate} <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
+          <span class="time-date"> ${msgtimeStamp} | ${msgDate} <i class="msg-del far fa-trash-alt fa-lg mx-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
         </div>
       </div>
       `;
@@ -63,6 +66,7 @@ const printMessages = () => {
   messagesData.getAllMessages()
     .then((results) => {
       msgOutput(results);
+      scrollToBottom();
     })
     .catch((error) => {
       console.error('An error occurred while retrieving messages from the DB', error);

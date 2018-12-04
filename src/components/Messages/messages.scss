@@ -12,10 +12,16 @@
 .messages {
   padding: 15px 15px 0 15px;
   width: 100%;
-  background-color: white;
+  background: rgba(0, 0, 0, 0.15);
+  background-color: $msgContainerBackgrnd;
+  border-radius: 10px 10px 0 0;
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  -ms-overflow-style: none;
 
   .msg-history {
-    // overflow: hidden;
     padding-bottom: 15px;
   }
 }
@@ -25,7 +31,7 @@ img{
 }
 
 .time-date {
-  color: #747474;
+  color: #d3d3d3;
   display: block;
   font-size: 12px;
   margin: 8px 0 0;
@@ -50,7 +56,8 @@ img{
 }
 
 .incoming-msg {
-  margin:13px 0 13px;
+  // margin:13px 0 13px;
+  padding: 12px 0 12px;
 }
 
 .received-msg {
@@ -92,7 +99,7 @@ img{
 
 .outgoing-msg {
   overflow:hidden;
-  margin:13px 0 13px;
+  padding: 12px 0 12px;
 }
 
 .sent-msg {
@@ -117,6 +124,7 @@ img{
   position: relative;
   background-color: white;
   padding: 0 15px 0 15px;
+  border-radius: 0 0 5px 5px;
 }
 
 .msg-send-btn {
