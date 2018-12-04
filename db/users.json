@@ -1,10 +1,12 @@
 {
   "user1": {
     "username": "Cat Lady",
+    "santizedUserName": "cat lady",
     "uid": "12345"
   },
   "user2": {
     "username": "John Smith",
+    "santizedUserName": "john smith",
     "uid": "67890"
   }
 }

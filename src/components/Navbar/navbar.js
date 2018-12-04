@@ -1,3 +1,6 @@
+// Authors: Marco Crank
+// Purpose: Handle all the Displaying and events related to the Navbar in the Nutshell App.
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import $ from 'jquery';
