@@ -4,8 +4,9 @@
 @import '../../styles/variables';
 @import '~bootstrap/scss/bootstrap';
 
+// Alot more work to do in here to refactor
 #message-container{
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
 
 .messages {
@@ -64,7 +65,7 @@ img{
 }
 
 .received-width-msg p {
-  background: $recMsgBackgrnd none repeat scroll 0 0;
+  background: $msgRecBackgrnd none repeat scroll 0 0;
   border-radius: 3px;
   color: $msgRecTextColor;
   font-size: $msgTextSize;
@@ -75,7 +76,7 @@ img{
 
 // Sent Messages
 .sent-msg p {
-  background: $sentMsgBackgrnd none repeat scroll 0 0;
+  background: $msgSentBackgrnd none repeat scroll 0 0;
   border-radius: 6px;
   font-size: $msgTextSize;
   margin: 0;
@@ -109,8 +110,6 @@ img{
   min-height: 48px;
   width: 100%;
   outline: none;
-
-
 }
 
 .type-msg {

@@ -34,6 +34,8 @@ const checkLoginStatus = (messages) => {
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
+      $('#message-container').html('');
+      $('#message-input').html('');
       auth.loginPage();
     }
   });

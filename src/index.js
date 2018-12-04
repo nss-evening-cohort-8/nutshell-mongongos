@@ -19,7 +19,6 @@ const initialize = () => {
   navbar.buildNavbar();
   navbar.navbarEvents();
   authHelper.checkLoginStatus(messages.msgOutput);
-  // messages.msgOutput();
 };
 
 initialize();

@@ -7,12 +7,12 @@ import './messages.scss';
 // import usersData from '../Helpers/Data/usersData';
 
 const msgOutput = () => {
-  let newString = `
-  <div class="messages">
+  let newMsgString = `
+  <div class="messages mt-5">
   <div class="msg-history">
   `;
   // If NOT my UID then it is incoming
-  newString += `
+  newMsgString += `
   <div class="incoming-msg">
     <div class="incoming-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
     <div class="received-msg">
@@ -24,7 +24,7 @@ const msgOutput = () => {
   </div>
   `;
   // If it is my UID then it is outgoing
-  newString += `
+  newMsgString += `
   <div class="outgoing-msg">
     <div class="outgoing-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
     <div class="sent-msg">
@@ -54,17 +54,16 @@ const msgOutput = () => {
     </div>
   </div>
   `;
-  // newString += `
-  // <div class="type-msg">
-  //   <div class="input-msg-write">
-  //     <input class="write-msg" type="text" placeholder="Type a message">
-  // <button class="msg-send-btn" type="button">
-  // <i class="fas fa-upload" aria-hidden="true"></i></button>
-  //   </div>
-  // </div>
-  // `;
-  $('#message-container').html(newString);
-  // $('#message-input').html(newInputString)
+  const newInputString = `
+  <div class="type-msg">
+    <div class="input-msg-write">
+      <input class="write-msg" type="text" placeholder="Type a message">
+      <button class="msg-send-btn" type="button"><i class="fas fa-upload" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  `;
+  $('#message-container').html(newMsgString);
+  $('#message-input').html(newInputString);
 };
 
 export default { msgOutput };
