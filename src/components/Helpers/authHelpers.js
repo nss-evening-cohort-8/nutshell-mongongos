@@ -41,8 +41,9 @@ const checkLoginStatus = (messages) => {
   });
 };
 
-const getUsderId = () => {
-  firebase.auth().onAuthStateChanged(user => user.uid);
-};
+const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-export default { checkLoginStatus, getUsderId };
+const getProfilePic = () => firebase.auth().currentUser.photoURL;
+// || '/images/profile_placeholder.png';
+
+export default { checkLoginStatus, getCurrentUid, getProfilePic };

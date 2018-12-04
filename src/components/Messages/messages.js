@@ -4,56 +4,49 @@
 import $ from 'jquery';
 import 'bootstrap';
 import './messages.scss';
-// import usersData from '../Helpers/Data/usersData';
+import moment from 'moment';
+import authHelpers from '../Helpers/authHelpers';
+import messagesData from '../Helpers/Data/messagesData';
 
-const msgOutput = () => {
+const msgOutput = (messagesArr) => {
+  const currentUid = authHelpers.getCurrentUid();
+  const currentProfilePic = authHelpers.getProfilePic();
+  console.log(currentUid, currentProfilePic);
+  console.log(messagesArr);
+
   let newMsgString = `
   <div class="messages mt-5">
   <div class="msg-history">
   `;
-  // If NOT my UID then it is incoming
-  newMsgString += `
-  <div class="incoming-msg">
-    <div class="incoming-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
-    <div class="received-msg">
-      <div class="received-width-msg">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt inventore quod beatae blanditiis, eos molestias ipsam pariatur voluptates unde eaque adipisci maxime repellendus obcaecati nesciunt dolor nam quaerat, at praesentium.</p>
-        <span class="time-date"> 11:01 AM | June 9</span>
+  messagesArr.forEach((message) => {
+    const msgtimeStamp = moment(message.timestamp).format('LT');
+    const msgDate = moment(message.timestamp).format('MMM D');
+    if (message.userUid === currentUid) {
+      // If it is my UID then it is outgoing
+      newMsgString += `
+      <div class="outgoing-msg">
+        <div class="outgoing-msg-img"> <img alt="Test" src="${currentProfilePic}"> </div>
+        <div class="sent-msg">
+          <p>${message.message}</p>
+          <span class="time-date"> ${msgtimeStamp} | ${msgDate} <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
+        </div>
       </div>
-    </div>
-  </div>
-  `;
-  // If it is my UID then it is outgoing
-  newMsgString += `
-  <div class="outgoing-msg">
-    <div class="outgoing-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
-    <div class="sent-msg">
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt inventore quod beatae blanditiis, eos molestias ipsam pariatur voluptates unde eaque adipisci maxime repellendus obcaecati nesciunt dolor nam quaerat, at praesentium.</p>
-      <span class="time-date"> 11:01 AM | June 9 <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
-    </div>
-  </div>
-  <div class="outgoing-msg">
-    <div class="outgoing-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
-    <div class="sent-msg">
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt inventore quod beatae blanditiis, eos molestias ipsam pariatur voluptates unde eaque adipisci maxime repellendus obcaecati nesciunt dolor nam quaerat, at praesentium.</p>
-      <span class="time-date"> 11:01 AM | June 9 <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
-    </div>
-  </div>
-  <div class="outgoing-msg">
-    <div class="outgoing-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
-    <div class="sent-msg">
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt inventore quod beatae blanditiis, eos molestias ipsam pariatur voluptates unde eaque adipisci maxime repellendus obcaecati nesciunt dolor nam quaerat, at praesentium.</p>
-      <span class="time-date"> 11:01 AM | June 9 <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
-    </div>
-  </div>
-  <div class="outgoing-msg">
-    <div class="outgoing-msg-img"> <img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"> </div>
-    <div class="sent-msg">
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt inventore quod beatae blanditiis, eos molestias ipsam pariatur voluptates unde eaque adipisci maxime repellendus obcaecati nesciunt dolor nam quaerat, at praesentium.</p>
-      <span class="time-date"> 11:01 AM | June 9 <i class="msg-del far fa-trash-alt fa-lg ml-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
-    </div>
-  </div>
-  `;
+      `;
+    } else {
+      // If NOT my UID then it is incoming
+      newMsgString += `
+      <div class="incoming-msg">
+        <div class="incoming-msg-img"> <img alt="Test2" src="${currentProfilePic}"> </div>
+        <div class="received-msg">
+          <div class="received-width-msg">
+            <p>${message.message}</p>
+            <span class="time-date"> ${msgtimeStamp} | ${msgDate}</span>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+  });
   const newInputString = `
   <div class="type-msg">
     <div class="input-msg-write">
@@ -66,4 +59,18 @@ const msgOutput = () => {
   $('#message-input').html(newInputString);
 };
 
-export default { msgOutput };
+const printMessages = () => {
+  messagesData.getAllMessages()
+    .then((results) => {
+      msgOutput(results);
+    })
+    .catch((error) => {
+      console.error('An error occurred while retrieving messages from the DB', error);
+    });
+};
+
+const initMessages = () => {
+  printMessages();
+};
+
+export default { initMessages };
