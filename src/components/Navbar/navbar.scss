@@ -1,0 +1,10 @@
+// Author: Marco Crank
+// Purpose: Handle all the styling for the navbar component.
+
+@import '../../styles/variables';
+@import '~bootstrap/scss/bootstrap';
+
+.navbar {
+  // Used to offset child DIV because fixed-top navbar
+  top: 0;
+}

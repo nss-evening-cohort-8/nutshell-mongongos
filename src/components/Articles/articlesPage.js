@@ -6,7 +6,6 @@ import authHelpers from '../Helpers/authHelpers';
 
 const printAllArticles = (allArticlesArray) => {
   let domString = '';
-  console.log(allArticlesArray);
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
@@ -25,7 +24,6 @@ const articleComponent = () => {
   const uid = authHelpers.getCurrentUid();
   articlesData.getAllArticlesFromDb(uid)
     .then((allArticlesArray) => {
-      console.log('printing out Articles', allArticlesArray);
       printAllArticles(allArticlesArray);
     })
     .catch((error) => {

@@ -12,13 +12,11 @@ const getAllArticlesFromDb = () => new Promise((resolve, reject) => {
     .then((results) => {
       const allArticlesObject = results.data;
       const allArticlesArray = [];
-      console.log(results);
       if (allArticlesObject !== null) {
         Object.keys(allArticlesObject).forEach((articleId) => {
           const newArticle = allArticlesObject[articleId];
           newArticle.id = articleId;
           allArticlesArray.push(newArticle);
-          console.log(newArticle);
         });
       }
       resolve(allArticlesArray);
