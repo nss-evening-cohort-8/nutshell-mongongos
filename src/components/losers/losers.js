@@ -74,13 +74,16 @@ const pendingLoserRequests = () => {
         .then((pendingLosers) => {
           let pendingLoserString = '';
           pendingLosers.forEach((pendingLoser) => {
+            const loserKey = Object.keys(pendingLoser)[0];
             pendingLoserString += `<div class='onePendingLoserDiv'>
-                                    <img class='onePendingLoserAvatar' src='${pendingLoser.avatar}'/>
-                                    <p class='onePendingLoserName'>${pendingLoser.name}</p>
-                                    <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser.uid}'>Accept</button>
-                                    <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser.uid}'>Decline</button>`;
+                                    <img class='onePendingLoserAvatar' src='${pendingLoser[loserKey].avatar}'/>
+                                    <p class='onePendingLoserName'>${pendingLoser[loserKey].userName}</p>
+                                    <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Accept</button>
+                                    <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Decline</button>`;
           });
           $('#losersPendingDiv').html(pendingLoserString);
+          acceptLoser();
+          declineLoser();
         })
         .catch((err) => {
           console.log(err);
@@ -98,7 +101,7 @@ const losersListBuilder = () => {
       losersArray.forEach((loser) => {
         loserListString += `<div class='oneLoserDiv'>
                               <img class='oneLoserAvatar' src='${loser.avatar}'/>
-                              <p class='oneLoserName'>${loser.name}</p>
+                              <p class='oneLoserName'>${loser.userName}</p>
                               <button type='button' class='btn btn-danger btn-sm removeLoserButton' data-loser-uid='${loser.uid}'>X</button>
                             </div>`;
       });

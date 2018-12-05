@@ -23,6 +23,24 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
     });
 });
 
+const getUserTag = uid => new Promise((resolve, reject) => {
+  axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${uid}"`)
+    .then((data) => {
+      const userObject = data.data;
+      const userArray = [];
+      if (userObject != null) {
+        Object.keys(userObject).forEach((user) => {
+          userObject[user].key = user;
+          userArray.push(userObject[user]);
+        });
+      }
+      resolve(userArray[0].key);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
 const getMyLosers = () => new Promise((resolve, reject) => {
   axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`)
     .then((data) => {
@@ -37,7 +55,6 @@ const getMyLosers = () => new Promise((resolve, reject) => {
           losersArray.push(usersObject[userKey].friends[friend]);
         });
       }
-      console.log(losersArray);
       resolve(losersArray);
     })
     .catch((err) => {
@@ -62,8 +79,6 @@ const sendLoserRequest = user => new Promise((resolve, reject) => {
       const requestedLoserObject = {
         userUid: authHelpers.getCurrentUid(),
         friendUid: requestedLoser.uid,
-        isAccepted: false,
-        isPending: true,
       };
       axios.post(`${URL}/friendRequests.json`, JSON.stringify(requestedLoserObject))
         .then(() => {
@@ -79,7 +94,7 @@ const sendLoserRequest = user => new Promise((resolve, reject) => {
 });
 
 const getPendingLosers = uid => new Promise((resolve, reject) => {
-  axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${uid}"`)
+  axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${uid}"`)
     .then((data) => {
       const requestsObject = data.data;
       const requestsArray = [];
@@ -96,11 +111,11 @@ const getPendingLosers = uid => new Promise((resolve, reject) => {
     });
 });
 
-const getUsersByRequests = (requests) => {
+const getUsersByRequests = requests => new Promise((resolve, reject) => {
   const usersArray = [];
   const promisesArray = [];
   requests.forEach((request) => {
-    const user = request.friendUid;
+    const user = request.userUid;
     promisesArray.push(axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${user}"`));
   });
   Promise.all(promisesArray)
@@ -108,15 +123,15 @@ const getUsersByRequests = (requests) => {
       promisesReturnedArray.forEach((userObject) => {
         usersArray.push(userObject.data);
       });
-      return usersArray;
+      resolve(usersArray);
     })
     .catch((err) => {
-      console.log(err);
+      reject(err);
     });
-};
+});
 
 const getRequestsByUser = () => new Promise((resolve, reject) => {
-  axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${authHelpers.getCurrentUid()}"`)
+  axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${authHelpers.getCurrentUid()}"`)
     .then((data) => {
       const matchesObject = data.data;
       const matchesArray = [];
@@ -134,16 +149,14 @@ const getRequestsByUser = () => new Promise((resolve, reject) => {
 });
 
 const filterRequests = (user, friend) => {
-  const filteredRequest = user.filter(request => request.includes(friend));
-  return filteredRequest.requestId;
+  user.filter(request => request.userUid.includes(friend));
+  return user[0].requestId;
 };
 
 const completeRequest = (loser) => {
-  let currentUserMatches = '';
   getRequestsByUser()
     .then((userMatches) => {
-      currentUserMatches = userMatches.data;
-      axios.delete(`${URL}/friendRequests/${filterRequests(currentUserMatches, loser)}.json`);
+      axios.delete(`${URL}/friendRequests/${filterRequests(userMatches, loser)}.json`);
     })
     .catch((err) => {
       console.log(err);
@@ -152,16 +165,29 @@ const completeRequest = (loser) => {
 
 const addLoserToUser = (loserUid) => {
   let userWithLoser;
-  getOneUser(authHelpers.getCurrentUid())
-    .then((userData) => {
-      userWithLoser = userData.data;
-      getOneUser(loserUid)
-        .then((loserData) => {
-          const loserInfo = {
-            name: loserData.data.name,
-            uid: loserData.data.uid,
-          };
-          userWithLoser.friends[loserData.data.uid] += loserInfo;
+  getUserTag(authHelpers.getCurrentUid())
+    .then((taggedUser) => {
+      getOneUser(taggedUser)
+        .then((userData) => {
+          userWithLoser = userData.data;
+          getUserTag(loserUid)
+            .then((taggedLoser) => {
+              getOneUser(taggedLoser)
+                .then((loserData) => {
+                  const loserInfo = {
+                    userName: loserData.data.userName,
+                    uid: loserData.data.uid,
+                  };
+                  userWithLoser.friends[loserData.data.uid] = loserInfo;
+                  axios.put(`${URL}users/${taggedUser}.json`, JSON.stringify(userWithLoser));
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -170,7 +196,6 @@ const addLoserToUser = (loserUid) => {
     .catch((err) => {
       console.log(err);
     });
-  axios.put(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`, JSON.stringify(userWithLoser));
 };
 
 const deleteLoser = (loserId) => {
@@ -187,4 +212,5 @@ export default {
   getUsersByRequests,
   getMyLosers,
   deleteLoser,
+  getUserTag,
 };

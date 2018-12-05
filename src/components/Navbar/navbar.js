@@ -43,9 +43,6 @@ const appLogout = () => {
 };
 
 const navbarEvents = () => {
-  $('body').on('click', '#nav-friends', () => {
-    console.log('Friends button clicked');
-  });
   $('body').on('click', '#nav-logout', appLogout);
 };
 
