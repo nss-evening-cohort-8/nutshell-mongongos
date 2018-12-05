@@ -22,8 +22,7 @@ const userNameExists = (userId) => {
       console.error('An error occured checking for existing user name', error);
     });
 };
-
-const checkLoginStatus = (initializeEventsPage) => {
+const checkLoginStatus = (bindComponents) => {
   console.log('heyy');
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -31,10 +30,12 @@ const checkLoginStatus = (initializeEventsPage) => {
       $('#login-page').html('');
       $('#nav-logout').show();
       $('#nav-friends').show();
-      initializeEventsPage();
+      bindComponents();
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
+      $('#message-container').html('');
+      $('#message-input').html('');
       auth.loginPage();
     }
   });

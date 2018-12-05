@@ -8,9 +8,15 @@ import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
 import initializeEventsPage from './components/Events/events';
+// import weather from './components/Weather/weather'
+// import messages from './components/Messages/messages';
 
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
+
+const bindComponents = () => {
+  initializeEventsPage();
+};
 
 const initialize = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
@@ -18,7 +24,7 @@ const initialize = () => {
   users.usersEvents();
   navbar.buildNavbar();
   navbar.navbarEvents();
-  authHelper.checkLoginStatus(initializeEventsPage);
+  authHelper.checkLoginStatus(bindComponents);
 };
 
 initialize();

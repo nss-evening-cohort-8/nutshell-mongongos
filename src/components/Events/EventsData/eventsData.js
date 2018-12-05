@@ -34,7 +34,12 @@ const getAllEvents = userId => new Promise((resolve, reject) => {
 //     });
 // });
 
+const deleteEvent = eventId => axios.delete(`${firebaseUrl}/events/${eventId}.json`);
+
+const createEventData = eventsObject => axios.post(`${firebaseUrl}/events.json`, JSON.stringify(eventsObject));
+
 export default {
   getAllEvents,
-  // getSingleEvent,
+  createEventData,
+  deleteEvent,
 };
