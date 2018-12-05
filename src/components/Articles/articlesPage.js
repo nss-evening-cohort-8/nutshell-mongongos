@@ -11,7 +11,7 @@ const printAllArticles = (allArticlesArray) => {
     <div class="news-articles-builder">
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
-      <a class="article-url" href="${article.url}">Click here to view the article</a>
+      <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
     </div>
     <hr class="my-4">
     <br>

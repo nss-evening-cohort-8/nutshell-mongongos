@@ -36,6 +36,7 @@ const checkLoginStatus = (bindComponents) => {
       $('#nav-friends').hide();
       $('#message-container').html('');
       $('#message-input').html('');
+      $('#article-section').html('');
       auth.loginPage();
     }
   });
