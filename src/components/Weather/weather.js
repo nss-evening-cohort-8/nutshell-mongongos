@@ -20,8 +20,8 @@ const buildDropdown = (weatherArray) => {
 };
 
 const printWeatherApi = (weather) => {
-  console.log(weather);
-  const domString = '';
+  const domString = `<p>${weather.city_name}, ${weather.state_code}<p>
+  <p><img src='https://www.weatherbit.io/api/codes/${weather.weather.icon}'> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
 };
 
@@ -37,7 +37,7 @@ const weatherComponent = () => {
 };
 
 const weatherApi = (e) => {
-  const zipcode = e.target.dataset.dropdownId;
+  const zipcode = e.target.dataset.dropdownZipcode;
   weatherData.getWeatherApi(zipcode)
     .then((weather) => {
       printWeatherApi(weather);
@@ -47,6 +47,6 @@ const weatherApi = (e) => {
     });
 };
 
-$('body').on('.get-zip', 'click', weatherApi);
+$('body').on('click', '.get-zip', weatherApi);
 
 export default { weatherComponent, weatherApi };
