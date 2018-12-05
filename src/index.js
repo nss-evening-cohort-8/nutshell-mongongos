@@ -8,8 +8,9 @@ import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
 
-import weather from './components/Weather/weather';
+import articlesPage from './components/Articles/articlesPage';
 import messages from './components/Messages/messages';
+import weather from './components/Weather/weather';
 
 
 import apiKeys from '../db/apiKeys.json';
@@ -17,6 +18,7 @@ import './index.scss';
 
 const bindComponents = () => {
   messages.initMessages();
+  articlesPage.articleComponent();
   weather.weatherComponent();
 };
 
