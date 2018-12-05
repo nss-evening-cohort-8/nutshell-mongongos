@@ -1,6 +1,14 @@
 import $ from 'jquery';
 import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
+import addEditWeather from './addEditWeather';
+
+const buildWeatherHeader = () => {
+  const domString = `<h2>Weather</h2>
+    <button id="add-zipcode-button">+</button>
+    <button id="delete-zipcode-button">X</button>`;
+  $('#weather-header').html(domString);
+};
 
 const buildDropdown = (weatherArray) => {
   let domString = `<div class="dropdown">
@@ -21,7 +29,8 @@ const buildDropdown = (weatherArray) => {
 
 const printWeatherApi = (weather) => {
   const domString = `<p>${weather.city_name}, ${weather.state_code}<p>
-  <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
+  <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>
+  <button id="edit-zipcode-button">Edit</button>`;
   $('#weather-container').html(domString);
 };
 
@@ -48,5 +57,6 @@ const weatherApi = (e) => {
 };
 
 $('body').on('click', '.get-zip', weatherApi);
+$('body').on('click', '#add-zipcode-button', addEditWeather.buildAddForm);
 
-export default { weatherComponent, weatherApi };
+export default { weatherComponent, weatherApi, buildWeatherHeader };

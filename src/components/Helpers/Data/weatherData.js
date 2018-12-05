@@ -34,4 +34,10 @@ const getWeatherApi = zipcode => new Promise((resolve, reject) => {
     });
 });
 
-export default { getAllWeatherObjects, getWeatherApi };
+const postNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
+
+export default {
+  getAllWeatherObjects,
+  getWeatherApi,
+  postNewLocation,
+};
