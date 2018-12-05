@@ -18,12 +18,20 @@ const addOneLoserClicked = () => {
   });
 };
 
+const returnToLosers = () => {
+  $('#losersBackButton').on('click', () => {
+    // eslint-disable-next-line no-use-before-define
+    losersBuilder();
+  });
+};
+
 const addLosersClicked = () => {
   $('#addLosersButton').on('click', () => {
     losersData.getOtherLosers(authHelpers.getCurrentUid())
       .then((losers) => {
         console.log(losers);
-        let loserString = '';
+        let loserString = `
+                          <button type='button' id='losersBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
         losers.forEach((loser) => {
           loserString += `<div class='oneLoserDiv'>
                             <img class='oneLoserAvatar' src='${loser.avatar}'/>
@@ -33,6 +41,7 @@ const addLosersClicked = () => {
         });
         $('#losersTitle').text('Add a Friend');
         $('#losersBody').html(loserString);
+        returnToLosers();
         addOneLoserClicked();
       })
       .catch((err) => {
@@ -41,12 +50,38 @@ const addLosersClicked = () => {
   });
 };
 
+const losersBuilder = () => {
+  const loserString = `
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id='losersTitle'>Friends</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class='modal-body' id='losersBody'>
+        <div>
+          <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
+        </div>
+        <div class="modal-body" id='losersDiv'>
+        </div>
+        <div class='modal-body' id='losersPendingDiv'>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  $('#losersModal').html(loserString);
+  addLosersClicked();
+  // eslint-disable-next-line no-use-before-define
+  initializeLosers();
+};
+
 const removeLoserClicked = () => {
   $('.removeLoserButton').on('click', (event) => {
     losersData.deleteLoser(event.target.dataset.loserUid)
       .then(() => {
-        // eslint-disable-next-line no-use-before-define
-        initializeLosers();
+        losersBuilder();
       })
       .catch((err) => {
         console.log(err);
@@ -56,14 +91,27 @@ const removeLoserClicked = () => {
 
 const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
-    losersData.completeRequest(event.target.dataset.loserUid);
     losersData.addLoserToUser(event.target.dataset.loserUid);
+    losersData.addUserToLoser(event.target.dataset.loserUid);
+    losersData.completeRequest(event.target.dataset.loserUid)
+      .then(() => {
+        losersBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
 
 const declineLoser = () => {
   $('.declineLoser').on('click', (event) => {
-    losersData.completeRequest(event.target.dataset.loserUid);
+    losersData.completeRequest(event.target.dataset.loserUid)
+      .then(() => {
+        losersBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
 
@@ -118,32 +166,6 @@ const initializeLosers = () => {
   pendingLoserRequests();
 };
 
-const losersBuilder = () => {
-  const loserString = `
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id='losersTitle'>Friends</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class='modal-body' id='losersBody'>
-        <div>
-          <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
-        </div>
-        <div class="modal-body" id='losersDiv'>
-        </div>
-        <div class='modal-body' id='losersPendingDiv'>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  $('#losersModal').html(loserString);
-  addLosersClicked();
-  initializeLosers();
-};
-
 const initializeAddLosers = () => {
   addLosersClicked();
 };
@@ -156,6 +178,7 @@ export default {
   pendingLoserRequests,
   acceptLoser,
   declineLoser,
+  returnToLosers,
   initializeLosers,
   initializeAddLosers,
 };
