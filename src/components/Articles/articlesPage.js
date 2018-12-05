@@ -17,7 +17,7 @@ const printAllArticles = (allArticlesArray) => {
       <p class="article-url" href="${article.url}">Click here to view the article</p>
     </div>
     `;
-    $('article-section').html(domString);
+    $('#article-section').html(domString);
   });
 };
 
@@ -25,6 +25,7 @@ const articleComponent = () => {
   const uid = authHelpers.getCurrentUid();
   articlesData.getAllArticlesFromDb(uid)
     .then((allArticlesArray) => {
+      console.log('printing out Articles', allArticlesArray);
       printAllArticles(allArticlesArray);
     })
     .catch((error) => {
