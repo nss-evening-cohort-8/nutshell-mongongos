@@ -7,7 +7,6 @@ import authHelpers from '../Helpers/authHelpers';
 const printAllArticles = (allArticlesArray) => {
   let domString = `
     <h3>Articles:</h3>
-    <div class="btn btn-info btn-sm">Add New Task</div>
   `;
 
   allArticlesArray.forEach((article) => {
@@ -35,69 +34,82 @@ const articleComponent = () => {
     });
 };
 
-
 // FORM TO CREATE A NEW ARTICLE
 
 const formBuilder = (article) => {
-  const form = ` <div id="modal-for-adding-articles"><div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  let domString = '';
+  console.log(article);
+  // articlesForm.forEach((article) => {
+  domString += `
+  <button type="button" id="add-new-article-button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add New Article:
+  </button>
+    <div id="modal-for-adding-articles"><div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="modal-header">
+          <h5 class="modal-title">Complete Form:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="article-form-group">
+            <label for="form-article-name">Article Title:</label>
+            <input type="text" class="title-input" value="${article.title}" id="title-input-form" placeholder="Coffee makers may contain mold!">
+            <label form="form-article-synopsis">Synopsis:</label>
+            <input type="text" class="synopsis-input" value="${article.synopsis}" id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
+            <label form="form-article-url">Synopsis:</label>
+            <input type="text" class="url-input" value="${article.url}" id="url-input-form" placeholder="www.google.com">
+            </div>
+            </div>
+            </div>
+          </div>
       </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-  <div class="article-form-group">
-    <label for="form-article-name">Article Title:</label>
-    <input type="text" class="title-input" value="${article.title}" id="title-input-form" placeholder="Coffee makers may contain mold!">
-    <label form="form-article-synopsis">Synopsis:</label>
-    <input type="text" class="synopsis-input" value="${article.synopsis}" id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
-    <label form="form-article-url">Synopsis:</label>
-    <input type="text" class="url-input" value="${article.url}" id="url-input-form" placeholder="www.google.com">
-  </div>
-  `;
-  return form;
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    `;
+  $('#modal-section').html(domString);
+  // });
+};
+
+const formComponent = () => {
+  articlesData.getAllArticlesFromDb()
+    .then((articles) => {
+      formBuilder(articles);
+    })
+    .catch((error) => {
+      console.error('error in formComponent', error);
+    });
 };
 
 // const buildArticleForm = () => {
 //   const emptyArticle = {
 //     article: '',
 //   };
-//   let domString = '<h3>Add New Article</h3>';
-//   domString += formBuilder(emptyArticle);
-//   domString += '<button id="add-article" class="btn btn-info btn-sm">Save New Article</button>';
+//   const domString = formBuilder(emptyArticle);
 //   $('#article-section').html(domString);
 // };
 
-const addArticle = () => {
-  articlesData.addNewArticle()
-    .then(() => {
-      $('#article-section').show();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+
+// const addArticle = () => {
+//   articlesData.addNewArticle()
+//     .then(() => {
+//       $('#article-section').show();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 // // CLICK EVENTS
-
-// $('body').on('click', '#add-article', addArticle);
+$('body').on('click', '#add-new-article-button', formBuilder);
 
 const initializeArticles = () => {
   articleComponent();
-  formBuilder();
-  addArticle();
+  formComponent();
+  // addArticle();
 };
 
 export default { initializeArticles };
