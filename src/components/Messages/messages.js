@@ -5,19 +5,13 @@ import $ from 'jquery';
 import 'bootstrap';
 import './messages.scss';
 import firebase from 'firebase/app';
+import 'firebase/database';
 import moment from 'moment';
 import authHelpers from '../Helpers/authHelpers';
 import messagesData from '../Helpers/Data/messagesData';
 
 const scrollToBottom = () => {
-  $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 1000);
-};
-
-const realTimeUpdate = () => {
-  firebase.database().ref('messages/')
-    .on('value', (snap) => {
-      console.log('RTU BABAY!', snap.val());
-    });
+  $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 0);
 };
 
 const msgOutput = (messagesArr) => {
@@ -67,6 +61,23 @@ const msgOutput = (messagesArr) => {
   `;
   $('#message-container').html(newMsgString);
   $('#message-input').html(newInputString);
+  $('#new-msg-input').val('');
+};
+
+const realTimeUpdate = () => {
+  firebase.database().ref('messages/')
+    .on('value', (snap) => {
+      const newMsgArray = [];
+      const newMsgObj = snap.val();
+      if (newMsgObj !== null) {
+        Object.keys(newMsgObj).forEach((message) => {
+          newMsgArray.push(newMsgObj[message]);
+        });
+        newMsgArray.sort((a, b) => moment(a.timestamp).unix() - moment(b.timestamp).unix());
+      }
+      msgOutput(newMsgArray);
+      scrollToBottom();
+    });
 };
 
 const printMessages = () => {
@@ -114,6 +125,7 @@ const msgBoxEvents = () => {
 
 const initMessages = () => {
   printMessages();
+  realTimeUpdate();
   msgBoxEvents();
 };
 
