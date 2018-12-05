@@ -17,7 +17,7 @@ import './index.scss';
 const bindComponents = () => {
   // weather.weatherComponent();
   messages.initMessages();
-  articlesPage.articleComponent();
+  articlesPage.initializeArticles();
 };
 
 const initialize = () => {

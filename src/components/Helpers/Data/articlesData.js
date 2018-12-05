@@ -40,8 +40,7 @@ const getAllArticles = articleId => new Promise((resolve, reject) => {
 
 // const deleteArticle = articleId => axios.delete(`${fireBaseUrl}/articles/${articleId}.json`);
 
-// const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`,
-// JSON.stringify(articleOBject));
+const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`, JSON.stringify(articleOBject));
 
 // const updateArticle = (articleOBject, articleId)
 // => axios.put(`${fireBaseUrl}/articles/${articleId.json}`, JSON.stringify(articleOBject));
@@ -50,6 +49,6 @@ export default {
   getAllArticlesFromDb,
   getAllArticles,
   // deleteArticle,
-  // addNewArticle,
+  addNewArticle,
   // updateArticle,
 };
