@@ -16,8 +16,8 @@ import apiKeys from '../db/apiKeys.json';
 import './index.scss';
 
 const bindComponents = () => {
-  weather.weatherComponent();
   messages.initMessages();
+  weather.weatherComponent();
 };
 
 const initialize = () => {
