@@ -4,13 +4,20 @@
 import $ from 'jquery';
 import 'bootstrap';
 import './messages.scss';
+import firebase from 'firebase/app';
 import moment from 'moment';
 import authHelpers from '../Helpers/authHelpers';
 import messagesData from '../Helpers/Data/messagesData';
 
-
 const scrollToBottom = () => {
   $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 1000);
+};
+
+const realTimeUpdate = () => {
+  firebase.database().ref('messages/')
+    .on('value', (snap) => {
+      console.log('RTU BABAY!', snap.val());
+    });
 };
 
 const msgOutput = (messagesArr) => {
@@ -53,8 +60,8 @@ const msgOutput = (messagesArr) => {
   const newInputString = `
   <div class="type-msg">
     <div class="input-msg-write">
-      <input class="write-msg" type="text" placeholder="Type a message">
-      <button class="msg-send-btn" type="button"><i class="fas fa-upload" aria-hidden="true"></i></button>
+      <input id="new-msg-input" class="write-msg" type="text" placeholder="Type a message">
+      <button id="new-msg-button" class="msg-send-btn" type="button"><i class="fas fa-upload" aria-hidden="true"></i></button>
     </div>
   </div>
   `;
@@ -73,8 +80,41 @@ const printMessages = () => {
     });
 };
 
+const saveUserMsg = () => {
+  const msgObj = {
+    isEdited: false,
+    message: $('#new-msg-input').val(),
+    timestamp: moment().format(),
+    avatarUrl: authHelpers.getProfilePic(),
+    userUid: authHelpers.getCurrentUid(),
+  };
+  messagesData.createUserMsg(msgObj)
+    .then(() => {
+    })
+    .catch((error) => {
+      console.error('There was a problem saving the message', error);
+    });
+  realTimeUpdate();
+};
+
+// Message box Events
+const msgBoxEvents = () => {
+  $('body').on('keypress', '#new-msg-input', (e) => {
+    if (e.key === 'Enter' && $('#new-msg-input').val() !== '') {
+      saveUserMsg(e);
+    }
+  });
+
+  $('body').on('click', '#new-msg-button', () => {
+    if ($('#new-msg-input').val() !== '') {
+      saveUserMsg();
+    }
+  });
+};
+
 const initMessages = () => {
   printMessages();
+  msgBoxEvents();
 };
 
 export default { initMessages };
