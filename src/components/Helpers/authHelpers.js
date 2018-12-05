@@ -34,6 +34,8 @@ const checkLoginStatus = (bindComponents) => {
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
+      $('#message-container').html('');
+      $('#message-input').html('');
       auth.loginPage();
     }
   });
@@ -41,5 +43,7 @@ const checkLoginStatus = (bindComponents) => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
+const getProfilePic = () => firebase.auth().currentUser.photoURL;
+// || '/images/profile_placeholder.png';
 
-export default { checkLoginStatus, getCurrentUid };
+export default { checkLoginStatus, getCurrentUid, getProfilePic };

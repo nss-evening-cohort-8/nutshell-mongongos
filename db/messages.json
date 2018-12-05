@@ -2,13 +2,31 @@
   "message1": {
     "userUid": "12345",
     "message": "What's up?",
-    "timestamp": 1528763298535,
+    "timestamp": "2018-12-03T19:35:37-06:00",
     "isEdited": false
   },
   "message2": {
     "userUid": "67890",
     "message": "The Sky",
-    "timestamp": 1528763298536,
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "isEdited": true
+  },
+  "message3": {
+    "userUid": "24680",
+    "message": "The Sky",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "isEdited": false
+  },
+  "message4": {
+    "userUid": "09876",
+    "message": "The Sky",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "isEdited": false
+  },
+  "message5": {
+    "userUid": "54321",
+    "message": "The Sky",
+    "timestamp": "2018-12-03T19:35:37-06:00",
     "isEdited": true
   }
 }

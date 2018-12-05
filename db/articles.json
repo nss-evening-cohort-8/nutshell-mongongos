@@ -3,12 +3,24 @@
     "userUid": "12345",
     "url": "https://www.quantamagazine.org/newfound-wormhole-allows-information-to-escape-black-holes-20171023/",
     "title": "Wormholes Allow Information to Escape Black Holes",
-    "synopsis": "Check out this recent discovery about workholes"
+    "synopsis": "Check out this recent discovery about wormholes"
   },
   "article2": {
     "userUid": "12345",
-    "url": "https://www.quantamagazine.org/newfound-wormhole-allows-information-to-escape-black-holes-20171023/",
-    "title": "Wormholes Allow Information to Escape Black Holes2",
-    "synopsis": "Check out this recent discovery about workholes2"
+    "url": "https://www.psychologytoday.com/us/blog/minding-the-body/201505/kitchen-therapy-cooking-mental-well-being",
+    "title": "Kitchen Therapy: Cooking Up Mental Well-Being",
+    "synopsis": "Information to prove home cooking is worth the work!"
+  },
+  "article3": {
+    "userUid": "12345",
+    "url": "https://www.sciencedaily.com/releases/2018/11/181127092525.htm",
+    "title": "Newly discovered deep-sea microbes gobble greenhouse gases and perhaps oil spills, too.",
+    "synopsis": "Yes! Scientists have found some microbes that will help limit greenhouse gasses and help remove oil spills."
+  },
+  "article4": {
+    "userUid": "12345",
+    "url": "https://www.sciencedaily.com/releases/2011/02/110222140550.htm",
+    "title": "T. rex more hyena than lion: Tyrannosaurus rex was opportunistic feeder, not top predator, paleontologists say.",
+    "synopsis": "T-Rex is NOT a top predator. Scientists are crazy!?"
   }
 }
