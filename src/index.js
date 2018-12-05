@@ -7,17 +7,19 @@ import navbar from './components/Navbar/navbar';
 import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
+
 import articlesPage from './components/Articles/articlesPage';
-// import weather from './components/Weather/weather'
 import messages from './components/Messages/messages';
+import weather from './components/Weather/weather';
+
 
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
 
 const bindComponents = () => {
-  // weather.weatherComponent();
   messages.initMessages();
   articlesPage.initializeArticles();
+  weather.weatherComponent();
 };
 
 const initialize = () => {

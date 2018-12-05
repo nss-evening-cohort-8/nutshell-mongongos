@@ -7,6 +7,7 @@ import authHelpers from '../Helpers/authHelpers';
 const printAllArticles = (allArticlesArray) => {
   let domString = `
     <h3>Articles:</h3>
+    <div class="btn btn-info btn-sm">Add New Task</div>
   `;
 
   allArticlesArray.forEach((article) => {
@@ -48,8 +49,7 @@ const formBuilder = (article) => {
     <input type="text" class="url-input" value="${article.url}" id="url-input-form" placeholder="www.google.com">
   </div>
   `;
-  console.log('formsomethin;kajshfkj');
-  $('#article-section').html(form);
+  return form;
 };
 
 // const buildArticleForm = () => {
@@ -62,15 +62,15 @@ const formBuilder = (article) => {
 //   $('#article-section').html(domString);
 // };
 
-// const addArticle = () => {
-//   articlesData.addNewArticle()
-//     .then(() => {
-//       $('#article-section').show();
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
+const addArticle = () => {
+  articlesData.addNewArticle()
+    .then(() => {
+      $('#article-section').show();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 // // CLICK EVENTS
 
@@ -79,6 +79,7 @@ const formBuilder = (article) => {
 const initializeArticles = () => {
   articleComponent();
   formBuilder();
+  addArticle();
 };
 
 export default { initializeArticles };
