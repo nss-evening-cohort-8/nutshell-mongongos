@@ -8,14 +8,18 @@ import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
 import initializeEventsPage from './components/Events/events';
-// import weather from './components/Weather/weather'
-// import messages from './components/Messages/messages';
+import articlesPage from './components/Articles/articlesPage';
+// import weather from './components/weather/weatherComponent';
+import messages from './components/Messages/messages';
 
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
 
 const bindComponents = () => {
   initializeEventsPage();
+  // weather.weatherComponent();
+  messages.initMessages();
+  articlesPage.articleComponent();
 };
 
 const initialize = () => {

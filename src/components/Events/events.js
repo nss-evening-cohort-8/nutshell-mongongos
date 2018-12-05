@@ -8,23 +8,25 @@ const printSingleEvent = (event) => {
         <h1>${event.event}</h1>
         <h3>${event.startDate}</h3>
         <p>${event.location}</p>
-    </div>
+      <button class = "btn btn-danger delete-btn" data-delete-id=${event.userUid}>X</button> 
+      <button class = "btn btn-info edit-btn" data-edit-id=${event.userUid}>Edit</button>        
+  </div>
       `;
   $('#single-container').html(eventString);
 };
 
-const getSingleEvent = (e) => {
-  const eventId = e.target.dataset.dropdownId;
-  const uid = authHelpers.getCurrentUid();
-  eventsData.getAllEvents(eventId)
-    .then((getAllEvents) => {
-      console.log('uid', uid);
-      printSingleEvent(getAllEvents);
-    })
-    .catch((error) => {
-      console.error('error in getting one event', error);
-    });
-};
+// const getSingleEvent = (e) => {
+//   const eventId = e.target.dataset.dropdownId;
+//   const uid = authHelpers.getCurrentUid();
+//   eventsData.getAllEvents(eventId)
+//     .then((getAllEvents) => {
+//       console.log('uid', uid);
+//       printSingleEvent(getAllEvents);
+//     })
+//     .catch((error) => {
+//       console.error('error in getting one event', error);
+//     });
+// };
 
 const buildDropDown = (eventsArray) => {
   let dropdown = `<div class="dropdown">
@@ -43,24 +45,39 @@ const buildDropDown = (eventsArray) => {
   $('#dropdown-container').html(dropdown);
 };
 
-const eventsPage = () => {
+const eventsComponent = () => {
   const uid = authHelpers.getCurrentUid();
   eventsData.getAllEvents(uid)
     .then((eventsArray) => {
       buildDropDown(eventsArray);
+      printSingleEvent();
+    //   getSingleEvent();
     })
     .catch((error) => {
       console.error('error in getting events', error);
     });
 };
 
+const deleteEvent = (e) => {
+  const idToDelete = e.target.dataset.deleteId;
+  eventsData.deleteEvent(idToDelete)
+    .then(() => {
+      eventsComponent();
+      $('#single-container').html('');
+    })
+    .catch((error) => {
+      console.error('error in deleting event', error);
+    });
+};
+
 const bindEvents = () => {
-  $('body').on('click', '.get-single', getSingleEvent);
+  $('body').on('click', '.get-single', printSingleEvent);
+  $('body').on('click', '.delete-btn', deleteEvent);
 };
 
 const initializeEventsPage = () => {
   console.log('hi');
-  eventsPage();
+  eventsComponent();
   bindEvents();
 };
 export default initializeEventsPage;
