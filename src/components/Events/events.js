@@ -1,29 +1,30 @@
+import $ from 'jquery';
 import eventsData from './EventsData/eventsData';
 import authHelpers from '../Helpers/authHelpers';
 
 const printSingleEvent = (event) => {
-    const eventString = `
+  const eventString = `
     <div>
         <h1>${event.event}</h1>
         <h3>${event.startDate}</h3>
         <p>${event.location}</p>
     </div>
       `;
-    $('#single-container').html(eventString);
-   };
+  $('#single-container').html(eventString);
+};
 
-   const getSingleEvent = (e) => {
-    const eventId = e.target.dataset.dropdownId;
-    const uid = authHelpers.getCurrentUid();
-    eventsData.getSingleEvent(eventId)
-    .then((singleEvent) => {
-        console.log('uid', uid)
-        printSingleEvent(singleEvent)
+const getSingleEvent = (e) => {
+  const eventId = e.target.dataset.dropdownId;
+  const uid = authHelpers.getCurrentUid();
+  eventsData.getAllEvents(eventId)
+    .then((getAllEvents) => {
+      console.log('uid', uid);
+      printSingleEvent(getAllEvents);
     })
-      .catch((error) => {
-        console.error('error in getting one event', error);
-      });
-  };
+    .catch((error) => {
+      console.error('error in getting one event', error);
+    });
+};
 
 const buildDropDown = (eventsArray) => {
   let dropdown = `<div class="dropdown">
@@ -54,10 +55,12 @@ const eventsPage = () => {
 };
 
 const bindEvents = () => {
-    $('body').on('click', '.get-single', getSingleEvent);
+  $('body').on('click', '.get-single', getSingleEvent);
+};
 
 const initializeEventsPage = () => {
-    eventsPage();
-    bindEvents();
+  console.log('hi');
+  eventsPage();
+  bindEvents();
 };
 export default initializeEventsPage;
