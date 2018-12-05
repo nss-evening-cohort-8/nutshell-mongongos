@@ -28,6 +28,7 @@ const avatarsBuilder = () => {
                         <input type='file' id='addAvatarInput' accept='image/png, image/jpeg' name='Upload an avatar'>
                         <div id='avatarSelectDiv'></div>
                         <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Select Avatar</button>`;
+  $('#avatarDiv').html(avatarString);
 };
 
 export default {

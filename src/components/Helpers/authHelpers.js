@@ -23,9 +23,10 @@ const userNameExists = (userId) => {
     });
 };
 
-const checkLoginStatus = () => {
+const checkLoginStatus = (losersFunctions) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      losersFunctions();
       userNameExists(user.uid);
       $('#login-page').html('');
       $('#nav-logout').show();

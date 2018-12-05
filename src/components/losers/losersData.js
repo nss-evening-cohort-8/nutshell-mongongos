@@ -5,16 +5,18 @@ import authHelpers from '../Helpers/authHelpers';
 const URL = apiKeys.firebaseKeys.databaseURL;
 
 const getOtherLosers = uid => new Promise((resolve, reject) => {
-  axios.get(`${URL}/users.json?orderByChild="child/friends/${uid}"&equalTo="null"`)
+  axios.get(`${URL}/users.json`)
     .then((data) => {
       const losersObject = data.data;
       const losersArray = [];
       if (losersObject != null) {
         Object.keys(losersObject).forEach((loserId) => {
+          losersObject[loserId].key = loserId;
           losersArray.push(losersObject[loserId]);
         });
       }
-      resolve(losersArray);
+      const filt = losersArray.filter(loser => Object.keys(loser.friends).includes(uid) !== true);
+      resolve(filt);
     })
     .catch((err) => {
       reject(err);
@@ -22,15 +24,20 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
 });
 
 const getMyLosers = () => new Promise((resolve, reject) => {
-  axios.get(`${URL}/users?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`)
+  axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`)
     .then((data) => {
-      const userObject = data.data;
+      const usersObject = data.data;
       const losersArray = [];
-      if (userObject.friends != null) {
-        Object.keys(userObject.friends).forEach((friend) => {
-          losersArray.push(userObject.friends[friend]);
+      let userKey;
+      if (usersObject != null) {
+        Object.keys(usersObject).forEach((user) => {
+          userKey = user;
+        });
+        Object.keys(usersObject[userKey].friends).forEach((friend) => {
+          losersArray.push(usersObject[userKey].friends[friend]);
         });
       }
+      console.log(losersArray);
       resolve(losersArray);
     })
     .catch((err) => {
@@ -38,11 +45,17 @@ const getMyLosers = () => new Promise((resolve, reject) => {
     });
 });
 
-const getOneUser = (user) => {
-  axios.get(`${URL}/users/${user}.json`);
-};
+const getOneUser = user => new Promise((resolve, reject) => {
+  axios.get(`${URL}/users/${user}.json`)
+    .then((data) => {
+      resolve(data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
 
-const sendLoserRequest = (user) => {
+const sendLoserRequest = user => new Promise((resolve, reject) => {
   getOneUser(user)
     .then((data) => {
       const requestedLoser = data.data;
@@ -52,12 +65,18 @@ const sendLoserRequest = (user) => {
         isAccepted: false,
         isPending: true,
       };
-      axios.post(`${URL}/friendRequests.json`, JSON.stringify(requestedLoserObject));
+      axios.post(`${URL}/friendRequests.json`, JSON.stringify(requestedLoserObject))
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
     })
     .catch((err) => {
       console.log(err);
     });
-};
+});
 
 const getPendingLosers = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${uid}"`)

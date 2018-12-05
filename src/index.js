@@ -17,8 +17,7 @@ const initialize = () => {
   users.usersEvents();
   navbar.buildNavbar();
   navbar.navbarEvents();
-  losers.losersBuilder();
-  authHelper.checkLoginStatus();
+  authHelper.checkLoginStatus(losers.losersBuilder);
 };
 
 initialize();
