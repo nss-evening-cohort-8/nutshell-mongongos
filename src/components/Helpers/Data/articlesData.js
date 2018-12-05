@@ -3,7 +3,7 @@
 
 
 import axios from 'axios';
-import apiKeys from '../../../db/apiKeys.json';
+import apiKeys from '../../../../db/apiKeys.json';
 
 const fireBaseUrl = apiKeys.firebaseKeys.databaseURL;
 
@@ -28,7 +28,7 @@ const getAllArticlesFromDb = () => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleArticle = articleId => new Promise((resolve, reject) => {
+const getAllArticles = articleId => new Promise((resolve, reject) => {
   axios.get(`${fireBaseUrl}/articles.json`)
     .then((result) => {
       const singleArticle = result.data;
@@ -50,7 +50,7 @@ const getSingleArticle = articleId => new Promise((resolve, reject) => {
 
 export default {
   getAllArticlesFromDb,
-  getSingleArticle,
+  getAllArticles,
   // deleteArticle,
   // addNewArticle,
   // updateArticle,

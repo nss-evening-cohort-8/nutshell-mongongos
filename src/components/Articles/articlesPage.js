@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import './articlesPage.scss';
-import articlesData from './articlesData';
+import articlesData from '../Helpers/Data/articlesData';
 import authHelpers from '../Helpers/authHelpers';
 
 
@@ -10,12 +10,12 @@ const printAllArticles = (allArticlesArray) => {
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
-      <h1 class="article-section">Articles</h1>
-      <h4 class="article-title">${article.title}</h4>
-      <hr class="my-4">
+      <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
-      <p class="article-url" href="${article.url}">Click here to view the article</p>
+      <a class="article-url" href="${article.url}">Click here to view the article</a>
     </div>
+    <hr class="my-4">
+    <br>
     `;
     $('#article-section').html(domString);
   });
