@@ -1,12 +1,10 @@
 import $ from 'jquery';
 import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
-import addEditWeather from './addEditWeather';
+// import addDeleteWeather from './addDeleteWeather';
 
 const buildWeatherHeader = () => {
-  const domString = `<h2>Weather</h2>
-    <button id="add-zipcode-button">+</button>
-    <button id="delete-zipcode-button">X</button>`;
+  const domString = '<h2>Weather</h2>';
   $('#weather-header').html(domString);
 };
 
@@ -57,6 +55,6 @@ const weatherApi = (e) => {
 };
 
 $('body').on('click', '.get-zip', weatherApi);
-$('body').on('click', '#add-zipcode-button', addEditWeather.buildAddForm);
+// $('body').on('click', '#add-zipcode-button', addEditWeather.buildAddForm);
 
 export default { weatherComponent, weatherApi, buildWeatherHeader };

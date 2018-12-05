@@ -3,6 +3,12 @@ import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
 import weather from './weather';
 
+const buildWeatherButtons = () => {
+  const domString = `<button id="add-zipcode-button">+</button>
+  <button id="delete-zipcode-button">X</button>`;
+  $('#weather-buttons').html(domString);
+};
+
 const formBuilder = (locationObject) => {
   const form = `<input type="text" value="${locationObject.zipcode}" id="zipcode-input">`;
   return form;
@@ -42,5 +48,6 @@ const addNewLocation = () => {
 };
 
 $('body').on('click', '#save-zipcode-button', addNewLocation);
+$('body').on('click', '#add-zipcode-button', buildAddForm);
 
-export default { buildAddForm };
+export default { buildAddForm, buildWeatherButtons };
