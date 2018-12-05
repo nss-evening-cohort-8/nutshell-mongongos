@@ -23,23 +23,27 @@ const userNameExists = (userId) => {
     });
 };
 
-const checkLoginStatus = () => {
+const checkLoginStatus = (bindComponents) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       userNameExists(user.uid);
       $('#login-page').html('');
       $('#nav-logout').show();
       $('#nav-friends').show();
+      bindComponents();
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
+      $('#message-container').html('');
+      $('#message-input').html('');
       auth.loginPage();
     }
   });
 };
 
-const getUsderId = () => {
-  firebase.auth().onAuthStateChanged(user => user.uid);
-};
+const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-export default { checkLoginStatus, getUsderId };
+const getProfilePic = () => firebase.auth().currentUser.photoURL;
+// || '/images/profile_placeholder.png';
+
+export default { checkLoginStatus, getCurrentUid, getProfilePic };

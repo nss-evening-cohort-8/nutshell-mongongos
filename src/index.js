@@ -7,9 +7,16 @@ import navbar from './components/Navbar/navbar';
 import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import users from './components/Users/users';
+// import weather from './components/Weather/weather'
+import messages from './components/Messages/messages';
 
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
+
+const bindComponents = () => {
+  // weather.weatherComponent();
+  messages.initMessages();
+};
 
 const initialize = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
@@ -17,7 +24,7 @@ const initialize = () => {
   users.usersEvents();
   navbar.buildNavbar();
   navbar.navbarEvents();
-  authHelper.checkLoginStatus();
+  authHelper.checkLoginStatus(bindComponents);
 };
 
 initialize();
