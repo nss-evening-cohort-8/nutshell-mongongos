@@ -23,17 +23,22 @@ const userNameExists = (userId) => {
     });
 };
 
-const checkLoginStatus = (losersFunctions) => {
+const checkLoginStatus = (bindComponents) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      losersFunctions();
       userNameExists(user.uid);
       $('#login-page').html('');
       $('#nav-logout').show();
       $('#nav-friends').show();
+      bindComponents();
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
+      $('#message-container').html('');
+      $('#message-input').html('');
+      $('#weather-header').html('');
+      $('#dropdown-container').html('');
+      $('#weather-container').html('');
       auth.loginPage();
     }
   });
@@ -41,12 +46,7 @@ const checkLoginStatus = (losersFunctions) => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-const getUserId = () => {
-  firebase.auth().onAuthStateChanged(user => user.uid);
-};
+const getProfilePic = () => firebase.auth().currentUser.photoURL;
+// || '/images/profile_placeholder.png';
 
-export default {
-  checkLoginStatus,
-  getCurrentUid,
-  getUserId,
-};
+export default { checkLoginStatus, getCurrentUid, getProfilePic };

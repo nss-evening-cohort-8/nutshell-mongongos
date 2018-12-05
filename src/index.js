@@ -8,8 +8,18 @@ import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
 import losers from './components/losers/losers';
 import users from './components/Users/users';
+import articlesPage from './components/Articles/articlesPage';
+import messages from './components/Messages/messages';
+import weather from './components/Weather/weather';
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
+
+const bindComponents = () => {
+  messages.initMessages();
+  articlesPage.articleComponent();
+  weather.weatherComponent();
+  losers.losersBuilder();
+};
 
 const initialize = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
@@ -17,7 +27,7 @@ const initialize = () => {
   users.usersEvents();
   navbar.buildNavbar();
   navbar.navbarEvents();
-  authHelper.checkLoginStatus(losers.losersBuilder);
+  authHelper.checkLoginStatus(bindComponents);
 };
 
 initialize();
