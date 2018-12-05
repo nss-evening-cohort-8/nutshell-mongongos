@@ -36,6 +36,12 @@ const checkLoginStatus = (bindComponents) => {
       $('#nav-friends').hide();
       $('#message-container').html('');
       $('#message-input').html('');
+      $('#weather-header').html('');
+      $('#dropdown-container').html('');
+      $('#weather-container').html('');
+      $('#events-container').html('');
+      $('#events-modal-container').html('');
+      $('#single-container').html('');
       auth.loginPage();
     }
   });
