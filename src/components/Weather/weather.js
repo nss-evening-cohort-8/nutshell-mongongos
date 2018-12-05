@@ -21,7 +21,7 @@ const buildDropdown = (weatherArray) => {
 
 const printWeatherApi = (weather) => {
   const domString = `<p>${weather.city_name}, ${weather.state_code}<p>
-  <p><img src='https://www.weatherbit.io/api/codes/${weather.weather.icon}'> ${weather.weather.description}<p>`;
+  <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
 };
 
