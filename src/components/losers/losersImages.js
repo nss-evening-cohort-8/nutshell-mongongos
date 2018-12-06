@@ -2,7 +2,7 @@ import $ from 'jquery';
 import firebase from 'firebase/app';
 import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
-import losersData from './losersData';
+import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
 
 let selectedAvatar = '';

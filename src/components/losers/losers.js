@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import './losers.scss';
-import losersData from './losersData';
+import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
 import losersImages from './losersImages';
 
