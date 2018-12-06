@@ -112,6 +112,10 @@ const saveUserMsg = () => {
   $('#new-msg-input').focus();
 };
 
+const delUserMsg = () => {
+  console.log('Delete Message');
+};
+
 // Message box Events
 const msgBoxEvents = () => {
   $('body').on('keypress', '#new-msg-input', (e) => {
@@ -125,6 +129,8 @@ const msgBoxEvents = () => {
       saveUserMsg();
     }
   });
+
+  $('body').on('click', '.msg-del', delUserMsg);
 };
 
 const initMessages = () => {

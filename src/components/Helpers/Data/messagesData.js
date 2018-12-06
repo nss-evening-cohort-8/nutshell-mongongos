@@ -28,4 +28,8 @@ const getAllMessages = () => new Promise((resolve, reject) => {
 
 const createUserMsg = msgObj => axios.post(`${fireBaseUrl}/messages.json`, JSON.stringify(msgObj));
 
-export default { getAllMessages, createUserMsg };
+// const deleteTask = taskId => axios.delete(`${firebaseUrl}/tasks/${taskId}.json`);
+
+const deleteUserMsg = msgId => axios.delete(`${fireBaseUrl}/messages/${msgId}.json`);
+
+export default { getAllMessages, createUserMsg, deleteUserMsg };
