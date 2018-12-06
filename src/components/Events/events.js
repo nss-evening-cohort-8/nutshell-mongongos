@@ -3,19 +3,19 @@ import 'bootstrap';
 import eventsData from './EventsData/eventsData';
 import authHelpers from '../Helpers/authHelpers';
 
-const printSingleEvent = (event) => {
-  console.log('event', event);
-  const eventString = `
-    <div>
-        <h1>${event.event}</h1>
-        <h3>${event.startDate}</h3>
-        <p>${event.location}</p>
-      <button class = "btn btn-danger delete-btn" data-delete-id=${event.userUid}>X</button>
-      <button class = "btn btn-info edit-btn" data-edit-id=${event.userUid}>Edit</button>
-  </div>
-      `;
-  $('#single-container').html(eventString);
-};
+// const printSingleEvent = (event) => {
+//   console.log('event', event);
+//   const eventString = `
+//     <div>
+//         <h1>${event.event}</h1>
+//         <h3>${event.startDate}</h3>
+//         <p>${event.location}</p>
+//       <button class = "btn btn-danger delete-btn" data-delete-id=${event.userUid}>X</button>
+//       <button class = "btn btn-info edit-btn" data-edit-id=${event.userUid}>Edit</button>
+//   </div>
+//       `;
+//   $('#single-container').html(eventString);
+// };
 
 // const getSingleEvent = (e) => {
 //   const eventId = e.target.dataset.dropdownId;
@@ -30,7 +30,6 @@ const printSingleEvent = (event) => {
 //     });
 // };
 const buildModal = (eventsArray) => {
-  console.log('eventsArray', eventsArray);
   let modal = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
   Pick a Event
 </button>
@@ -47,16 +46,18 @@ const buildModal = (eventsArray) => {
       <div class="modal-body">`;
   if (eventsArray.length) {
     eventsArray.forEach((event) => {
-      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>`;
+      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn delete-btn btn-danger" data-delete-id=${event.id}>X</button>
+        <button type="button" class="btn edit-btn btn-primary" data-edit-id=${event.id}>/</button>
+      </div>`;
     });
   } else {
     modal += '<div class = "modal-item">You have no events.</div>';
   }
   modal += `</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
+  <button type="button" class="btn save-btn btn-secondary btn-sm" data-save-id=${event.id}>Add Event</button>
       </div>
       </div>;`;
 
@@ -88,7 +89,7 @@ const deleteEvent = (e) => {
 };
 
 const bindEvents = () => {
-  $('body').on('click', '.get-single', printSingleEvent);
+//   $('body').on('click', '.get-single', printSingleEvent);
   $('body').on('click', '.delete-btn', deleteEvent);
 };
 
