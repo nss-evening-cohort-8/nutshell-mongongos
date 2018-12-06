@@ -29,7 +29,6 @@ const addLosersClicked = () => {
   $('#addLosersButton').on('click', () => {
     losersData.getOtherLosers(authHelpers.getCurrentUid())
       .then((losers) => {
-        console.log(losers);
         let loserString = `
                           <button type='button' id='losersBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
         losers.forEach((loser) => {
@@ -91,15 +90,15 @@ const removeLoserClicked = () => {
 
 const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
-    losersData.addLoserToUser(event.target.dataset.loserUid);
-    losersData.addUserToLoser(event.target.dataset.loserUid);
-    losersData.completeRequest(event.target.dataset.loserUid)
+    losersData.addLoserToUser(event.target.dataset.loserUid)
       .then(() => {
         losersBuilder();
       })
       .catch((err) => {
         console.log(err);
       });
+    losersData.addUserToLoser(event.target.dataset.loserUid);
+    losersData.completeRequest(event.target.dataset.loserUid);
   });
 };
 
