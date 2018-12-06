@@ -93,7 +93,6 @@ const bindEvents = () => {
 };
 
 const initializeEventsPage = () => {
-  console.log('hi');
   eventsComponent();
   bindEvents();
 };
