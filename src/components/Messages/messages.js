@@ -4,13 +4,14 @@
 import $ from 'jquery';
 import 'bootstrap';
 import './messages.scss';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import moment from 'moment';
 import authHelpers from '../Helpers/authHelpers';
 import messagesData from '../Helpers/Data/messagesData';
 
-
 const scrollToBottom = () => {
-  $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 1000);
+  $('.msg-history').animate({ scrollTop: $('.msg-history').prop('scrollHeight') }, 0);
 };
 
 const msgOutput = (messagesArr) => {
@@ -50,16 +51,36 @@ const msgOutput = (messagesArr) => {
       `;
     }
   });
-  const newInputString = `
+  $('#message-container').html(newMsgString);
+  $('#new-msg-input').val('');
+};
+
+const msgInputBuilder = () => {
+  const newMsgInput = `
   <div class="type-msg">
     <div class="input-msg-write">
-      <input class="write-msg" type="text" placeholder="Type a message">
-      <button class="msg-send-btn" type="button"><i class="fas fa-upload" aria-hidden="true"></i></button>
+      <input id="new-msg-input" class="write-msg" type="text" placeholder="Type a message">
+      <button id="new-msg-button" class="msg-send-btn" type="button"><i class="fas fa-upload" aria-hidden="true"></i></button>
     </div>
   </div>
   `;
-  $('#message-container').html(newMsgString);
-  $('#message-input').html(newInputString);
+  $('#message-input').html(newMsgInput);
+};
+
+const realTimeUpdate = () => {
+  firebase.database().ref('messages/')
+    .on('value', (snap) => {
+      const newMsgArray = [];
+      const newMsgObj = snap.val();
+      if (newMsgObj !== null) {
+        Object.keys(newMsgObj).forEach((message) => {
+          newMsgArray.push(newMsgObj[message]);
+        });
+        newMsgArray.sort((a, b) => moment(a.timestamp).unix() - moment(b.timestamp).unix());
+      }
+      msgOutput(newMsgArray);
+      scrollToBottom();
+    });
 };
 
 const printMessages = () => {
@@ -73,8 +94,44 @@ const printMessages = () => {
     });
 };
 
+const saveUserMsg = () => {
+  const msgObj = {
+    isEdited: false,
+    message: $('#new-msg-input').val(),
+    timestamp: moment().format(),
+    avatarUrl: authHelpers.getProfilePic(),
+    userUid: authHelpers.getCurrentUid(),
+  };
+  messagesData.createUserMsg(msgObj)
+    .then(() => {
+    })
+    .catch((error) => {
+      console.error('There was a problem saving the message', error);
+    });
+  realTimeUpdate();
+  $('#new-msg-input').focus();
+};
+
+// Message box Events
+const msgBoxEvents = () => {
+  $('body').on('keypress', '#new-msg-input', (e) => {
+    if (e.key === 'Enter' && $('#new-msg-input').val() !== '') {
+      saveUserMsg(e);
+    }
+  });
+
+  $('body').on('click', '#new-msg-button', () => {
+    if ($('#new-msg-input').val() !== '') {
+      saveUserMsg();
+    }
+  });
+};
+
 const initMessages = () => {
   printMessages();
+  msgInputBuilder();
+  realTimeUpdate();
+  msgBoxEvents();
 };
 
 export default { initMessages };
