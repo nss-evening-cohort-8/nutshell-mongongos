@@ -29,10 +29,12 @@ const buildAddForm = () => {
   };
   let domString = '<h2>Add New Location</h2>';
   domString += formBuilder(emptyLocation);
-  domString += '<button id="save-zipcode-button">Save Location</button>';
+  domString += '<button id="save-zipcode-button">Save New Location</button>';
+  domString += '<button id="cancel-zipcode-button">Cancel</button>';
   $('#add-edit-zipcode').html(domString);
   $('#weather-container').html('');
   $('#dropdown-container').html('');
+  $('#weather-buttons').hide();
 };
 
 
@@ -41,6 +43,7 @@ const addNewLocation = () => {
   weatherData.postNewLocation(newLocation)
     .then(() => {
       $('#add-edit-zipcode').html('');
+      $('#weather-buttons').show();
       weather.weatherComponent();
     })
     .catch((error) => {
@@ -54,7 +57,13 @@ const validateZip = () => {
   weatherData.getWeatherApi(newZip)
     .then((result) => {
       if (result === 'noData') {
-        console.error('zip code is not valid');
+        const alert = `<div class="alert alert-warning alert-dismissible fade show alert-danger" role="alert">
+          Zip code is not valid, ya dummy!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`;
+        $('#alert-zipcode').html(alert);
       } else {
         addNewLocation();
       }
@@ -64,6 +73,11 @@ const validateZip = () => {
     });
 };
 
+$('body').on('click', '#cancel-zipcode-button', () => {
+  $('#add-edit-zipcode').html('');
+  $('#weather-buttons').show();
+  weather.weatherComponent();
+});
 $('body').on('click', '#save-zipcode-button', validateZip);
 $('body').on('click', '#add-zipcode-button', buildAddForm);
 
