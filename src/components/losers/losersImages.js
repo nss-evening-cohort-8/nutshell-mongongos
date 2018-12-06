@@ -56,10 +56,16 @@ const selectAvatar = selection => new Promise((resolve, reject) => {
     });
 });
 
-const addAvatar = () => {
+const addAvatar = () => new Promise((resolve, reject) => {
   const newAvatar = document.getElementById('addAvatarInput').files[0];
-  axios.post(`${apiKeys.firebaseKeys.storageBucket}`, newAvatar);
-};
+  axios.post(`${apiKeys.firebaseKeys.storageBucket}`, newAvatar)
+    .then(() => {
+      resolve();
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
 
 export default {
   selectAvatarBuilder,

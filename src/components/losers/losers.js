@@ -41,9 +41,29 @@ const returnToLosersFromAvatars = () => {
   });
 };
 
+const uploadAvatarClicked = () => {
+  $('#uploadAvatarButton').on('click', () => {
+    losersImages.addAvatar()
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        avatarsBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
 const selectAvatarClicked = () => {
   $('#selectAvatarButton').on('click', () => {
-    losersImages.selectAvatar(losersImages.getSelectedAvatar());
+    losersImages.selectAvatar(losersImages.getSelectedAvatar())
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        losersBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
 
@@ -104,10 +124,13 @@ const avatarsBuilder = () => {
   const avatarString = `<h4 id='avatarTitle'>Choose your avatar</h4>
                         <button type='button' id='avatarBackButton' class='btn btn-sm btn-warning'>Return to friends</button>
                         <input type='file' id='addAvatarInput' accept='image/png, image/jpeg' name='Upload an avatar'>
+                        <button type='button' id='uploadAvatarButton' class='btn btn sm btn-info'>Upload</button>
                         <div id='avatarSelectDiv'></div>
-                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Select Avatar</button>`;
+                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Save Selected Avatar</button>`;
   $('#losersTitle').text('Select an Avatar');
   $('#losersBody').html(avatarString);
+  uploadAvatarClicked();
+  selectAvatarClicked();
   returnToLosersFromAvatars();
 };
 
@@ -218,4 +241,5 @@ export default {
   addAvatarClicked,
   avatarsBuilder,
   selectAvatarClicked,
+  uploadAvatarClicked,
 };
