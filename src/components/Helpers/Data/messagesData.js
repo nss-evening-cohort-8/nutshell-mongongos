@@ -14,6 +14,7 @@ const getAllMessages = () => new Promise((resolve, reject) => {
       const messagesObj = results.data;
       if (messagesObj !== null) {
         Object.keys(messagesObj).forEach((message) => {
+          messagesObj[message].id = message;
           messagesArray.push(messagesObj[message]);
         });
         // Sort array by timestamp because Firebase REST does not return a sort 😢
@@ -27,8 +28,6 @@ const getAllMessages = () => new Promise((resolve, reject) => {
 });
 
 const createUserMsg = msgObj => axios.post(`${fireBaseUrl}/messages.json`, JSON.stringify(msgObj));
-
-// const deleteTask = taskId => axios.delete(`${firebaseUrl}/tasks/${taskId}.json`);
 
 const deleteUserMsg = msgId => axios.delete(`${fireBaseUrl}/messages/${msgId}.json`);
 
