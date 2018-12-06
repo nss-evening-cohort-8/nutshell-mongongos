@@ -13,6 +13,7 @@ import articlesPage from './components/Articles/articlesPage';
 import messages from './components/Messages/messages';
 import weather from './components/Weather/weather';
 import addDeleteWeather from './components/Weather/addDeleteWeather';
+import addEvents from './components/Events/AddEditEvents/addEditEvents';
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
 
@@ -24,6 +25,7 @@ const bindComponents = () => {
   losers.losersBuilder();
   weather.buildWeatherHeader();
   addDeleteWeather.buildWeatherButtons();
+  addEvents.buildEventButton();
 };
 
 const initialize = () => {

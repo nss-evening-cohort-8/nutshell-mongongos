@@ -4,6 +4,12 @@ import authHelpers from '../../Helpers/authHelpers';
 import initializeEventsPage from '../events';
 import eventsData from '../EventsData/eventsData';
 
+const buildEventButton = () => {
+  const domString = `<button id="add-event-button">+</button>
+  <button id="delete-zipcode-button">X</button>`;
+  $('#event-button').html(domString);
+};
+
 const eventFormBuilder = (event) => {
   const form = `
     <div class="form-group">
@@ -52,6 +58,7 @@ const addNewEvent = () => {
       $('#add-edit-event').html('').hide();
       $('#events-container').show();
       initializeEventsPage();
+      eventFormBuilder();
     })
     .catch((error) => {
       console.error('error', error);
@@ -92,4 +99,4 @@ $('body').on('click', '#add-event', addNewEvent);
 $('body').on('click', '.edit-btn', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
 
-export default { buildAddFrom, gettingEventFromForm };
+export default { buildAddFrom, gettingEventFromForm, buildEventButton };
