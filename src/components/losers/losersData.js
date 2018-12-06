@@ -4,6 +4,42 @@ import authHelpers from '../Helpers/authHelpers';
 
 const URL = apiKeys.firebaseKeys.databaseURL;
 
+const getPendingLosers = uid => new Promise((resolve, reject) => {
+  axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${uid}"`)
+    .then((data) => {
+      const requestsObject = data.data;
+      const requestsArray = [];
+      if (requestsObject != null) {
+        Object.keys(requestsObject).forEach((requestTag) => {
+          requestsObject[requestTag].requestTag = requestTag;
+          requestsArray.push(requestsObject[requestTag]);
+        });
+      }
+      resolve(requestsArray);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+const getPendingLosersByUserUid = uid => new Promise((resolve, reject) => {
+  axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${uid}"`)
+    .then((data) => {
+      const requestsObject = data.data;
+      const requestsArray = [];
+      if (requestsObject != null) {
+        Object.keys(requestsObject).forEach((requestTag) => {
+          requestsObject[requestTag].requestTag = requestTag;
+          requestsArray.push(requestsObject[requestTag]);
+        });
+      }
+      resolve(requestsArray);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
 const getOtherLosers = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/users.json`)
     .then((data) => {
@@ -16,8 +52,22 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
         });
       }
       const filt = losersArray.filter(loser => Object.keys(loser.friends).includes(uid) !== true);
-      const filteredArray = filt.filter(loser => loser.uid !== uid);
-      resolve(filteredArray);
+      const filtered = filt.filter(loser => loser.uid !== uid);
+      getPendingLosersByUserUid(authHelpers.getCurrentUid())
+        .then((requests) => {
+          let f = filtered;
+          const requestsFriends = [];
+          requests.forEach((request) => {
+            requestsFriends.push(request.friendUid);
+          });
+          if (requests != null) {
+            f = filtered.filter(loser => requestsFriends.includes(loser.uid) !== true);
+          }
+          resolve(f);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       reject(err);
@@ -91,24 +141,6 @@ const sendLoserRequest = user => new Promise((resolve, reject) => {
     })
     .catch((err) => {
       console.log(err);
-    });
-});
-
-const getPendingLosers = uid => new Promise((resolve, reject) => {
-  axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${uid}"`)
-    .then((data) => {
-      const requestsObject = data.data;
-      const requestsArray = [];
-      if (requestsObject != null) {
-        Object.keys(requestsObject).forEach((requestTag) => {
-          requestsObject[requestTag].requestTag = requestTag;
-          requestsArray.push(requestsObject[requestTag]);
-        });
-      }
-      resolve(requestsArray);
-    })
-    .catch((err) => {
-      reject(err);
     });
 });
 
@@ -218,7 +250,6 @@ const addUserToLoser = (loserUid) => {
             userName: userData.data.userName,
             uid: userData.data.uid,
           };
-          console.log('userinfo', userInfo);
           getUserTag(loserUid)
             .then((taggedLoser) => {
               getOneUser(taggedLoser)
@@ -284,4 +315,5 @@ export default {
   getMyLosers,
   deleteLoser,
   getUserTag,
+  getPendingLosersByUserUid,
 };
