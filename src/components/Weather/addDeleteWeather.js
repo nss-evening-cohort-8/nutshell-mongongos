@@ -35,6 +35,7 @@ const buildAddForm = () => {
   $('#dropdown-container').html('');
 };
 
+
 const addNewLocation = () => {
   const newLocation = getLocationFromForm();
   weatherData.postNewLocation(newLocation)
@@ -47,7 +48,23 @@ const addNewLocation = () => {
     });
 };
 
-$('body').on('click', '#save-zipcode-button', addNewLocation);
+const validateZip = () => {
+  const newLocation = getLocationFromForm();
+  const newZip = newLocation.zipcode;
+  weatherData.getWeatherApi(newZip)
+    .then((result) => {
+      if (result === 'noData') {
+        console.error('zip code is not valid');
+      } else {
+        addNewLocation();
+      }
+    })
+    .catch((error) => {
+      console.error('error on validateZip', error);
+    });
+};
+
+$('body').on('click', '#save-zipcode-button', validateZip);
 $('body').on('click', '#add-zipcode-button', buildAddForm);
 
 export default { buildAddForm, buildWeatherButtons };

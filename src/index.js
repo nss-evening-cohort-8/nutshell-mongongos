@@ -3,7 +3,6 @@
 
 import firebase from 'firebase/app';
 import 'bootstrap';
-// import $ from 'jquery';
 import navbar from './components/Navbar/navbar';
 import auth from './components/Auth/auth';
 import authHelper from './components/Helpers/authHelpers';
@@ -33,7 +32,6 @@ const initialize = () => {
   navbar.buildNavbar();
   navbar.navbarEvents();
   authHelper.checkLoginStatus(bindComponents);
-  // $('#add-zipcode-button').on('click', addEditWeather.buildAddForm);
 };
 
 initialize();
