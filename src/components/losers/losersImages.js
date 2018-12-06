@@ -3,19 +3,30 @@ import firebase from 'firebase/app';
 import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
 
-const storage = firebase.storage();
-const mainRef = storage.ref();
-
-const selectAvatar = () => {
+const selectAvatarBuilder = () => {
+  const storage = firebase.storage();
+  const mainRef = storage.ref();
   const avatarsArray = [];
   mainRef.child().foreach((imageRef) => {
     avatarsArray.push(imageRef.getDownloadURL());
   });
   let avatarString = '';
   avatarsArray.forEach((avatarURL) => {
-    avatarString += `<image class='avatarImage' src='${avatarURL}' alt='Avatar failed to load' data-avatar-url='${avatarURL}'/>`;
+    avatarString += `<image class='avatarImage' src='${avatarURL}'alt='Avatar failed to load' data-avatar-url='${avatarURL}'/>`;
   });
   $('#avatarSelectDiv').html(avatarString);
+};
+
+const clickOnAvatar = () => {
+  $('.avatarImage').on('click', (event) => {
+    const selection = event.target;
+    $('.avatarImage').removeClass('selectedAvatar');
+    $(selection).toggleClass('selectedAvatar');
+  });
+};
+
+const selectAvatar = () => {
+  
 };
 
 const addAvatar = () => {
@@ -23,16 +34,9 @@ const addAvatar = () => {
   axios.post(`${apiKeys.firebaseKeys.storageBucket}`, newAvatar);
 };
 
-const avatarsBuilder = () => {
-  const avatarString = `<h4 id='avatarTitle'>Choose your avatar</h4>
-                        <input type='file' id='addAvatarInput' accept='image/png, image/jpeg' name='Upload an avatar'>
-                        <div id='avatarSelectDiv'></div>
-                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Select Avatar</button>`;
-  $('#avatarDiv').html(avatarString);
-};
-
 export default {
+  selectAvatarBuilder,
   selectAvatar,
   addAvatar,
-  avatarsBuilder,
+  clickOnAvatar,
 };

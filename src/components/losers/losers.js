@@ -2,6 +2,7 @@ import $ from 'jquery';
 import './losers.scss';
 import losersData from './losersData';
 import authHelpers from '../Helpers/authHelpers';
+import losersImages from './losersImages';
 
 const addOneLoserClicked = () => {
   $('.addOneLoserButton').on('click', (event) => {
@@ -21,6 +22,8 @@ const addOneLoserClicked = () => {
 const addAvatarClicked = () => {
   $('#addAvatarButton').on('click', () => {
     console.log('you clicked this');
+    // eslint-disable-next-line no-use-before-define
+    avatarsBuilder();
   });
 };
 
@@ -28,6 +31,19 @@ const returnToLosers = () => {
   $('#losersBackButton').on('click', () => {
     // eslint-disable-next-line no-use-before-define
     losersBuilder();
+  });
+};
+
+const returnToLosersFromAvatars = () => {
+  $('#avatarBackButton').on('click', () => {
+    // eslint-disable-next-line no-use-before-define
+    losersBuilder();
+  });
+};
+
+const selectAvatarClicked = () => {
+  $('#selectAvatarButton').on('click', () => {
+    losersImages.selectAvatar();
   });
 };
 
@@ -79,8 +95,20 @@ const losersBuilder = () => {
   </div>`;
   $('#losersModal').html(loserString);
   addLosersClicked();
+  addAvatarClicked();
   // eslint-disable-next-line no-use-before-define
   initializeLosers();
+};
+
+const avatarsBuilder = () => {
+  const avatarString = `<h4 id='avatarTitle'>Choose your avatar</h4>
+                        <button type='button' id='avatarBackButton' class='btn btn-sm btn-warning'>Return to friends</button>
+                        <input type='file' id='addAvatarInput' accept='image/png, image/jpeg' name='Upload an avatar'>
+                        <div id='avatarSelectDiv'></div>
+                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Select Avatar</button>`;
+  $('#losersTitle').text('Select an Avatar');
+  $('#losersBody').html(avatarString);
+  returnToLosersFromAvatars();
 };
 
 const removeLoserClicked = () => {
@@ -188,4 +216,6 @@ export default {
   initializeLosers,
   initializeAddLosers,
   addAvatarClicked,
+  avatarsBuilder,
+  selectAvatarClicked,
 };
