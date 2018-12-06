@@ -31,7 +31,7 @@ const msgOutput = (messagesArr) => {
       <div class="outgoing-msg">
         <div class="outgoing-msg-img"> <img alt="Test" src="${currentProfilePic}"> </div>
         <div class="sent-msg">
-          <p>${message.message}</p>
+          <p id="${message.id}">${message.message}</p>
           <span class="time-date"> ${msgtimeStamp} | ${msgDate} <i class="msg-del far fa-trash-alt fa-lg mx-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
         </div>
       </div>
@@ -74,6 +74,7 @@ const realTimeUpdate = () => {
       const newMsgObj = snap.val();
       if (newMsgObj !== null) {
         Object.keys(newMsgObj).forEach((message) => {
+          newMsgObj[message].id = message;
           newMsgArray.push(newMsgObj[message]);
         });
         newMsgArray.sort((a, b) => moment(a.timestamp).unix() - moment(b.timestamp).unix());
@@ -112,6 +113,12 @@ const saveUserMsg = () => {
   $('#new-msg-input').focus();
 };
 
+const delUserMsg = (e) => {
+  const msgId = $(e.target).closest('span').siblings('p').attr('id');
+  messagesData.deleteUserMsg(msgId);
+  realTimeUpdate();
+};
+
 // Message box Events
 const msgBoxEvents = () => {
   $('body').on('keypress', '#new-msg-input', (e) => {
@@ -125,6 +132,8 @@ const msgBoxEvents = () => {
       saveUserMsg();
     }
   });
+
+  $('body').on('click', '.msg-del', delUserMsg);
 };
 
 const initMessages = () => {
