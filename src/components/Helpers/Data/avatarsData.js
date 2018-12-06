@@ -4,17 +4,6 @@ import apiKeys from '../../../../db/apiKeys.json';
 const URL = apiKeys.firebaseKeys.databaseURL;
 const storageURL = apiKeys.firebaseKeys.storageBucket;
 
-const addAvatar = () => new Promise((resolve, reject) => {
-  const newAvatar = document.getElementById('addAvatarInput').files[0];
-  axios.post(`${storageURL}`, newAvatar)
-    .then(() => {
-      resolve();
-    })
-    .catch((err) => {
-      reject(err);
-    });
-});
-
 const addAvatarDatabaseRef = fileName => new Promise((resolve, reject) => {
   axios.post(`${URL}/avatarRef.json`, JSON.stringify(fileName))
     .then(() => {
@@ -36,6 +25,23 @@ const getAvatarDatabaseRef = () => new Promise((resolve, reject) => {
         });
       }
       resolve(refArray);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+const addAvatar = () => new Promise((resolve, reject) => {
+  const newAvatar = document.getElementById('addAvatarInput').files[0];
+  axios.post(`${storageURL}`, newAvatar)
+    .then(() => {
+      addAvatarDatabaseRef(newAvatar)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       reject(err);

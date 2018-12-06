@@ -2,7 +2,7 @@ import $ from 'jquery';
 import './losers.scss';
 import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
-import avatars from './avatars';
+import avatars from '../avatars/avatars';
 import avatarsData from '../Helpers/Data/avatarsData';
 
 const addOneLoserClicked = () => {
