@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
 import losersData from '../Helpers/Data/losersData';
@@ -12,6 +13,7 @@ const getSelectedAvatar = () => selectedAvatar;
 const selectAvatarBuilder = () => {
   const storage = firebase.storage();
   const mainRef = storage.ref();
+  console.log(mainRef);
   const avatarsArray = [];
   mainRef.child().foreach((imageRef) => {
     avatarsArray.push(imageRef.getDownloadURL());
@@ -56,21 +58,9 @@ const selectAvatar = selection => new Promise((resolve, reject) => {
     });
 });
 
-const addAvatar = () => new Promise((resolve, reject) => {
-  const newAvatar = document.getElementById('addAvatarInput').files[0];
-  axios.post(`${apiKeys.firebaseKeys.storageBucket}`, newAvatar)
-    .then(() => {
-      resolve();
-    })
-    .catch((err) => {
-      reject(err);
-    });
-});
-
 export default {
   selectAvatarBuilder,
   selectAvatar,
-  addAvatar,
   clickOnAvatar,
   getSelectedAvatar,
 };

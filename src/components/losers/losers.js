@@ -2,7 +2,8 @@ import $ from 'jquery';
 import './losers.scss';
 import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
-import losersImages from './losersImages';
+import avatars from './avatars';
+import avatarsData from '../Helpers/Data/avatarsData';
 
 const addOneLoserClicked = () => {
   $('.addOneLoserButton').on('click', (event) => {
@@ -21,7 +22,6 @@ const addOneLoserClicked = () => {
 
 const addAvatarClicked = () => {
   $('#addAvatarButton').on('click', () => {
-    console.log('you clicked this');
     // eslint-disable-next-line no-use-before-define
     avatarsBuilder();
   });
@@ -43,7 +43,7 @@ const returnToLosersFromAvatars = () => {
 
 const uploadAvatarClicked = () => {
   $('#uploadAvatarButton').on('click', () => {
-    losersImages.addAvatar()
+    avatarsData.addAvatar()
       .then(() => {
         // eslint-disable-next-line no-use-before-define
         avatarsBuilder();
@@ -56,7 +56,7 @@ const uploadAvatarClicked = () => {
 
 const selectAvatarClicked = () => {
   $('#selectAvatarButton').on('click', () => {
-    losersImages.selectAvatar(losersImages.getSelectedAvatar())
+    avatars.selectAvatar(avatars.getSelectedAvatar())
       .then(() => {
         // eslint-disable-next-line no-use-before-define
         losersBuilder();
@@ -129,6 +129,7 @@ const avatarsBuilder = () => {
                         <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Save Selected Avatar</button>`;
   $('#losersTitle').text('Select an Avatar');
   $('#losersBody').html(avatarString);
+  avatars.selectAvatarBuilder();
   uploadAvatarClicked();
   selectAvatarClicked();
   returnToLosersFromAvatars();
