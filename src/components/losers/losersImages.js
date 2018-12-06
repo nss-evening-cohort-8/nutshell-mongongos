@@ -2,6 +2,12 @@ import $ from 'jquery';
 import firebase from 'firebase/app';
 import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
+import losersData from './losersData';
+import authHelpers from '../Helpers/authHelpers';
+
+let selectedAvatar = '';
+
+const getSelectedAvatar = () => selectedAvatar;
 
 const selectAvatarBuilder = () => {
   const storage = firebase.storage();
@@ -22,12 +28,33 @@ const clickOnAvatar = () => {
     const selection = event.target;
     $('.avatarImage').removeClass('selectedAvatar');
     $(selection).toggleClass('selectedAvatar');
+    selectedAvatar = selection.dataset.avatarUrl;
   });
 };
 
-const selectAvatar = () => {
-  
-};
+const selectAvatar = selection => new Promise((resolve, reject) => {
+  losersData.getUserTag(authHelpers.getCurrentUid())
+    .then((taggedUser) => {
+      losersData.getOneUser(taggedUser)
+        .then((userData) => {
+          const userWithAvatar = userData.data;
+          userWithAvatar.avatar = selection;
+          axios.put(`${apiKeys.firebaseKeys.databaseURL}/users/${taggedUser}.json`, JSON.stringify(userWithAvatar))
+            .then(() => {
+              resolve();
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 const addAvatar = () => {
   const newAvatar = document.getElementById('addAvatarInput').files[0];
@@ -39,4 +66,5 @@ export default {
   selectAvatar,
   addAvatar,
   clickOnAvatar,
+  getSelectedAvatar,
 };

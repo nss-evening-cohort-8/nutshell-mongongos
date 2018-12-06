@@ -43,7 +43,7 @@ const returnToLosersFromAvatars = () => {
 
 const selectAvatarClicked = () => {
   $('#selectAvatarButton').on('click', () => {
-    losersImages.selectAvatar();
+    losersImages.selectAvatar(losersImages.getSelectedAvatar());
   });
 };
 
