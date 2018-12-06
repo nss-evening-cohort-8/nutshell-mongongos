@@ -16,7 +16,8 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
         });
       }
       const filt = losersArray.filter(loser => Object.keys(loser.friends).includes(uid) !== true);
-      resolve(filt);
+      const filteredArray = filt.filter(loser => loser.uid !== uid);
+      resolve(filteredArray);
     })
     .catch((err) => {
       reject(err);
