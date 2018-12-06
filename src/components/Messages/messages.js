@@ -119,9 +119,19 @@ const delUserMsg = (e) => {
 };
 
 const editUserMsg = (e) => {
-  // const msgId = $(e.target).closest('span').siblings('p').attr('id');
-  // mes
-  console.log(e);
+  const msgId = $(e.target).closest('span').siblings('p').attr('id');
+  const msgValue = $(e.target).closest('span').siblings('p').html();
+  $('#new-msg-input').val(msgValue).focus();
+  const msgObj = {
+    isEdited: true,
+    message: $('#new-msg-input').val(),
+    timestamp: moment().format(),
+    avatarUrl: authHelpers.getProfilePic(),
+    userUid: authHelpers.getCurrentUid(),
+  };
+  console.log(msgObj);
+  console.log(msgId);
+  console.log(msgValue);
 };
 
 // Message box Events
@@ -140,7 +150,7 @@ const msgBoxEvents = () => {
 
   $('body').on('click', '.msg-del', delUserMsg);
 
-  $('body').on('click', '#msg-edit', editUserMsg);
+  $('body').on('click', '.msg-edit', editUserMsg);
 };
 
 const initMessages = () => {
