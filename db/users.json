@@ -3,6 +3,7 @@
     "santizedUserName" : "westmary48",
     "uid" : "wJfBssG9k5efPUwpibQU2gvfZwA3",
     "userName" : "westmary48",
+    "avatar": "",
     "friends": {
       "0knSIZqhkVTVabtuHPlCftupvhu1": {
         "uid" : "0knSIZqhkVTVabtuHPlCftupvhu1",
@@ -14,6 +15,7 @@
     "santizedUserName" : "mcrank",
     "uid" : "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
     "userName" : "MCrank",
+    "avatar": "",
     "friends": {
       "0knSIZqhkVTVabtuHPlCftupvhu1": {
         "uid" : "0knSIZqhkVTVabtuHPlCftupvhu1",
@@ -25,18 +27,21 @@
     "santizedUserName" : "jazz",
     "uid" : "f9islzWb6jYi1oHbJXkKrPm0UP62",
     "userName" : "jazz",
+    "avatar": "",
     "friends": ""
   },
   "-LSqeMoLyfgmUG9pT9Ve" : {
     "santizedUserName" : "infinitepomelos",
     "uid" : "RQyjwnXjihcdsC183ZxoBC29waI2",
     "userName" : "infinitepomelos",
+    "avatar": "",
     "friends": ""
   },
   "-LSqtm3mKVllLcqMXIPN" : {
     "santizedUserName" : "rich f",
     "uid" : "0knSIZqhkVTVabtuHPlCftupvhu1",
     "userName" : "Rich F",
+    "avatar": "",
     "friends": {
       "q6Tg4Ea67EQJeptUOSe3gJqtgTf1": {
         "uid" : "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
@@ -52,12 +57,14 @@
     "santizedUserName" : "cat lady",
     "uid" : "12345",
     "username" : "Cat Lady",
+    "avatar": "",
     "friends": ""
   },
   "user2" : {
     "santizedUserName" : "john smith",
     "uid" : "67890",
     "username" : "John Smith",
+    "avatar": "",
     "friends": ""
   }
 }

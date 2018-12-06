@@ -18,6 +18,12 @@ const addOneLoserClicked = () => {
   });
 };
 
+const addAvatarClicked = () => {
+  $('#addAvatarButton').on('click', () => {
+    console.log('you clicked this');
+  });
+};
+
 const returnToLosers = () => {
   $('#losersBackButton').on('click', () => {
     // eslint-disable-next-line no-use-before-define
@@ -62,6 +68,7 @@ const losersBuilder = () => {
       <div class='modal-body' id='losersBody'>
         <div>
           <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
+          <button type='button' id='addAvatarButton' class='btn btn-sm btn-warning'>Add Avatar</button>
         </div>
         <div class="modal-body" id='losersDiv'>
         </div>
@@ -180,4 +187,5 @@ export default {
   returnToLosers,
   initializeLosers,
   initializeAddLosers,
+  addAvatarClicked,
 };
