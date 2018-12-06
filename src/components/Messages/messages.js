@@ -51,7 +51,12 @@ const msgOutput = (messagesArr) => {
       `;
     }
   });
-  const newInputString = `
+  $('#message-container').html(newMsgString);
+  $('#new-msg-input').val('');
+};
+
+const msgInputBuilder = () => {
+  const newMsgInput = `
   <div class="type-msg">
     <div class="input-msg-write">
       <input id="new-msg-input" class="write-msg" type="text" placeholder="Type a message">
@@ -59,9 +64,7 @@ const msgOutput = (messagesArr) => {
     </div>
   </div>
   `;
-  $('#message-container').html(newMsgString);
-  $('#message-input').html(newInputString);
-  $('#new-msg-input').val('');
+  $('#message-input').html(newMsgInput);
 };
 
 const realTimeUpdate = () => {
@@ -126,6 +129,7 @@ const msgBoxEvents = () => {
 
 const initMessages = () => {
   printMessages();
+  msgInputBuilder();
   realTimeUpdate();
   msgBoxEvents();
 };
