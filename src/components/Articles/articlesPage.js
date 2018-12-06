@@ -36,8 +36,8 @@ const articleComponent = () => {
 
 // FORM TO CREATE A NEW ARTICLE
 
-const modalFormBuilder = (article) => {
-  // console.log('form builder', articlesArray);
+const modalFormBuilder = () => {
+  // console.log('form builder', article);
   const domString = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
 <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -50,11 +50,11 @@ const modalFormBuilder = (article) => {
       </div>
         <div class="modal-body">
           <label for="form-article-name">Article Title:</label>
-          <input type="text" class="title-input" value="${article.title} id="title-input-form" placeholder="Coffee makers may contain mold!">
+          <input type="text" class="title-input" id="title-input-form" placeholder="Coffee makers may contain mold!">
           <label form="form-article-synopsis">Synopsis:</label>
-          <input type="text" class="synopsis-input" value="${article.synopsis} id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
+          <input type="text" class="synopsis-input" id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
           <label form="form-article-url">URL:</label>
-          <input type="text" class="url-input" value="${article.url} id="url-input-form" placeholder="www.google.com">
+          <input type="text" class="url-input" id="url-input-form" placeholder="www.google.com">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,7 +89,7 @@ const gettingArticleFromForm = () => {
 };
 
 const addNewArticle = () => {
-  const newArticle = gettingArticleFromForm()
+  const newArticle = gettingArticleFromForm();
   articlesData.addNewArticle(newArticle)
     .then(() => {
       formComponent();
@@ -104,8 +104,9 @@ $('body').on('click', '#save-new-article', addNewArticle);
 
 const initializeArticles = () => {
   articleComponent();
-  // formBuilder();
   formComponent();
+  modalFormBuilder();
+  addNewArticle();
 };
 
 export default { initializeArticles };
