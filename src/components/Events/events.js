@@ -57,7 +57,6 @@ const buildModal = (eventsArray) => {
     modal += '<div class = "modal-item">You have no events.</div>';
   }
   modal += `</div>
-  <button type="button" class="btn save-btn btn-secondary btn-sm" data-save-id=${event.id}>Add Event</button>
       </div>
       </div>;`;
 

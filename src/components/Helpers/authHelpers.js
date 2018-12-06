@@ -40,6 +40,7 @@ const checkLoginStatus = (bindComponents) => {
       $('#dropdown-container').html('');
       $('#weather-container').html('');
       $('#events-container').html('');
+      $('#add-edit-event').html('');
       $('#events-modal-container').html('');
       $('#single-container').html('');
       auth.loginPage();

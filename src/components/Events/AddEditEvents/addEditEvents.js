@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'bootstrap';
 import authHelpers from '../../Helpers/authHelpers';
 import initializeEventsPage from '../events';
 import eventsData from '../EventsData/eventsData';
@@ -7,7 +8,7 @@ const eventFormBuilder = (event) => {
   const form = `
     <div class="form-group">
       <label for="form-event-event">Event:</label>
-      <input type="text" class="form-control" value ="${event.event}"id="form-event-event" placeholder="Titans Game">
+      <input type="text" class="form-control " value ="${event.event}"id="form-event-event" placeholder="Titans Game">
     </div>
     <div class="form-group">
       <label for="form-event-date">Location:</label>
