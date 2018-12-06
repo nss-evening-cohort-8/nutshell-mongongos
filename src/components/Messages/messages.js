@@ -106,6 +106,7 @@ const saveUserMsg = () => {
       console.error('There was a problem saving the message', error);
     });
   realTimeUpdate();
+  $('#new-msg-input').focus();
 };
 
 // Message box Events
