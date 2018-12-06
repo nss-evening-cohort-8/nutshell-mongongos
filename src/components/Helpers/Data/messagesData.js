@@ -26,4 +26,6 @@ const getAllMessages = () => new Promise((resolve, reject) => {
     });
 });
 
-export default { getAllMessages };
+const createUserMsg = msgObj => axios.post(`${fireBaseUrl}/messages.json`, JSON.stringify(msgObj));
+
+export default { getAllMessages, createUserMsg };
