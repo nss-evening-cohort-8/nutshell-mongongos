@@ -31,4 +31,33 @@ const createUserMsg = msgObj => axios.post(`${fireBaseUrl}/messages.json`, JSON.
 
 const deleteUserMsg = msgId => axios.delete(`${fireBaseUrl}/messages/${msgId}.json`);
 
-export default { getAllMessages, createUserMsg, deleteUserMsg };
+const updateUserMsg = (msgObj, msgId) => new Promise((resolve, reject) => {
+  axios
+    .put(`${fireBaseUrl}/messages/${msgId}.json`, JSON.stringify(msgObj))
+    .then((results) => {
+      resolve(results);
+    })
+    .catch((error) => {
+      console.error('An error occured updating your message', error);
+      reject(error);
+    });
+});
+
+// const updateTask = (taskObj, taskId) => new Promise((resolve, reject) => {
+//   axios
+//     .put(`${firebaseUrl}/tasks/${taskId}.json`, JSON.stringify(taskObj))
+//     .then((results) => {
+//       resolve(results);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       reject(error);
+//     });
+// });
+
+export default {
+  getAllMessages,
+  createUserMsg,
+  deleteUserMsg,
+  updateUserMsg,
+};

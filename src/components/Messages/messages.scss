@@ -28,6 +28,7 @@
 
 img{
   max-width:75%;
+  border-radius: 5px;
 }
 
 .time-date {
@@ -73,7 +74,7 @@ img{
 
 .received-width-msg p {
   background: $msgRecBackgrnd none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 5px;
   color: $msgRecTextColor;
   font-size: $msgTextSize;
   margin: 0;
@@ -84,7 +85,7 @@ img{
 // Sent Messages
 .sent-msg p {
   background: $msgSentBackgrnd none repeat scroll 0 0;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: $msgTextSize;
   margin: 0;
   color:$msgSentTextColor;
