@@ -16,7 +16,7 @@ const eventFormBuilder = (event) => {
     </div>
     <div class="form-group">
     <label for="form-event-date">Date:</label>
-    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-date" placeholder="NSDecember 1st, 2018S">
+    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-date" placeholder="December 1st, 2018">
   </div>
   `;
   return form;
@@ -71,7 +71,7 @@ const showEditForm = (e) => {
     .then((singleEvent) => {
       let domString = '<h2>Edit Event</h2>';
       domString += eventFormBuilder(singleEvent);
-      domString += `<button id="edit-event" data-single-edit-id=${singleEvent.Id}>Save Event</button>`;
+      domString += `<button id="edit-event" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
       $('#add-edit-event').html(domString).show();
       // $('#events-container').hide();
     })
