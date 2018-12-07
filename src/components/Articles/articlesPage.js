@@ -13,6 +13,7 @@ const printAllArticles = (allArticlesArray) => {
     domString += `
     <div class="news-articles-builder">
       <button type="button" id="delete-article-button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
+      <button type="button" id="edit-article-button" class="btn btn btn-sm" data-edit-id=${article.id}>Edit</button>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
@@ -92,6 +93,7 @@ const addNewArticle = () => {
   const newArticle = gettingArticleFromForm();
   articlesData.addNewArticle(newArticle)
     .then(() => {
+      $('#modal-section').html('');
       formComponent();
     })
     .catch((error) => {
@@ -109,6 +111,12 @@ const deleteArticle = (e) => {
     .catch((error) => {
       console.error('error in deleteArticles', error);
     });
+};
+
+// EDIT ARTICLES
+
+const showEditForm = (e) => {
+  const articleToEdit = e.target.dataset.editId;
 };
 
 // CLICK EVENTS

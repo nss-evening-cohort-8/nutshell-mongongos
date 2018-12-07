@@ -42,13 +42,12 @@ const deleteArticles = articleId => axios.delete(`${fireBaseUrl}/articles/${arti
 
 const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`, JSON.stringify(articleOBject));
 
-// const updateArticle = (articleOBject, articleId)
-// => axios.put(`${fireBaseUrl}/articles/${articleId.json}`, JSON.stringify(articleOBject));
+const updateArticle = (articleOBject, articleId) => axios.put(`${fireBaseUrl}/articles/${articleId.json}`, JSON.stringify(articleOBject));
 
 export default {
   getAllArticlesFromDb,
   getAllArticles,
   deleteArticles,
   addNewArticle,
-  // updateArticle,
+  updateArticle,
 };
