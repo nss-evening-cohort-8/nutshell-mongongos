@@ -4,6 +4,7 @@ import apiKeys from '../../../db/apiKeys.json';
 import losersData from '../Helpers/Data/losersData';
 import avatarsData from '../Helpers/Data/avatarsData';
 import authHelpers from '../Helpers/authHelpers';
+import './avatars.scss';
 
 let selectedAvatar = '';
 
