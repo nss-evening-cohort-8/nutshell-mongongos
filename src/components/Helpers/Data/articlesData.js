@@ -38,7 +38,7 @@ const getAllArticles = articleId => new Promise((resolve, reject) => {
     });
 });
 
-// const deleteArticle = articleId => axios.delete(`${fireBaseUrl}/articles/${articleId}.json`);
+const deleteArticles = articleId => axios.delete(`${fireBaseUrl}/articles/${articleId}.json`);
 
 const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`, JSON.stringify(articleOBject));
 
@@ -48,7 +48,7 @@ const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`
 export default {
   getAllArticlesFromDb,
   getAllArticles,
-  // deleteArticle,
+  deleteArticles,
   addNewArticle,
   // updateArticle,
 };

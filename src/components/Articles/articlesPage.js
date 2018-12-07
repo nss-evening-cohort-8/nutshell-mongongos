@@ -12,7 +12,7 @@ const printAllArticles = (allArticlesArray) => {
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
-      <button type="button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
+      <button type="button" id="delete-article-button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
@@ -99,18 +99,25 @@ const addNewArticle = () => {
     });
 };
 
-
 // DELETE ARTICLES
-
-
+const deleteArticle = (e) => {
+  const articleToDelete = e.target.dataset.deleteId;
+  articlesData.deleteArticles(articleToDelete)
+    .then(() => {
+      articleComponent();
+    })
+    .catch((error) => {
+      console.error('error in deleteArticles', error);
+    });
+};
 
 // CLICK EVENTS
 $('body').on('click', '#save-new-article', addNewArticle);
+$('body').on('click', '#delete-article-button', deleteArticle);
 
 const initializeArticles = () => {
   articleComponent();
   formComponent();
-  addNewArticle();
 };
 
 export default { initializeArticles };

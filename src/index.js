@@ -18,6 +18,7 @@ import './index.scss';
 const bindComponents = () => {
   messages.initMessages();
   articlesPage.initializeArticles();
+  // articlesPage.modalFormBuilder();
   weather.weatherComponent();
   losers.losersBuilder();
   weather.buildWeatherHeader();
