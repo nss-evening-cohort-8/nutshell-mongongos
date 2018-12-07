@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import firebase from 'firebase/app';
-import 'firebase/storage';
 import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
 import losersData from '../Helpers/Data/losersData';
@@ -12,23 +10,18 @@ let selectedAvatar = '';
 const getSelectedAvatar = () => selectedAvatar;
 
 const selectAvatarBuilder = () => {
-  const storage = firebase.storage();
-  const mainRef = storage.ref();
-  const avatarsArray = [];
-  avatarsData.getAvatarDatabaseRef()
-    .then((fileNames) => {
-      fileNames.forEach((fileName) => {
-        avatarsArray.push(mainRef.child(fileName).getDownloadURL());
+  avatarsData.getAvatars()
+    .then((avatarUrls) => {
+      let avatarString = '';
+      const avatarsArray = avatarUrls;
+      avatarsArray.forEach((avatarURL) => {
+        avatarString += `<image class='avatarImage' src='${avatarURL}'alt='Avatar failed to load' data-avatar-url='${avatarURL}'/>`;
       });
+      $('#avatarSelectDiv').html(avatarString);
     })
     .catch((err) => {
       console.log(err);
     });
-  let avatarString = '';
-  avatarsArray.forEach((avatarURL) => {
-    avatarString += `<image class='avatarImage' src='${avatarURL}'alt='Avatar failed to load' data-avatar-url='${avatarURL}'/>`;
-  });
-  $('#avatarSelectDiv').html(avatarString);
 };
 
 const clickOnAvatar = () => {
