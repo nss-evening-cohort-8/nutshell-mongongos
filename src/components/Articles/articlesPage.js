@@ -12,10 +12,11 @@ const printAllArticles = (allArticlesArray) => {
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
+      <button type="button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
-    </div>
+    </button>
     <hr class="my-4">
     <br>
     `;
@@ -37,7 +38,6 @@ const articleComponent = () => {
 // FORM TO CREATE A NEW ARTICLE
 
 const modalFormBuilder = () => {
-  // console.log('form builder', article);
   const domString = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
 <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -99,13 +99,17 @@ const addNewArticle = () => {
     });
 };
 
+
+// DELETE ARTICLES
+
+
+
 // CLICK EVENTS
 $('body').on('click', '#save-new-article', addNewArticle);
 
 const initializeArticles = () => {
   articleComponent();
   formComponent();
-  modalFormBuilder();
   addNewArticle();
 };
 

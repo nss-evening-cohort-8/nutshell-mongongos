@@ -20,6 +20,7 @@ const bindComponents = () => {
   messages.initMessages();
   articlesPage.initializeArticles();
   weather.weatherComponent();
+  articlesPage.addNewArticle();
 };
 
 const initialize = () => {
