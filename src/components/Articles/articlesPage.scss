@@ -1,17 +1,36 @@
 // links
 
 a:link {
-  color: turquoise;
+  color: darkcyan;
 }
 
 a:visited {
-  color: orange;
+  color: darkgoldenrod;
 }
 
-// article size
+// article size & scroll
 
 #article-section {
+  background-color: lightgrey;
+  box-shadow: inset 0 0 5px grey;
   max-width: 30%;
   margin: 4%;
   padding: 2%;
+  overflow: scroll;
+  height: 400px;
+  width: 400px;
+}
+
+// location
+
+// #container {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-end;
+//   margin: auto;
+// }
+
+#modal-section {
+  margin: 4%;
+  // margin-bottom: 4%;
 }

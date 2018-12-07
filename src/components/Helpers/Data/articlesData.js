@@ -4,6 +4,7 @@
 
 import axios from 'axios';
 import apiKeys from '../../../../db/apiKeys.json';
+import '../../Articles/articlesPage.scss';
 
 const fireBaseUrl = apiKeys.firebaseKeys.databaseURL;
 

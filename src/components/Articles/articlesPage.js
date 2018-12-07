@@ -142,7 +142,7 @@ const showEditForm = (e) => {
       let domString = '<h2>Edit Article</h2>';
       domString += editFormBuilder(singleArticle);
       domString += `<button id="article-to-edit" data-edit-id=${singleArticle.id} class="btn btn btn-sm edit">Save Article Change</button>`;
-      $('#edit-section').html(domString).show();
+      $('#article-section').append(domString).show();
     })
     .catch((error) => {
       console.log('error in showing the edit form', error);
@@ -156,7 +156,7 @@ const updateArticle = (e) => {
   articlesData.updateArticles(updatedArticle, articleId)
     .then(() => {
       articlesPage();
-      $('#edit-section').html('');
+      $('#article-section').show();
     })
     .catch((error) => {
       console.log('error in updateArticle', error);
@@ -174,4 +174,4 @@ const initializeArticles = () => {
   articlesPage();
 };
 
-export default { initializeArticles };
+export default { initializeArticles, printAllArticles };
