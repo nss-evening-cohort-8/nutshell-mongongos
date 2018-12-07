@@ -7,8 +7,8 @@ import apiKeys from '../../../../db/apiKeys.json';
 
 const fireBaseUrl = apiKeys.firebaseKeys.databaseURL;
 
-const getAllArticlesFromDb = uid => new Promise((resolve, reject) => {
-  axios.get(`${fireBaseUrl}/articles.json?orderBy="userUid"&equalTo="${uid}"`)
+const getAllArticlesFromDb = () => new Promise((resolve, reject) => {
+  axios.get(`${fireBaseUrl}/articles.json`)
     .then((results) => {
       const allArticlesObject = results.data;
       const allArticlesArray = [];
@@ -55,7 +55,7 @@ const deleteArticles = articleId => axios.delete(`${fireBaseUrl}/articles/${arti
 
 const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`, JSON.stringify(articleOBject));
 
-const updateArticles = (articleOBject, articleId) => axios.put(`${fireBaseUrl}/articles/${articleId}.json`, JSON.stringify(articleOBject));
+const updateArticles = (articleObject, articleId) => axios.put(`${fireBaseUrl}/articles/${articleId}.json`, JSON.stringify(articleObject));
 
 export default {
   getAllArticlesFromDb,
