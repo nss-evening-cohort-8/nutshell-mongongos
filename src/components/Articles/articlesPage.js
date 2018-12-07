@@ -13,7 +13,7 @@ const printAllArticles = (allArticlesArray) => {
     domString += `
     <div class="news-articles-builder">
       <button type="button" id="delete-article-button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
-      <button type="button" id="edit-article-button" class="btn btn btn-sm" data-edit-id=${article.id}>Edit</button>
+      <button type="button" id="edit-article-button" class="btn btn btn-sm edit-btn" data-edit-id=${article.id}>Edit</button>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
@@ -51,11 +51,11 @@ const modalFormBuilder = () => {
       </div>
         <div class="modal-body">
           <label for="form-article-name">Article Title:</label>
-          <input type="text" class="title-input" id="title-input-form" placeholder="Coffee makers may contain mold!">
+          <input type="text" class="form-control" id="title-input-form" placeholder="Coffee makers may contain mold!">
           <label form="form-article-synopsis">Synopsis:</label>
-          <input type="text" class="synopsis-input" id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
+          <input type="text" class="form-control" id="synopsis-input-form" placeholder="Keep away from the plastic in coffee makers, especially Keurigs!">
           <label form="form-article-url">URL:</label>
-          <input type="text" class="url-input" id="url-input-form" placeholder="www.google.com">
+          <input type="text" class="form-control" id="url-input-form" placeholder="www.google.com">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,13 +93,14 @@ const addNewArticle = () => {
   const newArticle = gettingArticleFromForm();
   articlesData.addNewArticle(newArticle)
     .then(() => {
-      $('#modal-section').html('');
+      // $('#modal-section').html('');
       formComponent();
     })
     .catch((error) => {
       console.log('error in addNewArticle', error);
     });
 };
+
 
 // DELETE ARTICLES
 const deleteArticle = (e) => {
@@ -115,13 +116,61 @@ const deleteArticle = (e) => {
 
 // EDIT ARTICLES
 
+const editFormBuilder = (article) => {
+  const form = `
+  <div class="form-group">
+    <label for="form-friend-name">Name:</label>
+    <input type="text" class="form-control" value="${article.title}" id="form-friend-name" placeholder="Indiana Jones">
+  </div>
+  <div class="form-group">
+    <label for="form-friend-address">Address:</label>
+    <input type="text" class="form-control" value="${article.synopsis}" id="form-friend-address" placeholder="1234 Indy Drive">
+  </div>
+  <div class="form-group">
+    <label for="form-friend-email">Email:</label>
+    <input type="email" class="form-control" value="${article.url}" id="form-friend-email" placeholder="savemyartifact@goblet.com">
+  </div>
+  `;
+  return form;
+};
+
 const showEditForm = (e) => {
   const articleToEdit = e.target.dataset.editId;
+  // console.log(articleToEdit);
+  articlesData.getSingleArticle(articleToEdit)
+    .then((singleArticle) => {
+      console.log(singleArticle);
+      let domString = '<h2>Edit Article</h2>';
+      domString += editFormBuilder(singleArticle);
+      domString += `<button id="article-to-edit" data-single-edit-id=${singleArticle.id} class="btn btn btn-sm edit">Save Article Change</button>`;
+      console.log(singleArticle.id);
+      $('#article-section').html(domString).show();
+    })
+    .catch((error) => {
+      console.log('error in showing the edit form', error);
+    });
 };
+
+// const updateArticle = (e) => {
+//   const updatedArticle = gettingArticleFromForm();
+//   console.log(updatedArticle);
+//   const articleId = e.target.dataset.editId;
+//   console.log(articleId);
+//   articlesData.updateArticles(updatedArticle, articleId)
+//     .then(() => {
+//       formComponent();
+//       showEditForm();
+//     })
+//     .catch((error) => {
+//       console.log('error in updateArticle', error);
+//     });
+// };
 
 // CLICK EVENTS
 $('body').on('click', '#save-new-article', addNewArticle);
 $('body').on('click', '#delete-article-button', deleteArticle);
+$('body').on('click', '#edit-article-button', showEditForm);
+// $('body').on('click', '#article-to-edit', updateArticle);
 
 const initializeArticles = () => {
   articleComponent();
