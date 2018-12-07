@@ -1,32 +1,79 @@
 {
   "message1": {
-    "userUid": "12345",
+    "isEdited": false,
     "message": "What's up?",
     "timestamp": "2018-12-03T19:35:37-06:00",
-    "isEdited": false
+    "userUid": "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
+    "avatarUrl": ""
   },
   "message2": {
-    "userUid": "67890",
-    "message": "The Sky",
-    "timestamp": "2018-12-03T19:35:37-06:00",
-    "isEdited": true
+    "isEdited": true,
+    "message": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "timestamp": "2018-12-03T19:35:36-06:00",
+    "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
+    "avatarUrl": ""
   },
   "message3": {
-    "userUid": "24680",
-    "message": "The Sky",
-    "timestamp": "2018-12-03T19:35:37-06:00",
-    "isEdited": false
+    "isEdited": false,
+    "message": "Lorem ipsum dolor amet kogi bespoke deep v, austin heirloom bitters craft beer letterpress bushwick. Subway tile tbh lo-fi hoodie cred. Sustainable franzen sriracha vice scenester, poutine ennui biodiesel trust fund bitters vexillologist try-hard schlitz. Tofu celiac cornhole jianbing man bun artisan, swag food truck chia occupy.",
+    "timestamp": "2018-12-03T19:35:38-06:00",
+    "userUid": "q6Tg4Ea67EQJeptUOSe3gJqtgTf1",
+    "avatarUrl": ""
   },
   "message4": {
-    "userUid": "09876",
-    "message": "The Sky",
-    "timestamp": "2018-12-03T19:35:37-06:00",
-    "isEdited": false
+    "isEdited": false,
+    "message": "Always be yourself, express yourself, have faith in yourself, do not go out and look for a successful personality and duplicate it.",
+    "timestamp": "2018-12-03T19:35:39-06:00",
+    "userUid": "RQyjwnXjihcdsC183ZxoBC29waI2",
+    "avatarUrl": ""
   },
   "message5": {
-    "userUid": "54321",
-    "message": "The Sky",
+    "isEdited": true,
+    "message": "Success isn't always about greatness. It's about consistency. Consistent hard work leads to success. Greatness will come",
+    "timestamp": "2018-12-03T19:35:20-06:00",
+    "userUid": "f9islzWb6jYi1oHbJXkKrPm0UP62",
+    "avatarUrl": ""
+  },
+  "message6": {
+    "isEdited": false,
+    "message": "All of the women on 'The Apprentice' flirted with me—consciously or unconsciously. That's to be expected",
     "timestamp": "2018-12-03T19:35:37-06:00",
-    "isEdited": true
+    "userUid": "0knSIZqhkVTVabtuHPlCftupvhu1",
+    "avatarUrl": ""
+  },
+  "message7": {
+    "isEdited": false,
+    "message": "My fingers are long and beautiful, as, it has been well been documented, are various other parts of my body.",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "userUid": "RQyjwnXjihcdsC183ZxoBC29waI2",
+    "avatarUrl": ""
+  },
+  "message8": {
+    "isEdited": false,
+    "message": "I could stand in the middle of Fifth Avenue and shoot somebody, and I wouldn't lose any voters, okay? It's, like, incredible.",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "userUid": "f9islzWb6jYi1oHbJXkKrPm0UP62",
+    "avatarUrl": ""
+  },
+  "message9": {
+    "isEdited": false,
+    "message": "I’m speaking with myself, number one, because I have a very good brain and I’ve said a lot of things.",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "userUid": "",
+    "avatarUrl": ""
+  },
+  "message10": {
+    "isEdited": false,
+    "message": "Actually, I was only kidding. You can get that baby out of here. Don’t worry, I think she really believed me that I love having a baby crying while I’m speaking. That’s OK People don’t understand. That’s OK.",
+    "timestamp": "2018-12-03T19:35:37-06:00",
+    "userUid": "0knSIZqhkVTVabtuHPlCftupvhu1",
+    "avatarUrl": ""
+  },
+  "message11": {
+    "isEdited": false,
+    "message": "For evangelicals, for the Christians, for the everybody, for everybody of religion, this will be, may be, the most important election that our country has ever had. And once I get in, I will do my thing that I do very well. And I figure it is probably, maybe the only way I'm going to get to heaven. So I better do a good job.",
+    "timestamp": "2018-12-03T19:37:37-06:00",
+    "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
+    "avatarUrl": ""
   }
 }
