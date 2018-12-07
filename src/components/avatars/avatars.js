@@ -9,6 +9,15 @@ let selectedAvatar = '';
 
 const getSelectedAvatar = () => selectedAvatar;
 
+const clickOnAvatar = () => {
+  $('.avatarImage').on('click', (event) => {
+    const selection = event.target;
+    $('.avatarImage').removeClass('selectedAvatar');
+    $(selection).toggleClass('selectedAvatar');
+    selectedAvatar = selection.dataset.avatarUrl;
+  });
+};
+
 const selectAvatarBuilder = () => {
   avatarsData.getAvatars()
     .then((avatarUrls) => {
@@ -18,19 +27,11 @@ const selectAvatarBuilder = () => {
         avatarString += `<image class='avatarImage' src='${avatarURL}'alt='Avatar failed to load' data-avatar-url='${avatarURL}'/>`;
       });
       $('#avatarSelectDiv').html(avatarString);
+      clickOnAvatar();
     })
     .catch((err) => {
       console.log(err);
     });
-};
-
-const clickOnAvatar = () => {
-  $('.avatarImage').on('click', (event) => {
-    const selection = event.target;
-    $('.avatarImage').removeClass('selectedAvatar');
-    $(selection).toggleClass('selectedAvatar');
-    selectedAvatar = selection.dataset.avatarUrl;
-  });
 };
 
 const selectAvatar = selection => new Promise((resolve, reject) => {
