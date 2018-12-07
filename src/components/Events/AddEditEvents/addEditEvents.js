@@ -4,12 +4,6 @@ import authHelpers from '../../Helpers/authHelpers';
 import initializeEventsPage from '../events';
 import eventsData from '../EventsData/eventsData';
 
-const buildEventButton = () => {
-  const domString = `<button id="add-event-button">+</button>
-  <button id="delete-zipcode-button">X</button>`;
-  $('#event-button').html(domString);
-};
-
 const eventFormBuilder = (event) => {
   const form = `
     <div class="form-group">
@@ -17,11 +11,11 @@ const eventFormBuilder = (event) => {
       <input type="text" class="form-control " value ="${event.event}"id="form-event-event" placeholder="Titans Game">
     </div>
     <div class="form-group">
-      <label for="form-event-date">Location:</label>
+      <label for="form-event-location">Location:</label>
       <input type="text" class="form-control" value ="${event.location}" id="form-event-location" placeholder="NSS">
     </div>
     <div class="form-group">
-    <label for="form-event-location">Date:</label>
+    <label for="form-event-date">Date:</label>
     <input type="text" class="form-control" value ="${event.startDate}" id="form-event-date" placeholder="NSDecember 1st, 2018S">
   </div>
   `;
@@ -48,12 +42,12 @@ const buildAddFrom = () => {
   domString += eventFormBuilder(emptyEvent);
   domString += '<button id="add-event">Add Event</button>';
   $('#add-edit-event').html(domString).show();
-  $('#events-container').hide();
+  // $('#events-container').hide();
 };
 
 const addNewEvent = () => {
   const newEvent = gettingEventFromForm();
-  eventsData.addNewEvent(newEvent)
+  eventsData.createEventData(newEvent)
     .then(() => {
       $('#add-edit-event').html('').hide();
       $('#events-container').show();
@@ -63,6 +57,12 @@ const addNewEvent = () => {
     .catch((error) => {
       console.error('error', error);
     });
+};
+
+const buildEventButton = () => {
+  const domString = '<button id="add-event-button">+</button>';
+  $('#event-button').html(domString);
+  $('#add-event-button').on('click', buildAddFrom);
 };
 
 const showEditForm = (e) => {
@@ -99,4 +99,9 @@ $('body').on('click', '#add-event', addNewEvent);
 $('body').on('click', '.edit-btn-event', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
 
-export default { buildAddFrom, gettingEventFromForm, buildEventButton };
+export default {
+  buildAddFrom,
+  gettingEventFromForm,
+  buildEventButton,
+  addNewEvent,
+};
