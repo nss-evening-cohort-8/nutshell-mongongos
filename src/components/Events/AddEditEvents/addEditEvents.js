@@ -73,7 +73,7 @@ const showEditForm = (e) => {
       domString += eventFormBuilder(singleEvent);
       domString += `<button id="edit-event" data-single-edit-id=${singleEvent.Id}>Save Event</button>`;
       $('#add-edit-event').html(domString).show();
-      $('#events-container').hide();
+      // $('#events-container').hide();
     })
     .catch((error) => {
       console.error('error in getting single for edit', error);
@@ -85,9 +85,9 @@ const updateEvent = (e) => {
   const eventId = e.target.dataset.singleEditId;
   eventsData.updateEvent(updatedEvent, eventId)
     .then(() => {
-      $('#add-edit-event').html('').hide();
-      $('#single-container').html('');
-      $('#events-container').show();
+      // $('#add-edit-event').html('').hide();
+      // $('#single-container').html('');
+      // $('#events-container').show();
       initializeEventsPage();
     })
     .catch((error) => {
@@ -96,7 +96,7 @@ const updateEvent = (e) => {
 };
 
 $('body').on('click', '#add-event', addNewEvent);
-$('body').on('click', '.edit-btn', showEditForm);
+$('body').on('click', '.edit-btn-event', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
 
 export default { buildAddFrom, gettingEventFromForm, buildEventButton };

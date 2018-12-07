@@ -3,32 +3,32 @@ import 'bootstrap';
 import eventsData from './EventsData/eventsData';
 import authHelpers from '../Helpers/authHelpers';
 
-// const printSingleEvent = (event) => {
-//   console.log('event', event);
-//   const eventString = `
-//     <div>
-//         <h1>${event.event}</h1>
-//         <h3>${event.startDate}</h3>
-//         <p>${event.location}</p>
-//       <button class = "btn btn-danger delete-btn" data-delete-id=${event.userUid}>X</button>
-//       <button class = "btn btn-info edit-btn" data-edit-id=${event.userUid}>Edit</button>
-//   </div>
-//       `;
-//   $('#single-container').html(eventString);
-// };
+const printSingleEvent = (event) => {
+  console.log('event', event);
+  const eventString = `
+    <div>
+        <h1>${event.event}</h1>
+        <h3>${event.startDate}</h3>
+        <p>${event.location}</p>
+      <button class = "btn btn-danger delete-btn" data-delete-id=${event.userUid}>X</button>
+      <button class = "btn btn-info edit-btn" data-edit-id=${event.userUid}>Edit</button>
+  </div>
+      `;
+  $('#single-container').html(eventString);
+};
 
-// const getSingleEvent = (e) => {
-//   const eventId = e.target.dataset.dropdownId;
-//   const uid = authHelpers.getCurrentUid();
-//   eventsData.getAllEvents(eventId)
-//     .then((getAllEvents) => {
-//       console.log('uid', uid);
-//       printSingleEvent(getAllEvents);
-//     })
-//     .catch((error) => {
-//       console.error('error in getting one event', error);
-//     });
-// };
+const getSingleEvent = (e) => {
+  const eventId = e.target.dataset.dropdownId;
+  const uid = authHelpers.getCurrentUid();
+  eventsData.getAllEvents(eventId)
+    .then((getAllEvents) => {
+      console.log('uid', uid);
+      printSingleEvent(getAllEvents);
+    })
+    .catch((error) => {
+      console.error('error in getting one event', error);
+    });
+};
 const buildModal = (eventsArray) => {
   let modal = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
   Pick a Event
@@ -49,8 +49,8 @@ const buildModal = (eventsArray) => {
       modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>
 
       <div class="modal-footer">
-        <button type="button" class="btn delete-btn btn-danger" data-delete-id=${event.id}>X</button>
-        <button type="button" class="btn edit-btn btn-primary" data-edit-id=${event.id}>/</button>
+        <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id}>X</button>
+        <button type="button" class="btn edit-btn-event btn-primary" data-edit-id=${event.id}>/</button>
       </div>`;
     });
   } else {
@@ -88,8 +88,8 @@ const deleteEvent = (e) => {
 };
 
 const bindEvents = () => {
-//   $('body').on('click', '.get-single', printSingleEvent);
-  $('body').on('click', '.delete-btn', deleteEvent);
+  $('body').on('click', '.get-single', getSingleEvent);
+  $('body').on('click', '.delete-btn-event', deleteEvent);
 };
 
 const initializeEventsPage = () => {

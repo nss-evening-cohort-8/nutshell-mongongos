@@ -21,25 +21,29 @@ const getAllEvents = userId => new Promise((resolve, reject) => {
     });
 });
 
-// const getSingleEvent = userUid => new Promise((resolve, reject) => {
-//   axios.get(`${firebaseUrl}/events.json?orderBy=${userUid}`)
-//     .then((result) => {
-//       console.log('heyaaaa');
-//       // const singleEvent = result.data;
-//       // singleEvent.userUid = eventId;
-//       resolve(result);
-//     })
-//     .catch((error) => {
-//       reject(error);
-//     });
-// });
+const getSingleEvent = eventId => new Promise((resolve, reject) => {
+  axios.get(`${firebaseUrl}/events/${eventId}.json`)
+    .then((result) => {
+      console.log('heyaaaa');
+      const singleEvent = result.data;
+      singleEvent.userUid = eventId;
+      resolve(result);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
 
 const deleteEvent = eventId => axios.delete(`${firebaseUrl}/events/${eventId}.json`);
 
 const createEventData = eventsObject => axios.post(`${firebaseUrl}/events.json`, JSON.stringify(eventsObject));
 
+const updateEvent = (eventObject, eventId) => axios.put(`${firebaseUrl}/events/${eventId}.json`, JSON.stringify(eventObject));
+
 export default {
   getAllEvents,
   createEventData,
   deleteEvent,
+  getSingleEvent,
+  updateEvent,
 };
