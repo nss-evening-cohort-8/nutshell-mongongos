@@ -18,7 +18,7 @@ const msgOutput = (messagesArr) => {
   const currentUid = authHelpers.getCurrentUid();
 
   let newMsgString = `
-  <div class="messages mt-5">
+  <div class="messages">
   <div class="msg-history">
   `;
   messagesArr.forEach((message) => {
