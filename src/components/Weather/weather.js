@@ -25,7 +25,7 @@ const buildDropdown = (weatherArray) => {
 };
 
 const printWeatherApi = (weather, locationId) => {
-  const domString = `<button id="edit-zipcode-button">Edit</button>
+  const domString = `<input type="checkbox" id="is-current-zipcode-checkbox">Current Location</input>
     <button id="delete-zipcode-button" data-zip-id="${locationId}">X</button>
     <p>${weather.city_name}, ${weather.state_code}<p>
     <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
