@@ -65,7 +65,7 @@ const buildEventButton = () => {
   $('#add-event-button').on('click', buildAddFrom);
 };
 
-const showEditForm = (e) => {
+const showEditEventForm = (e) => {
   const idToEdit = e.target.dataset.editId;
   eventsData.getSingleEvent(idToEdit)
     .then((singleEvent) => {
@@ -96,7 +96,7 @@ const updateEvent = (e) => {
 };
 
 $('body').on('click', '#add-event', addNewEvent);
-$('body').on('click', '.edit-btn-event', showEditForm);
+$('body').on('click', '.edit-btn-event', showEditEventForm);
 $('body').on('click', '#edit-event', updateEvent);
 
 export default {

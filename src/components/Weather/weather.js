@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
-// import addDeleteWeather from './addDeleteWeather';
 
 const buildWeatherHeader = () => {
   const domString = '<h2>Weather</h2>';
@@ -16,7 +15,7 @@ const buildDropdown = (weatherArray) => {
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (weatherArray.length) {
     weatherArray.forEach((weather) => {
-      domString += `<div class="dropdown-item get-zip" data-dropdown-zipcode=${weather.zipcode}>${weather.zipcode}</div>`;
+      domString += `<div id="${weather.id}" class="dropdown-item get-zip" data-dropdown-zipcode=${weather.zipcode}>${weather.zipcode}</div>`;
     });
   } else {
     domString += '<div class="dropdown-item">You have no locations.</div>';
@@ -25,10 +24,11 @@ const buildDropdown = (weatherArray) => {
   $('#dropdown-container').html(domString);
 };
 
-const printWeatherApi = (weather) => {
-  const domString = `<p>${weather.city_name}, ${weather.state_code}<p>
-  <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>
-  <button id="edit-zipcode-button">Edit</button>`;
+const printWeatherApi = (weather, locationId) => {
+  const domString = `<button id="edit-zipcode-button">Edit</button>
+    <button id="delete-zipcode-button" data-zip-id="${locationId}">X</button>
+    <p>${weather.city_name}, ${weather.state_code}<p>
+    <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
 };
 
@@ -36,6 +36,7 @@ const weatherComponent = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getAllWeatherObjects(uid)
     .then((weatherArray) => {
+      $('#weather-container').html('');
       buildDropdown(weatherArray);
     })
     .catch((error) => {
@@ -45,16 +46,29 @@ const weatherComponent = () => {
 
 const weatherApi = (e) => {
   const zipcode = e.target.dataset.dropdownZipcode;
+  const locationId = e.target.id;
   weatherData.getWeatherApi(zipcode)
     .then((weather) => {
-      printWeatherApi(weather);
+      printWeatherApi(weather, locationId);
     })
     .catch((error) => {
       console.error('error on weatherApi', error);
     });
 };
 
+const deleteZip = (e) => {
+  const idToDelete = e.target.dataset.zipId;
+  weatherData.deleteLocation(idToDelete)
+    .then(() => {
+      weatherComponent();
+    })
+    .catch((error) => {
+      console.error('error on deleteZip', error);
+    });
+};
+
 $('body').on('click', '.get-zip', weatherApi);
-// $('body').on('click', '#add-zipcode-button', addEditWeather.buildAddForm);
+$('body').on('click', '#delete-zipcode-button', deleteZip);
+
 
 export default { weatherComponent, weatherApi, buildWeatherHeader };

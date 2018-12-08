@@ -39,8 +39,11 @@ const getWeatherApi = zipcode => new Promise((resolve, reject) => {
 
 const postNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
 
+const deleteLocation = locationId => axios.delete(`${firebaseUrl}/weather/${locationId}.json`);
+
 export default {
   getAllWeatherObjects,
   getWeatherApi,
   postNewLocation,
+  deleteLocation,
 };

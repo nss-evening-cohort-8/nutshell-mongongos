@@ -24,10 +24,10 @@ const getAllEvents = userId => new Promise((resolve, reject) => {
 const getSingleEvent = eventId => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/events/${eventId}.json`)
     .then((result) => {
-      console.log('heyaaaa');
       const singleEvent = result.data;
-      singleEvent.userUid = eventId;
-      resolve(result);
+      console.log(singleEvent);
+      singleEvent.id = eventId;
+      resolve(singleEvent);
     })
     .catch((error) => {
       reject(error);

@@ -12,7 +12,7 @@ import initializeEventsPage from './components/Events/events';
 import articlesPage from './components/Articles/articlesPage';
 import messages from './components/Messages/messages';
 import weather from './components/Weather/weather';
-import addDeleteWeather from './components/Weather/addDeleteWeather';
+import addWeather from './components/Weather/addWeather';
 import addEvents from './components/Events/AddEditEvents/addEditEvents';
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
@@ -21,10 +21,11 @@ const bindComponents = () => {
   initializeEventsPage();
   weather.weatherComponent();
   messages.initMessages();
-  articlesPage.articleComponent();
+  articlesPage.initializeArticles();
+  weather.weatherComponent();
   losers.losersBuilder();
   weather.buildWeatherHeader();
-  addDeleteWeather.buildWeatherButtons();
+  addWeather.buildWeatherButtons();
   addEvents.buildEventButton();
 };
 
