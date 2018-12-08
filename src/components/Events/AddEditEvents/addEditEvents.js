@@ -79,6 +79,7 @@ const showEditEventForm = (e) => {
       domString += `<button id="edit-event" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
       $('#add-edit-event').html(domString).show();
       // $('#events-container').hide();
+      $('#events-modal-container').hide();
     })
     .catch((error) => {
       console.error('error in getting single for edit', error);
