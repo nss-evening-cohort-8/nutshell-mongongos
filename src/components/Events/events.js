@@ -31,7 +31,7 @@ const getSingleEvent = (e) => {
 };
 const buildModal = (eventsArray) => {
   let modal = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
-  Pick a Event
+  Pick Event
 </button>
 <!-- Modal -->
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
