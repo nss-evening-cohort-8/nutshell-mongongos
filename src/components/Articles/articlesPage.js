@@ -76,8 +76,9 @@ const modalFormBuilder = () => {
 const articlesPage = () => {
   const uid = authHelpers.getCurrentUid();
   articlesData.getAllArticlesFromDb(uid)
-    .then((articles) => {
-      modalFormBuilder(articles);
+    .then(() => {
+      // modalFormBuilder(articles);
+      articleComponent();
     })
     .catch((error) => {
       console.error('error in formComponent', error);
@@ -99,6 +100,7 @@ const addNewArticle = () => {
   articlesData.addNewArticle(newArticle)
     .then(() => {
       articlesPage();
+      $('.modal').modal('hide');
     })
     .catch((error) => {
       console.log('error in addNewArticle', error);
@@ -176,6 +178,7 @@ $('body').on('click', '#article-to-edit', updateArticle);
 const initializeArticles = () => {
   articleComponent();
   articlesPage();
+  modalFormBuilder();
 };
 
 export default { initializeArticles, printAllArticles };
