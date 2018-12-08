@@ -4,7 +4,7 @@ import weatherData from '../Helpers/Data/weatherData';
 import weather from './weather';
 
 const buildWeatherButtons = () => {
-  const domString = '<button id="add-zipcode-button">+</button>';
+  const domString = '<button id="add-zipcode-button"><i class="far fa-plus-square"></i></button>';
   $('#weather-buttons').html(domString);
 };
 
@@ -34,6 +34,7 @@ const buildAddForm = () => {
   $('#weather-container').html('');
   $('#dropdown-container').html('');
   $('#weather-buttons').hide();
+  $('#zipcode-input').focus();
 };
 
 
@@ -78,6 +79,11 @@ $('body').on('click', '#cancel-zipcode-button', () => {
   weather.weatherComponent();
 });
 $('body').on('click', '#save-zipcode-button', validateZip);
+$('body').on('keyup', '#zipcode-input', (e) => {
+  if (e.keyCode === 13) {
+    validateZip();
+  }
+});
 $('body').on('click', '#add-zipcode-button', buildAddForm);
 
 export default { buildAddForm, buildWeatherButtons };

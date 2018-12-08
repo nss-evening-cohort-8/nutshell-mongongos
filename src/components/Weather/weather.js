@@ -32,7 +32,7 @@ const printWeatherApi = (weather, locationId, currentLocation) => {
   } else {
     domString += `<input class="is-current-checkbox" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox">Current Location</input>`;
   }
-  domString += `<button id="delete-zipcode-button" data-zip-id="${locationId}">X</button>
+  domString += `<button id="delete-zipcode-button" data-zip-id="${locationId}"><i class="far fa-trash-alt"></i></button>
     <p>${weather.city_name}, ${weather.state_code}<p>
     <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
