@@ -15,6 +15,7 @@
   background: rgba(0, 0, 0, 0.15);
   background-color: $msgContainerBackgrnd;
   border-radius: 10px 10px 0 0;
+  box-shadow: 5px 5px $msgSentBackgrnd;
   ::-webkit-scrollbar,
   ::-webkit-scrollbar-button {
     display: none;
@@ -27,7 +28,8 @@
 }
 
 img{
-  max-width:75%;
+  max-width: 80%;
+  border-radius: 10%;
 }
 
 .time-date {
@@ -73,7 +75,7 @@ img{
 
 .received-width-msg p {
   background: $msgRecBackgrnd none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 5px;
   color: $msgRecTextColor;
   font-size: $msgTextSize;
   margin: 0;
@@ -84,10 +86,10 @@ img{
 // Sent Messages
 .sent-msg p {
   background: $msgSentBackgrnd none repeat scroll 0 0;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: $msgTextSize;
   margin: 0;
-  color:$msgSentTextColor;
+  color: $msgSentTextColor;
   padding: 5px 10px 5px 12px;
   width:100%;
 }
@@ -125,6 +127,7 @@ img{
   background-color: white;
   padding: 0 15px 0 15px;
   border-radius: 0 0 5px 5px;
+  box-shadow: 5px 5px $msgSentBackgrnd;
 }
 
 .msg-send-btn {
