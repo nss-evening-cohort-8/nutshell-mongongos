@@ -43,7 +43,7 @@ const msgOutput = (messagesArr) => {
         <div class="received-msg">
           <div class="received-width-msg">
             <p id="${message.id}">${message.message}</p>
-            <span class="time-date" data-ts="${message.timestamp}"> ${msgtimeStamp} | ${msgDate}</span>
+            <span class="time-date" data-ts="${message.timestamp}"> ${msgtimeStamp} | ${msgDate} | ${msgDate} ${message.isEdited === true ? '| (Edited)' : ''}</span>
           </div>
         </div>
       </div>
