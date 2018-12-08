@@ -2,6 +2,7 @@
 // Purpose: Entry point into the Nutshell App.
 
 import firebase from 'firebase/app';
+import $ from 'jquery';
 import 'bootstrap';
 import navbar from './components/Navbar/navbar';
 import auth from './components/Auth/auth';
@@ -16,6 +17,10 @@ import addWeather from './components/Weather/addWeather';
 import addEvents from './components/Events/AddEditEvents/addEditEvents';
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
+
+import bannerLogo from './BannerConnect.png';
+
+$('#bannerLogo').html(`<img src=${bannerLogo}>`);
 
 const bindComponents = () => {
   initializeEventsPage();
