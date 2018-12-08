@@ -4,8 +4,7 @@ import weatherData from '../Helpers/Data/weatherData';
 import weather from './weather';
 
 const buildWeatherButtons = () => {
-  const domString = `<button id="add-zipcode-button">+</button>
-  <button id="delete-zipcode-button">X</button>`;
+  const domString = '<button id="add-zipcode-button">+</button>';
   $('#weather-buttons').html(domString);
 };
 
