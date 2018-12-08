@@ -194,7 +194,7 @@ const pendingLoserRequests = () => {
           pendingLosers.forEach((pendingLoser) => {
             const loserKey = Object.keys(pendingLoser)[0];
             pendingLoserString += `<div class='onePendingLoserDiv'>
-                                    <img class='onePendingLoserAvatar' src='${pendingLoser[loserKey].avatar}'/>
+                                    <img class='onePendingLoserAvatar avatarImage' src='${pendingLoser[loserKey].avatar}'/>
                                     <p class='onePendingLoserName'>${pendingLoser[loserKey].userName}</p>
                                     <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Accept</button>
                                     <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Decline</button>`;

@@ -5,6 +5,8 @@
 import axios from 'axios';
 import apiKeys from '../../../../db/apiKeys.json';
 import '../../Articles/articlesPage.scss';
+import losersData from './losersData';
+import authHelpers from '../authHelpers';
 
 const fireBaseUrl = apiKeys.firebaseKeys.databaseURL;
 const getAllArticlesFromDb = () => new Promise((resolve, reject) => {
@@ -57,6 +59,39 @@ const addNewArticle = articleOBject => axios.post(`${fireBaseUrl}/articles.json`
 
 const updateArticles = (articleObject, articleId) => axios.put(`${fireBaseUrl}/articles/${articleId}.json`, JSON.stringify(articleObject));
 
+// This function made by Rich to only get current user and their friends articles
+
+const getLosersArticlesFromDb = () => new Promise((resolve, reject) => {
+  axios.get(`${fireBaseUrl}/articles.json`)
+    .then((results) => {
+      const allArticlesObject = results.data;
+      const allArticlesArray = [];
+      if (allArticlesObject !== null) {
+        Object.keys(allArticlesObject).forEach((articleId) => {
+          const newArticle = allArticlesObject[articleId];
+          newArticle.id = articleId;
+          allArticlesArray.push(newArticle);
+        });
+      }
+      losersData.getMyLosers()
+        .then((losers) => {
+          const losersUids = [];
+          losers.forEach((loser) => {
+            losersUids.push(loser.uid);
+          });
+          const uid = authHelpers.getCurrentUid();
+          const filt = allArticlesArray.filter(a => losersUids.includes(a.uid) || a.uid === uid);
+          resolve(filt);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 export default {
   getAllArticlesFromDb,
   getAllArticles,
@@ -64,4 +99,5 @@ export default {
   addNewArticle,
   updateArticles,
   getSingleArticle,
+  getLosersArticlesFromDb,
 };

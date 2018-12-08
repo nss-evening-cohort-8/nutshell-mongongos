@@ -33,7 +33,7 @@ const printAllArticles = (allArticlesArray) => {
 
 const articleComponent = () => {
   const uid = authHelpers.getCurrentUid();
-  articlesData.getAllArticlesFromDb(uid)
+  articlesData.getLosersArticlesFromDb(uid)
     .then((allArticlesArray) => {
       printAllArticles(allArticlesArray);
     })
