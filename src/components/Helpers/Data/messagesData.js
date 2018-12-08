@@ -27,21 +27,30 @@ const getAllMessages = () => new Promise((resolve, reject) => {
     });
 });
 
+const getMsgById = msgId => new Promise((resolve, reject) => {
+  const saveMsgId = msgId;
+  axios
+    .get(`${fireBaseUrl}/messages/${msgId}.json`)
+    .then((result) => {
+      const msgObj = result.data;
+      if (msgObj !== null) {
+        msgObj.id = saveMsgId;
+      }
+      console.log(saveMsgId);
+      resolve(msgObj);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const createUserMsg = msgObj => axios.post(`${fireBaseUrl}/messages.json`, JSON.stringify(msgObj));
 
 const deleteUserMsg = msgId => axios.delete(`${fireBaseUrl}/messages/${msgId}.json`);
 
-const updateUserMsg = (msgObj, msgId) => new Promise((resolve, reject) => {
-  axios
-    .put(`${fireBaseUrl}/messages/${msgId}.json`, JSON.stringify(msgObj))
-    .then((results) => {
-      resolve(results);
-    })
-    .catch((error) => {
-      console.error('An error occured updating your message', error);
-      reject(error);
-    });
-});
+const updateUserMsg = (msgObj, msgId) => axios.put(`${fireBaseUrl}/messages/${msgId}.json`, JSON.stringify(msgObj));
+
+const updateIsEdited = (msgId, isEdited) => axios.patch(`${fireBaseUrl}/messages/${msgId}.json`, { isEdited });
 
 // const updateTask = (taskObj, taskId) => new Promise((resolve, reject) => {
 //   axios
@@ -57,7 +66,9 @@ const updateUserMsg = (msgObj, msgId) => new Promise((resolve, reject) => {
 
 export default {
   getAllMessages,
+  getMsgById,
   createUserMsg,
   deleteUserMsg,
   updateUserMsg,
+  updateIsEdited,
 };
