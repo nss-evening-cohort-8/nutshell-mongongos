@@ -1,9 +1,14 @@
+// Author is Michelle Beshears
+// This particular section is dedicated to the NEWS ARTICLES part of the project.
+
+
 import $ from 'jquery';
 import './articlesPage.scss';
 import articlesData from '../Helpers/Data/articlesData';
 import authHelpers from '../Helpers/authHelpers';
 
 // PRINT ARTICLE TO PAGE
+
 const printAllArticles = (allArticlesArray) => {
   let domString = `
     <h3>Articles:</h3>
@@ -93,7 +98,6 @@ const addNewArticle = () => {
   const newArticle = gettingArticleFromForm();
   articlesData.addNewArticle(newArticle)
     .then(() => {
-      // $('#modal-section').html('');
       articlesPage();
     })
     .catch((error) => {
@@ -103,6 +107,7 @@ const addNewArticle = () => {
 
 
 // DELETE ARTICLES
+
 const deleteArticle = (e) => {
   const articleToDelete = e.target.dataset.deleteId;
   articlesData.deleteArticles(articleToDelete)
@@ -136,7 +141,6 @@ const editFormBuilder = (article) => {
 
 const showEditForm = (e) => {
   const articleToEdit = e.target.dataset.editId;
-  // console.log(articleToEdit);
   articlesData.getSingleArticle(articleToEdit)
     .then((singleArticle) => {
       let domString = '<h2>Edit Article</h2>';

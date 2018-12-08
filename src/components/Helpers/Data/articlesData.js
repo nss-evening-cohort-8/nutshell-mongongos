@@ -7,7 +7,6 @@ import apiKeys from '../../../../db/apiKeys.json';
 import '../../Articles/articlesPage.scss';
 
 const fireBaseUrl = apiKeys.firebaseKeys.databaseURL;
-
 const getAllArticlesFromDb = () => new Promise((resolve, reject) => {
   axios.get(`${fireBaseUrl}/articles.json`)
     .then((results) => {
