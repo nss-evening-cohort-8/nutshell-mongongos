@@ -56,4 +56,6 @@ const checkLoginStatus = (bindComponents) => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-export default { checkLoginStatus, getCurrentUid };
+const getProfilePic = () => firebase.auth().currentUser.photoURL;
+
+export default { checkLoginStatus, getCurrentUid, getProfilePic };

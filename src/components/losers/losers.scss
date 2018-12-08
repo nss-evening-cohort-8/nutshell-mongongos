@@ -1,0 +1,21 @@
+@import '~bootstrap/scss/bootstrap';
+
+.avatarImage {
+  height: 50px;
+  width: 50px;
+}
+
+.oneLoserDiv {
+  border: 1px solid black;
+}
+
+#loserModalHeader, #losersBody {
+  background-color: burlywood;
+    .oneLoserDiv {
+      background-color: white;
+    }
+}
+
+#avatarSelectDiv {
+  border: 1px solid black;
+}

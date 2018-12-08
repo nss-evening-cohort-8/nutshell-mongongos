@@ -57,6 +57,7 @@ const createUserName = (e) => {
             userName: `${userInput}`,
             santizedUserName: `${sanitizedUser}`,
             uid: `${userId}`,
+            friends: '',
           };
           // Pass the data to our Axios Create
           usersData.createUserData(newUserObject)
