@@ -218,7 +218,11 @@ const addLoserToUser = loserUid => new Promise((resolve, reject) => {
                     uid: loserData.data.uid,
                     avatar: loserData.data.avatar,
                   };
-                  userWithLoser.friends[loserData.data.uid] = loserInfo;
+                  if (userWithLoser.friends === '') {
+                    userWithLoser.friends = {
+                      [loserData.data.uid]: loserInfo,
+                    };
+                  } else { userWithLoser.friends[loserData.data.uid] = loserInfo; }
                   axios.put(`${URL}/users/${taggedUser}.json`, JSON.stringify(userWithLoser))
                     .then(() => {
                       resolve();
@@ -257,7 +261,11 @@ const addUserToLoser = (loserUid) => {
               getOneUser(taggedLoser)
                 .then((loserData) => {
                   loserWithUser = loserData.data;
-                  loserWithUser.friends[userData.data.uid] = userInfo;
+                  if (loserWithUser.friends === '') {
+                    loserWithUser.friends = {
+                      [userData.data.uid]: userInfo,
+                    };
+                  } else { loserWithUser.friends[userData.data.uid] = userInfo; }
                   axios.put(`${URL}/users/${taggedLoser}.json`, JSON.stringify(loserWithUser));
                 })
                 .catch((err) => {
@@ -282,26 +290,42 @@ const deleteLoser = loserId => new Promise((resolve, reject) => {
     .then((taggedUser) => {
       axios.delete(`${URL}/users/${taggedUser}/friends/${loserId}.json`)
         .then(() => {
-          getUserTag(loserId)
-            .then((taggedLoser) => {
-              axios.delete(`${URL}/users/${taggedLoser}/friends/${authHelpers.getCurrentUid()}.json`)
-                .then(() => {
-                  resolve();
-                })
-                .catch((err) => {
-                  console.log(err);
+          getOneUser(taggedUser)
+            .then((data) => {
+              const friends = data.data;
+              if (friends.friends === undefined) {
+                friends.friends = '';
+                axios.put(`${URL}/users/${taggedUser}.json`, JSON.stringify(friends));
+              }
+              getUserTag(loserId)
+                .then((taggedLoser) => {
+                  axios.delete(`${URL}/users/${taggedLoser}/friends/${authHelpers.getCurrentUid()}.json`)
+                    .then(() => {
+                      getOneUser(taggedLoser)
+                        .then((loserData) => {
+                          const friends2 = loserData.data;
+                          if (friends2.friends === undefined) {
+                            friends.friends = '';
+                            axios.put(`${URL}/users/${taggedLoser}.json`, JSON.stringify(friends2));
+                          }
+                          resolve();
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
                 });
             })
             .catch((err) => {
-              console.log(err);
+              reject(err);
             });
         })
         .catch((err) => {
-          reject(err);
+          console.log(err);
         });
-    })
-    .catch((err) => {
-      console.log(err);
     });
 });
 
