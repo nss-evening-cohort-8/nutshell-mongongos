@@ -50,17 +50,17 @@ const buildModal = (eventsArray) => {
       modal += `<div class="modal-item get-single" data-modal-id=${event.id}>
       <div class = "container">
       <div class = "row justify-content-center">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
       ${event.event}
       </div>
       </div>
       <div class = "row justify-content-center">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
       ${event.location}
       </div>
       </div>
       <div class = "row justify-content-center">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
       ${event.startDate}</div>
       </div>
       </div>
