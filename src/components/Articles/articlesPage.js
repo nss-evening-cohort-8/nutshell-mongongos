@@ -25,6 +25,7 @@ const printAllArticles = (allArticlesArray) => {
     </button>
     <hr class="my-4">
     <br>
+    <div id="${article.id}"></div>
     `;
     $('#article-section').html(domString);
   });
@@ -148,7 +149,7 @@ const showEditForm = (e) => {
       let domString = '<h2>Edit Article</h2>';
       domString += editFormBuilder(singleArticle);
       domString += `<button id="article-to-edit" data-edit-id=${singleArticle.id} class="btn btn btn-sm edit">Save Article Change</button>`;
-      $('#article-section').append(domString).show();
+      $(`#${articleToEdit}`).html(domString);
     })
     .catch((error) => {
       console.log('error in showing the edit form', error);
@@ -157,7 +158,6 @@ const showEditForm = (e) => {
 
 const updateArticle = (e) => {
   const updatedArticle = gettingArticleFromForm();
-  console.log(updatedArticle);
   const articleId = e.target.dataset.editId;
   articlesData.updateArticles(updatedArticle, articleId)
     .then(() => {
