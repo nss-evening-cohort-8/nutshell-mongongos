@@ -15,6 +15,7 @@ const printSingleEvent = (event) => {
   </div>
       `;
   $('#single-container').html(eventString);
+  $('#single-container').hide();
 };
 
 const getSingleEvent = (e) => {
@@ -46,11 +47,27 @@ const buildModal = (eventsArray) => {
       <div class="modal-body">`;
   if (eventsArray.length) {
     eventsArray.forEach((event) => {
-      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>
-
-      <div class="modal-footer">
+      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>
+      <div class = "container">
+      <div class = "row justify-content-center">
+      <div class="col-sm-6">
+      ${event.event}
+      </div>
+      </div>
+      <div class = "row justify-content-center">
+      <div class="col-sm-6">
+      ${event.location}
+      </div>
+      </div>
+      <div class = "row justify-content-center">
+      <div class="col-sm-6">
+      ${event.startDate}</div>
+      </div>
+      </div>
+      <div class="modal-footer justify-content-center">
         <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id}>X</button>
         <button type="button" class="btn edit-btn-event btn-primary" data-edit-id=${event.id}>/</button>
+        </div>
       </div>`;
     });
   } else {
@@ -62,6 +79,7 @@ const buildModal = (eventsArray) => {
 
   modal += '</div></div>';
   $('#events-modal-container').html(modal);
+  getSingleEvent();
 };
 
 const eventsComponent = () => {

@@ -16,7 +16,12 @@ const eventFormBuilder = (event) => {
     </div>
     <div class="form-group">
     <label for="form-event-date">Date:</label>
-    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-date" placeholder="December 1st, 2018">
+    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-date">
+        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
   </div>
   `;
   return form;
@@ -94,7 +99,6 @@ const updateEvent = (e) => {
       console.error('error', error);
     });
 };
-
 $('body').on('click', '#add-event', addNewEvent);
 $('body').on('click', '.edit-btn-event', showEditEventForm);
 $('body').on('click', '#edit-event', updateEvent);
