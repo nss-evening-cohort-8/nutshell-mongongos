@@ -16,7 +16,6 @@ const scrollToBottom = () => {
 
 const msgOutput = (messagesArr) => {
   const currentUid = authHelpers.getCurrentUid();
-  const currentProfilePic = authHelpers.getProfilePic();
 
   let newMsgString = `
   <div class="messages mt-5">
@@ -29,10 +28,10 @@ const msgOutput = (messagesArr) => {
       // If it is my UID then it is outgoing
       newMsgString += `
       <div class="outgoing-msg">
-        <div class="outgoing-msg-img"> <img alt="Test" src="${currentProfilePic}"> </div>
+        <div class="outgoing-msg-img"> <img alt="Test" src="${message.avatarUrl}"> </div>
         <div class="sent-msg">
           <p id="${message.id}">${message.message}</p>
-          <span class="time-date"> ${msgtimeStamp} | ${msgDate} <i class="msg-del far fa-trash-alt fa-lg mx-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
+          <span class="time-date" data-ts="${message.timestamp}"> ${msgtimeStamp} | ${msgDate} ${message.isEdited === true ? '| (Edited)' : ''}  <i class="msg-del far fa-trash-alt fa-lg mx-2"></i><i class="msg-edit fas fa-edit fa-lg mr-2"></i></span>
         </div>
       </div>
       `;
@@ -40,11 +39,11 @@ const msgOutput = (messagesArr) => {
       // If NOT my UID then it is incoming
       newMsgString += `
       <div class="incoming-msg">
-        <div class="incoming-msg-img"> <img alt="Test2" src="${currentProfilePic}"> </div>
+        <div class="incoming-msg-img"> <img alt="Test2" src="${message.avatarUrl}"> </div>
         <div class="received-msg">
           <div class="received-width-msg">
-            <p>${message.message}</p>
-            <span class="time-date"> ${msgtimeStamp} | ${msgDate}</span>
+            <p id="${message.id}">${message.message}</p>
+            <span class="time-date" data-ts="${message.timestamp}"> ${msgtimeStamp} | ${msgDate} ${message.isEdited === true ? '| (Edited)' : ''}</span>
           </div>
         </div>
       </div>
@@ -113,27 +112,67 @@ const saveUserMsg = () => {
   $('#new-msg-input').focus();
 };
 
+const saveEditMsg = (msgId) => {
+  const timeStamnp = $(`#${msgId}`).siblings('span').data('ts');
+  const msgObj = {
+    isEdited: true,
+    message: $('#new-msg-input').val(),
+    timestamp: timeStamnp,
+    avatarUrl: authHelpers.getProfilePic(),
+    userUid: authHelpers.getCurrentUid(),
+  };
+  messagesData.updateUserMsg(msgObj, msgId)
+    .then(() => {
+      // Reset the values on the input box
+      $('#new-msg-input').removeAttr('data-editing');
+      $('#new-msg-input').removeAttr('data-msgId');
+    })
+    .catch((error) => {
+      console.log('There was an error updating your message', error);
+    });
+};
+
 const delUserMsg = (e) => {
   const msgId = $(e.target).closest('span').siblings('p').attr('id');
   messagesData.deleteUserMsg(msgId);
   realTimeUpdate();
 };
 
+const editUserMsg = (e) => {
+  const msgId = $(e.target).closest('span').siblings('p').attr('id');
+  const msgValue = $(e.target).closest('span').siblings('p').html();
+  $('#new-msg-input').attr('data-editing', true);
+  $('#new-msg-input').attr('data-msgId', msgId);
+  $('#new-msg-input').val(msgValue).focus();
+};
+
 // Message box Events
 const msgBoxEvents = () => {
   $('body').on('keypress', '#new-msg-input', (e) => {
     if (e.key === 'Enter' && $('#new-msg-input').val() !== '') {
-      saveUserMsg(e);
+      if ($('#new-msg-input').attr('data-editing') === 'true') {
+        const msgId = $('#new-msg-input').attr('data-msgId');
+        saveEditMsg(msgId);
+      } else {
+        saveUserMsg(e);
+      }
     }
   });
 
   $('body').on('click', '#new-msg-button', () => {
     if ($('#new-msg-input').val() !== '') {
-      saveUserMsg();
+      if ($('#new-msg-input').attr('data-editing') === 'true') {
+        const msgId = $('#new-msg-input').attr('data-msgId');
+        saveEditMsg(msgId);
+      } else {
+        saveUserMsg();
+      }
     }
   });
 
   $('body').on('click', '.msg-del', delUserMsg);
+
+  $('body').on('click', '.msg-edit', editUserMsg);
 };
 
 const initMessages = () => {
