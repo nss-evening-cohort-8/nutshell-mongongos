@@ -36,10 +36,14 @@ const checkLoginStatus = (bindComponents) => {
       $('#message-container').html('');
       $('#message-input').html('');
       $('#weather-header').html('');
+      $('#weather-buttons').html('');
+      $('#add-edit-zipcode').html('');
       $('#dropdown-container').html('');
       $('#weather-container').html('');
       $('#events-container').html('');
       $('#add-edit-event').html('');
+      $('#add-event-button').html('');
+      $('#event-button').html('');
       $('#events-modal-container').html('');
       $('#single-container').html('');
       auth.loginPage();
