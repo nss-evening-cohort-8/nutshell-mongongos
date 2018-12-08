@@ -78,7 +78,6 @@ const articlesPage = () => {
   const uid = authHelpers.getCurrentUid();
   articlesData.getAllArticlesFromDb(uid)
     .then(() => {
-      // modalFormBuilder(articles);
       articleComponent();
     })
     .catch((error) => {
