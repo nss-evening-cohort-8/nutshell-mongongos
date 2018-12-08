@@ -22,7 +22,6 @@ const userNameExists = (userId) => {
       console.error('An error occured checking for existing user name', error);
     });
 };
-
 const checkLoginStatus = (bindComponents) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -37,8 +36,16 @@ const checkLoginStatus = (bindComponents) => {
       $('#message-container').html('');
       $('#message-input').html('');
       $('#weather-header').html('');
+      $('#weather-buttons').html('');
+      $('#add-edit-zipcode').html('');
       $('#dropdown-container').html('');
       $('#weather-container').html('');
+      $('#events-container').html('');
+      $('#add-edit-event').html('');
+      $('#add-event-button').html('');
+      $('#event-button').html('');
+      $('#events-modal-container').html('');
+      $('#single-container').html('');
       auth.loginPage();
     }
   });
@@ -46,7 +53,4 @@ const checkLoginStatus = (bindComponents) => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-const getProfilePic = () => firebase.auth().currentUser.photoURL;
-// || '/images/profile_placeholder.png';
-
-export default { checkLoginStatus, getCurrentUid, getProfilePic };
+export default { checkLoginStatus, getCurrentUid };
