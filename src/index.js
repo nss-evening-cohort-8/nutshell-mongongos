@@ -33,7 +33,7 @@ const initialize = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   auth.autheEvents();
   users.usersEvents();
-  navbar.buildNavbar();
+  navbar.updateFriendsPending();
   navbar.navbarEvents();
   authHelper.checkLoginStatus(bindComponents);
 };
