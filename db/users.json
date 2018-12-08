@@ -52,19 +52,5 @@
         "userName" : "westmary48"
       }
     }
-  },
-  "user1" : {
-    "santizedUserName" : "cat lady",
-    "uid" : "12345",
-    "username" : "Cat Lady",
-    "avatar": "",
-    "friends": ""
-  },
-  "user2" : {
-    "santizedUserName" : "john smith",
-    "uid" : "67890",
-    "username" : "John Smith",
-    "avatar": "",
-    "friends": ""
   }
 }

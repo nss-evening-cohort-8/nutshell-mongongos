@@ -1,6 +1,6 @@
 import axios from 'axios';
-import apiKeys from '../../../db/apiKeys.json';
-import authHelpers from '../Helpers/authHelpers';
+import apiKeys from '../../../../db/apiKeys.json';
+import authHelpers from '../authHelpers';
 
 const URL = apiKeys.firebaseKeys.databaseURL;
 
@@ -216,6 +216,7 @@ const addLoserToUser = loserUid => new Promise((resolve, reject) => {
                   const loserInfo = {
                     userName: loserData.data.userName,
                     uid: loserData.data.uid,
+                    avatar: loserData.data.avatar,
                   };
                   userWithLoser.friends[loserData.data.uid] = loserInfo;
                   axios.put(`${URL}/users/${taggedUser}.json`, JSON.stringify(userWithLoser))
@@ -249,6 +250,7 @@ const addUserToLoser = (loserUid) => {
           const userInfo = {
             userName: userData.data.userName,
             uid: userData.data.uid,
+            avatar: userData.data.avatar,
           };
           getUserTag(loserUid)
             .then((taggedLoser) => {
