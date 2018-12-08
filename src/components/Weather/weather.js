@@ -15,7 +15,7 @@ const buildDropdown = (weatherArray) => {
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (weatherArray.length) {
     weatherArray.forEach((weather) => {
-      domString += `<div id="${weather.id}" class="dropdown-item get-zip" data-dropdown-zipcode=${weather.zipcode}>${weather.zipcode}</div>`;
+      domString += `<div id="${weather.id}" class="dropdown-item get-zip" data-is-current=${weather.isCurrent} data-dropdown-zipcode=${weather.zipcode}>${weather.zipcode}</div>`;
     });
   } else {
     domString += '<div class="dropdown-item">You have no locations.</div>';
@@ -24,12 +24,19 @@ const buildDropdown = (weatherArray) => {
   $('#dropdown-container').html(domString);
 };
 
-const printWeatherApi = (weather, locationId) => {
-  const domString = `<input type="checkbox" id="is-current-zipcode-checkbox">Current Location</input>
-    <button id="delete-zipcode-button" data-zip-id="${locationId}">X</button>
+const printWeatherApi = (weather, locationId, currentLocation) => {
+  let domString = '';
+  const isCurrent = currentLocation;
+  if (isCurrent === 'true') {
+    domString += `<input class="is-current-checkbox" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox" checked>Current Location</input>`;
+  } else {
+    domString += `<input class="is-current-checkbox" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox">Current Location</input>`;
+  }
+  domString += `<button id="delete-zipcode-button" data-zip-id="${locationId}">X</button>
     <p>${weather.city_name}, ${weather.state_code}<p>
     <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
+  console.log(currentLocation);
 };
 
 const weatherComponent = () => {
@@ -46,10 +53,11 @@ const weatherComponent = () => {
 
 const weatherApi = (e) => {
   const zipcode = e.target.dataset.dropdownZipcode;
+  const currentLocation = e.target.dataset.isCurrent;
   const locationId = e.target.id;
   weatherData.getWeatherApi(zipcode)
     .then((weather) => {
-      printWeatherApi(weather, locationId);
+      printWeatherApi(weather, locationId, currentLocation);
     })
     .catch((error) => {
       console.error('error on weatherApi', error);
@@ -67,8 +75,21 @@ const deleteZip = (e) => {
     });
 };
 
+const updateCurrentLocation = (e) => {
+  const locationId = e.target.dataset.zipId;
+  const isCurrent = e.target.checked;
+  weatherData.patchCurrentLocation(locationId, isCurrent)
+    .then(() => {
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 $('body').on('click', '.get-zip', weatherApi);
 $('body').on('click', '#delete-zipcode-button', deleteZip);
+$('body').on('change', '.is-current-checkbox', updateCurrentLocation);
 
 
 export default { weatherComponent, weatherApi, buildWeatherHeader };
