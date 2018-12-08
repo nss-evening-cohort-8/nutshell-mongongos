@@ -36,7 +36,6 @@ const printWeatherApi = (weather, locationId, currentLocation) => {
     <p>${weather.city_name}, ${weather.state_code}<p>
     <p><img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"> ${weather.weather.description}<p>`;
   $('#weather-container').html(domString);
-  console.log(currentLocation);
 };
 
 const weatherComponent = () => {
@@ -45,6 +44,21 @@ const weatherComponent = () => {
     .then((weatherArray) => {
       $('#weather-container').html('');
       buildDropdown(weatherArray);
+      const currentLocation = weatherArray.filter(object => object.isCurrent === true);
+      if (currentLocation[0] !== undefined) {
+        const currentZipcode = currentLocation[0].zipcode;
+        const isCurrentValue = 'true';
+        const locationId = currentLocation[0].id;
+        weatherData.getWeatherApi(currentZipcode)
+          .then((weather) => {
+            printWeatherApi(weather, locationId, isCurrentValue);
+          })
+          .catch((error) => {
+            console.error('error on weatherApi', error);
+          });
+      } else {
+        $('#weather-container').html('You have no current location selected');
+      }
     })
     .catch((error) => {
       console.error('error in weatherComponent', error);
@@ -75,15 +89,41 @@ const deleteZip = (e) => {
     });
 };
 
+const fixCurrentLocation = () => {
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getAllWeatherObjects(uid)
+    .then((weatherObjects) => {
+      const currentLocation = weatherObjects.filter(object => object.isCurrent === true);
+      console.log(currentLocation);
+      if (currentLocation[0] !== undefined) {
+        const currentLocationId = currentLocation[0].id;
+        console.log(currentLocation);
+        console.log(currentLocationId);
+        const isCurrentFalse = false;
+        weatherData.patchCurrentLocation(currentLocationId, isCurrentFalse)
+          .then(() => {
+
+          })
+          .catch((error) => {
+            console.error('error on patchCurrentLocation', error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error('error on fixCurrentLocation', error);
+    });
+};
+
 const updateCurrentLocation = (e) => {
   const locationId = e.target.dataset.zipId;
   const isCurrent = e.target.checked;
-  weatherData.patchCurrentLocation(locationId, isCurrent)
+  fixCurrentLocation();
+  weatherData.patchLocation(locationId, isCurrent)
     .then(() => {
 
     })
     .catch((error) => {
-      console.error(error);
+      console.error('error on updateCurrentLocation', error);
     });
 };
 
