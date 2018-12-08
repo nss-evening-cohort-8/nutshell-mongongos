@@ -23,7 +23,6 @@ const userNameExists = (userId) => {
     });
 };
 const checkLoginStatus = (bindComponents) => {
-  console.log('heyy');
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       userNameExists(user.uid);
