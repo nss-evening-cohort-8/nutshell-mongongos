@@ -4,6 +4,15 @@ import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
 import avatars from '../avatars/avatars';
 import avatarsData from '../Helpers/Data/avatarsData';
+import addEvents from '../Events/AddEditEvents/addEditEvents';
+import articlesPage from '../Articles/articlesPage';
+import initializeEventsPage from '../Events/events';
+
+const bindComponents = () => {
+  initializeEventsPage();
+  articlesPage.initializeArticles();
+  addEvents.buildEventButton();
+};
 
 const addOneLoserClicked = () => {
   $('.addOneLoserButton').on('click', (event) => {
@@ -151,6 +160,7 @@ const removeLoserClicked = () => {
   $('.removeLoserButton').on('click', (event) => {
     losersData.deleteLoser(event.target.dataset.loserUid)
       .then(() => {
+        bindComponents();
         losersBuilder();
       })
       .catch((err) => {
@@ -163,6 +173,7 @@ const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
     losersData.addLoserToUser(event.target.dataset.loserUid)
       .then(() => {
+        bindComponents();
         losersBuilder();
       })
       .catch((err) => {
