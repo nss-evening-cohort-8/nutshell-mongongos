@@ -85,7 +85,7 @@ const updateEvent = (e) => {
   const eventId = e.target.dataset.singleEditId;
   eventsData.updateEvent(updatedEvent, eventId)
     .then(() => {
-      // $('#add-edit-event').html('').hide();
+      $('#add-edit-event').html('').hide();
       // $('#single-container').html('');
       // $('#events-container').show();
       initializeEventsPage();
