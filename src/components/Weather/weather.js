@@ -97,12 +97,10 @@ const fixCurrentLocation = () => {
       console.log(currentLocation);
       if (currentLocation[0] !== undefined) {
         const currentLocationId = currentLocation[0].id;
-        console.log(currentLocation);
-        console.log(currentLocationId);
         const isCurrentFalse = false;
         weatherData.patchCurrentLocation(currentLocationId, isCurrentFalse)
           .then(() => {
-
+            weatherComponent();
           })
           .catch((error) => {
             console.error('error on patchCurrentLocation', error);
@@ -120,7 +118,7 @@ const updateCurrentLocation = (e) => {
   fixCurrentLocation();
   weatherData.patchLocation(locationId, isCurrent)
     .then(() => {
-
+      weatherComponent();
     })
     .catch((error) => {
       console.error('error on updateCurrentLocation', error);
