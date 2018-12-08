@@ -41,9 +41,15 @@ const postNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json
 
 const deleteLocation = locationId => axios.delete(`${firebaseUrl}/weather/${locationId}.json`);
 
+const patchLocation = (locationId, isCurrent) => axios.patch(`${firebaseUrl}/weather/${locationId}.json`, { isCurrent });
+
+const patchCurrentLocation = (locationId, isCurrent) => axios.patch(`${firebaseUrl}/weather/${locationId}.json`, { isCurrent });
+
 export default {
   getAllWeatherObjects,
   getWeatherApi,
   postNewLocation,
   deleteLocation,
+  patchLocation,
+  patchCurrentLocation,
 };

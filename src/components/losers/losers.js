@@ -1,7 +1,9 @@
 import $ from 'jquery';
 import './losers.scss';
-import losersData from './losersData';
+import losersData from '../Helpers/Data/losersData';
 import authHelpers from '../Helpers/authHelpers';
+import avatars from '../avatars/avatars';
+import avatarsData from '../Helpers/Data/avatarsData';
 
 const addOneLoserClicked = () => {
   $('.addOneLoserButton').on('click', (event) => {
@@ -20,7 +22,8 @@ const addOneLoserClicked = () => {
 
 const addAvatarClicked = () => {
   $('#addAvatarButton').on('click', () => {
-    console.log('you clicked this');
+    // eslint-disable-next-line no-use-before-define
+    avatarsBuilder();
   });
 };
 
@@ -31,20 +34,57 @@ const returnToLosers = () => {
   });
 };
 
+const returnToLosersFromAvatars = () => {
+  $('#avatarBackButton').on('click', () => {
+    // eslint-disable-next-line no-use-before-define
+    losersBuilder();
+  });
+};
+
+const uploadAvatarClicked = () => {
+  $('#uploadAvatarButton').on('click', () => {
+    avatarsData.addAvatar()
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        avatarsBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
+const selectAvatarClicked = () => {
+  $('#selectAvatarButton').on('click', () => {
+    avatars.selectAvatar(avatars.getSelectedAvatar())
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        losersBuilder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
 const addLosersClicked = () => {
   $('#addLosersButton').on('click', () => {
     losersData.getOtherLosers(authHelpers.getCurrentUid())
       .then((losers) => {
+        const losersHeaderString = `<h5 class="modal-title" id='losersTitle'>Add a Friend</h5>
+                                <button type='button' id='losersBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
         let loserString = `
-                          <button type='button' id='losersBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
+                          <div class="modal-body row" id='losersDiv'>`;
         losers.forEach((loser) => {
-          loserString += `<div class='oneLoserDiv'>
-                            <img class='oneLoserAvatar' src='${loser.avatar}'/>
+          loserString += `<div class='oneLoserDiv col-4'>
+                            <img class='oneLoserAvatar avatarImage' src='${loser.avatar}'/>
                             <p class='oneLoserName'>${loser.userName}</p>
                             <button type='button' class='btn btn-info btn-sm addOneLoserButton' data-loser-key='${loser.key}'>+</button>
                           </div>`;
         });
-        $('#losersTitle').text('Add a Friend');
+        loserString += `
+                        </div>`;
+        $('#loserModalHeader').html(losersHeaderString);
         $('#losersBody').html(loserString);
         returnToLosers();
         addOneLoserClicked();
@@ -59,7 +99,7 @@ const losersBuilder = () => {
   const loserString = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" id='loserModalHeader'>
         <h5 class="modal-title" id='losersTitle'>Friends</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -70,7 +110,7 @@ const losersBuilder = () => {
           <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
           <button type='button' id='addAvatarButton' class='btn btn-sm btn-warning'>Add Avatar</button>
         </div>
-        <div class="modal-body" id='losersDiv'>
+        <div class="modal-body row" id='losersDiv'>
         </div>
         <div class='modal-body' id='losersPendingDiv'>
         </div>
@@ -79,8 +119,32 @@ const losersBuilder = () => {
   </div>`;
   $('#losersModal').html(loserString);
   addLosersClicked();
+  addAvatarClicked();
   // eslint-disable-next-line no-use-before-define
   initializeLosers();
+};
+
+const avatarsBuilder = () => {
+  const avatarHeaderString = `<h5 class="modal-title" id='losersTitle'>Select an Avatar</h5>
+                              <button type='button' id='avatarBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
+  const avatarString = `<div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="addAvatarInput" accept='image/png, image/jpeg'/>
+                            <label class="custom-file-label" for="addAvatarInput" aria-describedby="uploadAvatarButton">Upload an Avatar</label>
+                          </div>
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="uploadAvatarButton">Upload</span>
+                          </div>
+                        </div>
+                        <h5>Select From Existing Avatars</h5>
+                        <div id='avatarSelectDiv'></div>
+                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Save Selected Avatar</button>`;
+  $('#loserModalHeader').html(avatarHeaderString);
+  $('#losersBody').html(avatarString);
+  avatars.selectAvatarBuilder();
+  uploadAvatarClicked();
+  selectAvatarClicked();
+  returnToLosersFromAvatars();
 };
 
 const removeLoserClicked = () => {
@@ -153,10 +217,10 @@ const losersListBuilder = () => {
     .then((losersArray) => {
       let loserListString = '';
       losersArray.forEach((loser) => {
-        loserListString += `<div class='oneLoserDiv'>
-                              <img class='oneLoserAvatar' src='${loser.avatar}'/>
+        loserListString += `<div class='oneLoserDiv col-4'>
+                              <img class='oneLoserAvatar avatarImage' src='${loser.avatar}'/>
                               <p class='oneLoserName'>${loser.userName}</p>
-                              <button type='button' class='btn btn-danger btn-sm removeLoserButton' data-loser-uid='${loser.uid}'>X</button>
+                              <button type='button' class='btn btn-danger btn-sm removeLoserButton' data-loser-uid='${loser.uid}'>Remove</button>
                             </div>`;
       });
       $('#losersDiv').html(loserListString);
@@ -188,4 +252,7 @@ export default {
   initializeLosers,
   initializeAddLosers,
   addAvatarClicked,
+  avatarsBuilder,
+  selectAvatarClicked,
+  uploadAvatarClicked,
 };
