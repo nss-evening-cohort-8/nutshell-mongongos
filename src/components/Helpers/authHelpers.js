@@ -39,6 +39,8 @@ const checkLoginStatus = (bindComponents) => {
       $('#weather-header').html('');
       $('#dropdown-container').html('');
       $('#weather-container').html('');
+      $('#article-section').hide();
+      $('#modal-section').hide();
       auth.loginPage();
     }
   });
