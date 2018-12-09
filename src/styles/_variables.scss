@@ -25,3 +25,11 @@ $list: $lightgrey, $grey, $greydarken-1, $greydarken-2, $greydarken-3;
     background: linear-gradient($direction, $list);  
   }
 // END GRADIENT
+
+// Weather Variables
+$textShadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+$weatherBackground: rgba(115, 150, 196, 0.726);
+$weatherText: white;
+$centerText: center
+// End Weather Variables
+

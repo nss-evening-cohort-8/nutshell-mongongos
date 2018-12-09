@@ -30,7 +30,6 @@ a:visited {
   color: white;
   background-image: url(../../e1.jpg);
   object-fit: contain;
-  // opacity: .8;
   position: relative;
   overflow: hidden;
  }
@@ -66,6 +65,7 @@ a:visited {
   display: flex;
   align-content: center;
   background-color: white;
+  z-index: -10;
   padding: 15px 15px 15px 15px;
   border-radius: 3px;
   margin: 5px;
