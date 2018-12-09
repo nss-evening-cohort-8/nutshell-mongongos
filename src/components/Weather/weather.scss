@@ -62,3 +62,9 @@
 #cancel-zipcode-button {
   margin-bottom: 10px;
 }
+
+#alert-zipcode {
+  position: absolute;
+  z-index: 999999;
+  margin-top: 100px;
+}
