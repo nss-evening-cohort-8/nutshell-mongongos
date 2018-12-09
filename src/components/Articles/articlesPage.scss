@@ -1,6 +1,8 @@
 @import '../../styles/variables';
 @import '~bootstrap/scss/bootstrap';
 
+// links
+
 a:link {
   color: $msgSentBackgrnd;
 }
@@ -19,7 +21,6 @@ a:visited {
 }
 
 .article-for-scroll, .outer-container {
-  // @include gradient(top, $list);
   opacity: .8;
   height: 400px;
   width: 250px;
@@ -58,6 +59,3 @@ a:visited {
   color: $msgSentBackgrnd;
 }
 
-// .news-articles-builder {
-
-// }
