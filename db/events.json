@@ -2,25 +2,25 @@
   "event1": {
     "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
     "event": "Preds vs Wild",
-    "startDate": "December 12th 2018",
+    "startDate": "12/15/2018",
     "location": "Bridgestone Arena"
   },
   "event2": {
     "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
     "event": "Holiday Party",
-    "startDate": "December 23, 2018",
+    "startDate": "12/23/2018",
     "location": "NSS"
   },
   "event3": {
     "userUid": "wJfBssG9k5efPUwpibQU2gvfZwA3",
     "event": "Christmas Parade",
-    "startDate": "December 24, 2018",
+    "startDate": "12/25/2018",
     "location": "Downtown Nashville"
   },
   "event5": {
     "userUid": "12345",
     "event": "New Years Eve Party",
-    "startDate": "December 31st, 2018",
+    "startDate": "12/31/2018",
     "location": "Acme"
   }
 }

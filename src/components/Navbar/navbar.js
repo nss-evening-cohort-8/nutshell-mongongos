@@ -12,7 +12,7 @@ import './navbar.scss';
 const buildNavbar = (requests) => {
   const domString = `
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><i class="fas fa-mars fa-lg mr-2"></i>In A NutShell</a>
+    <a class="navbar-brand" href="#"><i class="far fa-sad-tear"></i><i class="fas fa-sad-tear"></i> Pathetic Connect</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
