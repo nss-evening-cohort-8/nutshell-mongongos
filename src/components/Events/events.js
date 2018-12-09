@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import 'bootstrap';
-import moment from 'moment';
 import eventsData from './EventsData/eventsData';
 import authHelpers from '../Helpers/authHelpers';
 
@@ -68,9 +67,7 @@ const buildModal = (eventsArray) => {
         <div class="modal-body">`;
   if (eventsArray.length) {
     eventsArray.forEach((event) => {
-      const formatCalendar = moment(event.timestamp).format('LL');
-      const eventDate = moment(event.timestamp).format('dddd, MMMM Do YYYY');
-      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}${formatCalendar}${eventDate}</div>
+      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>
         <div class="modal-footer">
           <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id}>X</button>
           <button type="button" class="btn edit-btn-event btn-primary" data-edit-id=${event.id}>/</button>
@@ -101,7 +98,7 @@ const deleteEvent = (e) => {
   eventsData.deleteEvent(idToDelete)
     .then(() => {
       eventsComponent();
-      $('#single-container').html('');
+      $('#eventModal').html('');
     })
     .catch((error) => {
       console.error('error in deleting event', error);

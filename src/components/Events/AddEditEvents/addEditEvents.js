@@ -49,9 +49,9 @@ import eventsData from '../EventsData/eventsData';
 //     `;
 //   $('#add-edit-event').html(domString);
 // };
-const eventCalendar = () => {
-  $('#datetimepicker4').datepicker({ dateFormat: 'MM-DD-YYYY' });
-};
+// const eventCalendar = () => {
+//   $('#datetimepicker4').datepicker({ dateFormat: 'MM-DD-YYYY' });
+// };
 
 const eventFormBuilder = (event) => {
   const form = `<div class="modal-dialog modal-dialog-centered" role="document">
@@ -72,19 +72,10 @@ const eventFormBuilder = (event) => {
       <input type="text" class="form-control" value ="${event.location}" id="form-event-location"
       placeholder="NSS">
     </div>
-    <div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" value ="${event.startDate}"id="form-event-date"/>
-                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="form-group">
+    <label for="form-event-startDate">Date:</label>
+    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-startDate"
+    placeholder="">
 </div>
   `;
   return form;
@@ -110,7 +101,6 @@ const buildAddFrom = () => {
   };
   let domString = '<h2>Add New Event</h2>';
   domString += eventFormBuilder(emptyEvent);
-  domString += eventCalendar(emptyEvent);
   domString += '<button id="add-event">Add Event</button>';
   $('#add-edit-event').html(domString).show();
   // $('#events-container').hide();
@@ -124,8 +114,8 @@ const buildEventButton = () => {
 const gettingEventFromForm = () => {
   const event = {
     event: $('#form-event-event').val(),
-    location: $('#form-event-date').val(),
-    startDate: $('#form-event-location').val(),
+    location: $('#form-event-location').val(),
+    startDate: $('#form-event-startDate').val(),
     userUid: authHelpers.getCurrentUid(),
   };
   return event;
@@ -187,8 +177,7 @@ const updateEvent = (e) => {
   const eventId = e.target.dataset.singleEditId;
   eventsData.updateEvent(updatedEvent, eventId)
     .then(() => {
-      $('#add-edit-event').hide();
-      $('#eventModal').hide();
+      $('#add-edit-event').html('').hide();
       // $('#single-container').html('');
       // $('#events-container').show();
       events.initializeEventsPage();
