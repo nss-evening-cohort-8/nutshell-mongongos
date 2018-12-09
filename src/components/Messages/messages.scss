@@ -5,9 +5,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 // Alot more work to do in here to refactor
-// #message-container{
-//   margin-top: 5rem;
-// }
+#message-container{
+  // height: calc(100vh - 35vh);
+}
 
 .messages {
   padding: 15px 15px 0 15px;
@@ -15,7 +15,8 @@
   background: rgba(0, 0, 0, 0.15);
   background-color: $msgContainerBackgrnd;
   border-radius: 10px 10px 0 0;
-  box-shadow: 5px 5px $msgSentBackgrnd;
+  // height: calc(100vh - 35vh);
+  // box-shadow: 5px 5px $msgSentBackgrnd;
   ::-webkit-scrollbar,
   ::-webkit-scrollbar-button {
     display: none;
@@ -24,6 +25,7 @@
 
   .msg-history {
     padding-bottom: 15px;
+    height: calc(100vh - 35vh);
   }
 }
 
@@ -127,7 +129,7 @@ img{
   background-color: white;
   padding: 0 15px 0 15px;
   border-radius: 0 0 5px 5px;
-  box-shadow: 5px 5px $msgSentBackgrnd;
+  // box-shadow: 5px 5px $msgSentBackgrnd;
 }
 
 .msg-send-btn {

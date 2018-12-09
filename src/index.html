@@ -12,27 +12,31 @@
 
 <body>
   <!-- Navbar -->
-  <div id="nav-bar"></div>
+  <!-- <div id="nav-bar"></div>
   <div id="new-user-modal"></div>
 
-  <div id="bannerLogo"></div>  
+  <div id="bannerLogo"></div> -->
 
   <!-- Wrapper DIV to handle offset of fixed Navbar -->
-  <div id="wrapper" class="container">
+  <div id="wrapper" class="container-fluid d-flex flex-column">
     <!-- Login Button -->
     <div id="login-page"></div>
+    <div id="nav-bar"></div>
+    <div id="new-user-modal"></div>
+
+    <div id="bannerLogo" class="text-center"></div>
     <!--News Articles-->
     <div class="row">
       <div class="col-3">
         <div id="article-section"></div>
         <div id="modal-section"></div>
       </div>
-    <!-- Messages DIV -->
-    <div class="col-6">
-      <div id="message-container" class="container w-auto"></div>
-      <div id="message-input" class="container w-auto"></div>
-    </div>
-    <!-- Weather Component -->
+      <!-- Messages DIV -->
+      <div class="col-6">
+        <div id="message-container" class="container w-auto"></div>
+        <div id="message-input" class="container w-auto"></div>
+      </div>
+      <!-- Weather Component -->
       <div class="col-3">
         <div id="weather-header"></div>
         <div id="dropdown-container"></div>
@@ -40,18 +44,20 @@
         <div id="weather-container"></div>
         <div id="add-edit-zipcode"></div>
         <div id="alert-zipcode"></div>
-    <!-- Events -->
-        <div id="events-container"><h2>Events</h2> </div>
+        <!-- Events -->
+        <div id="events-container">
+          <h2>Events</h2>
+        </div>
         <div id="events-modal-container"></div>
         <div id="event-button"></div>
         <div id="add-edit-event"></div>
         <div id="single-container"></div>
       </div>
     </div>
-  <!-- Friends Modal -->
-  <div class="modal" tabindex="-1" role="dialog" id='losersModal'></div>
+    <!-- Friends Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id='losersModal'></div>
 
-  
+
 </body>
 
 </html>
