@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import apiKeys from '../../../../db/apiKeys';
 
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
@@ -13,6 +14,7 @@ const getAllEvents = userId => new Promise((resolve, reject) => {
           eventsObject[eventId].id = eventId;
           eventsArray.push(eventsObject[eventId]);
         });
+        eventsArray.sort((a, b) => moment(a.timestamp).unix() - moment(b.timestamp).unix());
       }
       resolve(eventsArray);
     })
