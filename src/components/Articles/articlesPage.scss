@@ -1,7 +1,8 @@
-// links
+@import '../../styles/variables';
+@import '~bootstrap/scss/bootstrap';
 
 a:link {
-  color: darkcyan;
+  color: $msgSentBackgrnd;
 }
 
 a:visited {
@@ -11,20 +12,52 @@ a:visited {
 // article size & scroll
 
 #article-section {
-  background-color: lightgrey;
-  box-shadow: inset 0 0 5px grey;
-  max-width: 30%;
-  overflow: scroll;
   margin: 4%;
   padding: 2%;
   height: 400px;
-  width: 400px;
+  width: 250px;
 }
 
-// #scroll-section {
-
-// }
+.article-for-scroll, .outer-container {
+  // @include gradient(top, $list);
+  opacity: .8;
+  height: 400px;
+  width: 250px;
+  border-radius: 10px;
+ }
+  
+ .outer-container {
+  @include gradient(top, $list);
+  opacity: .8;
+  position: relative;
+  overflow: hidden;
+ }
+  
+ .inner-container {
+  position: absolute;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+ }
+  
+ .inner-container::-webkit-scrollbar {
+  display: none;
+ }
 
 #modal-section {
   margin: 4%;
 }
+
+.btn {
+  background-color: $msgSentBackgrnd;
+  color: white;
+  margin-left: 20%;
+}
+
+.article-url {
+  color: $msgSentBackgrnd;
+}
+
+// .news-articles-builder {
+
+// }

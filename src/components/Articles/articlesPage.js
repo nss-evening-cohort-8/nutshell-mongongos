@@ -18,7 +18,8 @@ const printAllArticles = (allArticlesArray) => {
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
-      <button type="button" id="delete-article-button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
+      <div id="delete-article-button" class="far fa-trash-alt" data-delete-id=${article.id}></div>
+      <div id="edit-article-button" class="fas fa-edit" data-edit-id=${article.id}></div>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
@@ -30,8 +31,6 @@ const printAllArticles = (allArticlesArray) => {
     $('#article-section').html(domString);
   });
 };
-// <button type="button" id="edit-article-button"
-// class="btn btn btn-sm edit-btn" data-edit-id=${article.id}>Edit</button>
 
 const articleComponent = () => {
   const uid = authHelpers.getCurrentUid();
@@ -47,7 +46,7 @@ const articleComponent = () => {
 // FORM TO CREATE A NEW ARTICLE
 
 const modalFormBuilder = () => {
-  const domString = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
+  const domString = `<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
 <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -67,7 +66,7 @@ const modalFormBuilder = () => {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="save-article" class="btn btn-primary">Save changes</button>
+          <button type="button" id="save-new-article" class="btn btn-primary">Save changes</button>
         </div>
     </div>
   </div>
@@ -147,29 +146,10 @@ const showEditForm = (e) => {
   const articleToEdit = e.target.dataset.editId;
   articlesData.getSingleArticle(articleToEdit)
     .then((singleArticle) => {
-      let domString = `<button type="button" id="article-to-edit" class="btn btn btn-sm" data-toggle="modal" data-target="#articleModalCenter">Edit Article</button>
-      <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="articleModalCenterTitle">Complete the form below:</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>`;
-      domString = '<div class="modal-body">';
-      domString = editFormBuilder(singleArticle);
-      domString = '</div>';
-      domString = `<div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" id="save-new-article" data-edit-id=${singleArticle.id} class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-      <button type="button"  id="edit-article" class="btn btn-primary">Save changes</button>`;
-      $('#article-section').html(domString);
-      // $(`#${articleToEdit}`).html(domString);
+      let domString = '<h2>Edit Article</h2>';
+      domString += editFormBuilder(singleArticle);
+      domString += `<button id="article-to-edit" data-edit-id=${singleArticle.id} class="btn btn btn-sm edit">Save Article Change</button>`;
+      $(`#${articleToEdit}`).html(domString);
     })
     .catch((error) => {
       console.log('error in showing the edit form', error);
@@ -192,8 +172,8 @@ const updateArticle = (e) => {
 // CLICK EVENTS
 $('body').on('click', '#save-new-article', addNewArticle);
 $('body').on('click', '#delete-article-button', deleteArticle);
-$('body').on('click', '#article-to-edit', showEditForm);
-$('body').on('click', '#save-article', updateArticle);
+$('body').on('click', '#edit-article-button', showEditForm);
+$('body').on('click', '#article-to-edit', updateArticle);
 
 const initializeArticles = () => {
   articleComponent();
