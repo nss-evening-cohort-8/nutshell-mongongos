@@ -32,18 +32,6 @@ const eventFormBuilder = (event) => {
   return form;
 };
 
-/* <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body"> */
-
-
 const buildAddFrom = () => {
   const emptyEvent = {
     event: '',
@@ -54,7 +42,6 @@ const buildAddFrom = () => {
   domString += eventFormBuilder(emptyEvent);
   domString += '<button id="add-event">Add Event</button>';
   $('#add-edit-event').html(domString).show();
-  // $('#events-container').hide();
 };
 const buildEventButton = () => {
   const domString = '<button id="add-event-button">+</button>';
@@ -72,19 +59,6 @@ const gettingEventFromForm = () => {
   return event;
 };
 
-// const buildAddFrom = () => {
-//   const emptyEvent = {
-//     event: '',
-//     startDate: '',
-//     location: '',
-//   };
-//   let domString = '<h2>Add New Event</h2>';
-//   domString += eventFormBuilder(emptyEvent);
-//   domString += '<button id="add-event">Add Event</button>';
-//   $('#add-edit-event').html(domString).show();
-//   // $('#events-container').hide();
-// };
-
 const addNewEvent = () => {
   const newEvent = gettingEventFromForm();
   eventsData.createEventData(newEvent)
@@ -99,12 +73,6 @@ const addNewEvent = () => {
     });
 };
 
-// const buildEventButton = () => {
-//   const domString = '<button id="add-event-button">+</button>';
-//   $('#event-button').html(domString);
-//   $('#add-event-button').on('click', buildAddFrom);
-// };
-
 const showEditEventForm = (e) => {
   const idToEdit = e.target.dataset.editId;
   eventsData.getSingleEvent(idToEdit)
@@ -112,9 +80,7 @@ const showEditEventForm = (e) => {
       let domString = '<h2>Edit Event</h2>';
       domString += eventFormBuilder(singleEvent);
       domString += `<button id="edit-event" data-single-edit-id=${singleEvent.id} data-dismiss="modal">Save Event</button>`;
-      // $('#add-edit-event').html(domString).show();
       $('#eventModal').html(domString).show();
-      // $('#events-container').hide();
       $('#events-modal-container').show();
     })
     .catch((error) => {
@@ -129,7 +95,6 @@ const updateEvent = (e) => {
     .then(() => {
       $('#add-edit-event').html('').hide();
       $('#single-container').html('').hide();
-      // $('#events-container').show();
       events.initializeEventsPage();
     })
     .catch((error) => {
@@ -138,7 +103,6 @@ const updateEvent = (e) => {
 };
 
 const addCloseButton = () => {
-  console.log('addclosebutton');
   $('#add-edit-event').hide();
 };
 

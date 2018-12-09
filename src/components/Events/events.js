@@ -17,26 +17,6 @@ const printSingleEvent = (event) => {
   $('#single-container').hide();
 };
 
-// const printAllEvents = (allEventsArray) => {
-//   let domString = `<h2>Events</h2>
-// `;
-//   allEventsArray.forEach((event) => {
-//     domString += `
-//     <div class="evnts-builder">
-//       <button type="button" id="delete-event-button" class="btn btn btn-sm"
-// data-delete-id=${event.id}>X</button>
-//       <button type="button" id="edit-event-button" class="btn btn btn-sm
-// edit-btn" data-edit-id=${event.id}>Edit</button>
-//       <h5 class="event-event">&#9758 ${event.event}</h5>
-//       <p class="event-location">${event.location}</p>
-//       <a class="event-startDate" href="${event.startDate}" target="_blank"></a>
-//     </button>
-//     <div id="${event.id}"></div>
-//     `;
-//     $('#events-modal-container').html(domString);
-//   });
-// };
-
 const getSingleEvent = (e) => {
   const eventId = e.target.dataset.dropdownId;
   const uid = authHelpers.getCurrentUid();
