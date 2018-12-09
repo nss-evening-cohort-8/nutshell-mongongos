@@ -58,7 +58,7 @@ const eventFormBuilder = (event) => {
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalHeader">Complete the form below:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="add-close-button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -142,7 +142,6 @@ const addNewEvent = () => {
       $('#events-container').show();
       events.initializeEventsPage();
       eventFormBuilder();
-      events.printAllEvents();
     })
     .catch((error) => {
       console.error('error', error);
@@ -161,7 +160,7 @@ const showEditEventForm = (e) => {
     .then((singleEvent) => {
       let domString = '<h2>Edit Event</h2>';
       domString += eventFormBuilder(singleEvent);
-      domString += `<button id="edit-event" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
+      domString += `<button id="edit-event" data-single-edit-id=${singleEvent.id} data-dismiss="modal">Save Event</button>`;
       // $('#add-edit-event').html(domString).show();
       $('#eventModal').html(domString).show();
       // $('#events-container').hide();
@@ -178,7 +177,7 @@ const updateEvent = (e) => {
   eventsData.updateEvent(updatedEvent, eventId)
     .then(() => {
       $('#add-edit-event').html('').hide();
-      // $('#single-container').html('');
+      $('#single-container').html('').hide();
       // $('#events-container').show();
       events.initializeEventsPage();
     })
@@ -186,9 +185,16 @@ const updateEvent = (e) => {
       console.error('error', error);
     });
 };
+
+const addCloseButton = () => {
+  console.log('addclosebutton');
+  $('#add-edit-event').hide();
+};
+
 $('body').on('click', '#add-event', addNewEvent);
 $('body').on('click', '.edit-btn-event', showEditEventForm);
 $('body').on('click', '#edit-event', updateEvent);
+$('body').on('click', '#add-close-button', addCloseButton);
 
 export default {
   buildAddFrom,

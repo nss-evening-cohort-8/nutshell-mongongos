@@ -67,10 +67,25 @@ const buildModal = (eventsArray) => {
         <div class="modal-body">`;
   if (eventsArray.length) {
     eventsArray.forEach((event) => {
-      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>${event.event}${event.location}${event.startDate}</div>
-        <div class="modal-footer">
-          <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id}>X</button>
+      modal += `<div class="modal-item get-single" data-modal-id=${event.id}>
+      <div = "row">
+      <div = "col">
+      ${event.event}
+      </div>
+      </div>
+      <div = "row">
+      <div = "col">
+      ${event.location}
+      <div = "row">
+      <div = "col">
+      ${event.startDate}
+      <div class= "d-flex justify-content-end">
+          <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id} data-dismiss="modal">X</button>
           <button type="button" class="btn edit-btn-event btn-primary" data-edit-id=${event.id}>/</button>
+          </div>
+          </div>
+          <div class="modal-footer">
+          </div>
         </div>`;
     });
   } else {
@@ -78,7 +93,7 @@ const buildModal = (eventsArray) => {
   }
   modal += `</div>
         </div>
-        </div>;`;
+        </div>`;
   modal += '</div></div>';
   $('#events-modal-container').html(modal);
 };
@@ -115,4 +130,4 @@ const initializeEventsPage = () => {
   bindEvents();
 };
 
-export default initializeEventsPage;
+export default { initializeEventsPage };
