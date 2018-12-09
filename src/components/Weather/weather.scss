@@ -4,12 +4,16 @@
 
 #weather-header {
   background-color: $weatherBackground;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 #weather-data {
   background-color: $weatherBackground;
   color: $weatherText;
   text-shadow: $textShadow;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 #weather-buttons {
