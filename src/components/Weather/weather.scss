@@ -3,19 +3,19 @@
 
 
 #weather-header {
-  background-color: rgba(115, 150, 196, 0.726);
+  background-color: $weatherBackground;
 }
 
 #weather-data {
-  background-color: rgba(115, 150, 196, 0.726);
-  color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  background-color: $weatherBackground;
+  color: $weatherText;
+  text-shadow: $textShadow;
 }
 
 #weather-buttons {
   margin-left: 80px;
-  color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: $weatherText;
+  text-shadow: $textShadow;
 }
 
 #add-zipcode-button {
@@ -29,12 +29,12 @@
 
 .temp {
   font-size: 30px;
-  text-align: center;
+  text-align: $centerText;
   margin-bottom: 0;
 }
 
 .location {
-  text-align: center;
+  text-align: $centerText;
   margin-bottom: 5px;
 }
 
@@ -44,11 +44,11 @@
 }
 
 #add-header {
-  text-align: center;
+  text-align: $centerText;
 }
 
 #zipcode-input {
-  text-align: center;
+  text-align: $centerText;
   margin-top: 20px;
   margin-bottom: 20px;
 }
