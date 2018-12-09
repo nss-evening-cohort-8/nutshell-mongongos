@@ -4,55 +4,6 @@ import authHelpers from '../../Helpers/authHelpers';
 import events from '../events';
 import eventsData from '../EventsData/eventsData';
 
-// const addEventModalFormBuilder = (event) => {
-//   const domString = `<button type="button" class="btn btn-prima
-// ry" data-toggle="modal" data-target="#eventModal">Add A New Event</button>
-// <div class="modal fade" id="eventModal" tabindex="-1" role="di
-// alog" aria-labelledby="eventModal" aria-hidden="true">
-//   <div class="modal-dialog modal-dialog-centered" role="document">
-//     <div class="modal-content">
-//       <div class="modal-header">
-//         <h5 class="modal-title" id="eventModalHeader">Complete the form below:</h5>
-//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//           <span aria-hidden="true">&times;</span>
-//         </button>
-//       </div>
-//         <div class="modal-body">
-//         <label for="form-event-event">Event:</label>
-//         <input type="text" class="form-control " value ="${event.event}"
-// id="form-event-event" placeholder="Titans Game">
-//       </div>
-//       <div class="form-group">
-//         <label for="form-event-location">Location:</label>
-//         <input type="text" class="form-control" value ="${event.location}"
-// id="form-event-location" placeholder="NSS">
-//       </div>
-//       <div class="form-group">
-//       <label for="form-event-date">Date:</label>
-//       <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-//       <input type="text" class="form-control" value ="${event.startDate}"
-// id="form-event-date">
-//           <input type="text" class="form-control datetimepicker-input"
-// data-target="#datetimepicker1"/>
-//           <div class="input-group-append" data-target="#datetimepicker1"
-//  data-toggle="datetimepicker">
-//               <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-//           </div>
-//         </div>
-//         <div class="modal-footer">
-//           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-//           <button type="button" id="save-new-event" class="btn btn-primary">Save changes</button>
-//         </div>
-//     </div>
-//   </div>
-// </div>
-//     `;
-//   $('#add-edit-event').html(domString);
-// };
-// const eventCalendar = () => {
-//   $('#datetimepicker4').datepicker({ dateFormat: 'MM-DD-YYYY' });
-// };
-
 const eventFormBuilder = (event) => {
   const form = `<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -75,7 +26,7 @@ const eventFormBuilder = (event) => {
     <div class="form-group">
     <label for="form-event-startDate">Date:</label>
     <input type="text" class="form-control" value ="${event.startDate}" id="form-event-startDate"
-    placeholder="">
+    placeholder="10/23/2001">
 </div>
   `;
   return form;
@@ -192,7 +143,7 @@ const addCloseButton = () => {
 };
 
 $('body').on('click', '#add-event', addNewEvent);
-$('body').on('click', '.edit-btn-event', showEditEventForm);
+$('body').on('click', '#edit-btn-event', showEditEventForm);
 $('body').on('click', '#edit-event', updateEvent);
 $('body').on('click', '#add-close-button', addCloseButton);
 

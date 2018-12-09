@@ -80,8 +80,8 @@ const buildModal = (eventsArray) => {
       <div = "col">
       ${event.startDate}
       <div class= "d-flex justify-content-end">
-          <button type="button" class="btn delete-btn-event btn-danger" data-delete-id=${event.id} data-dismiss="modal">X</button>
-          <button type="button" class="btn edit-btn-event btn-primary" data-edit-id=${event.id}>/</button>
+          <div id="delete-btn-event" class="far fa-trash-alt" data-delete-id=${event.id} data-dismiss="modal"></div>
+          <div id="edit-btn-event" class="fas fa-edit" data-edit-id=${event.id}></div>
           </div>
           </div>
           <div class="modal-footer">
@@ -122,7 +122,7 @@ const deleteEvent = (e) => {
 
 const bindEvents = () => {
   $('body').on('click', '.get-single', getSingleEvent);
-  $('body').on('click', '.delete-btn-event', deleteEvent);
+  $('body').on('click', '#delete-btn-event', deleteEvent);
 };
 
 const initializeEventsPage = () => {
