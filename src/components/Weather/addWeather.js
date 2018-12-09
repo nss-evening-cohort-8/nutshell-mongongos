@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import './weather.scss';
+import 'bootstrap';
 import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
 import weather from './weather';
@@ -9,7 +11,7 @@ const buildWeatherButtons = () => {
 };
 
 const formBuilder = (locationObject) => {
-  const form = `<input type="text" value="${locationObject.zipcode}" id="zipcode-input">`;
+  const form = `<div class="d-flex justify-content-center"><input type="text" value="${locationObject.zipcode}" id="zipcode-input"></div>`;
   return form;
 };
 
@@ -26,10 +28,10 @@ const buildAddForm = () => {
   const emptyLocation = {
     zipcode: '',
   };
-  let domString = '<h2>Add New Location</h2>';
+  let domString = '<h4 id="add-header">Add New Location</h4>';
   domString += formBuilder(emptyLocation);
-  domString += '<button id="save-zipcode-button">Save New Location</button>';
-  domString += '<button id="cancel-zipcode-button">Cancel</button>';
+  domString += '<button class="btn btn-secondary" id="save-zipcode-button">Save New Location</button>';
+  domString += '<button class="btn btn-secondary" id="cancel-zipcode-button">Cancel</button>';
   $('#add-edit-zipcode').html(domString);
   $('#weather-container').html('');
   $('#dropdown-container').html('');

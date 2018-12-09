@@ -23,7 +23,6 @@ const buildDropdown = (weatherArray) => {
 
 const printWeatherApi = (weather, locationId, currentLocation) => {
   let domString = '';
-  console.log(weather);
   const tempurature = weather.temp;
   const convert = (tempurature * 9 / 5) + 32;
   const fahrenheit = Math.round(convert);
@@ -31,11 +30,11 @@ const printWeatherApi = (weather, locationId, currentLocation) => {
   domString += `<p class="temp">${fahrenheit}° <img class="weather-icon" src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png"></p>
     <p class="location">${weather.city_name}, ${weather.state_code}</p>`;
   if (isCurrent === 'true') {
-    domString += `<input class="is-current-checkbox ml-2" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox" checked>Current Location</input>`;
+    domString += `<input class="is-current-checkbox ml-2" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox" checked> Current Location</input>`;
   } else {
-    domString += `<input class="is-current-checkbox ml-2" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox">Current Location</input>`;
+    domString += `<input class="is-current-checkbox ml-2" data-zip-id="${locationId}" type="checkbox" id="is-current-zipcode-checkbox"> Current Location</input>`;
   }
-  domString += `<a id="delete-zipcode-button" data-zip-id="${locationId}"><i class="far fa-trash-alt"></i></a>`;
+  domString += `<div id="delete-zipcode-button" data-zip-id="${locationId}"<i class="far fa-trash-alt"></i></div>`;
   $('#weather-container').html(domString);
   // ${weather.weather.description}
 };
