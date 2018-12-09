@@ -2,11 +2,6 @@ import $ from 'jquery';
 import authHelpers from '../Helpers/authHelpers';
 import weatherData from '../Helpers/Data/weatherData';
 
-const buildWeatherHeader = () => {
-  const domString = '<h2>Weather</h2>';
-  $('#weather-header').html(domString);
-};
-
 const buildDropdown = (weatherArray) => {
   let domString = `<div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,7 +89,6 @@ const fixCurrentLocation = () => {
   weatherData.getAllWeatherObjects(uid)
     .then((weatherObjects) => {
       const currentLocation = weatherObjects.filter(object => object.isCurrent === true);
-      console.log(currentLocation);
       if (currentLocation[0] !== undefined) {
         const currentLocationId = currentLocation[0].id;
         const isCurrentFalse = false;
@@ -130,4 +124,4 @@ $('body').on('click', '#delete-zipcode-button', deleteZip);
 $('body').on('change', '.is-current-checkbox', updateCurrentLocation);
 
 
-export default { weatherComponent, weatherApi, buildWeatherHeader };
+export default { weatherComponent, weatherApi };
