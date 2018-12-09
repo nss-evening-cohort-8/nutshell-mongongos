@@ -7,6 +7,7 @@ import './articlesPage.scss';
 import articlesData from '../Helpers/Data/articlesData';
 import authHelpers from '../Helpers/authHelpers';
 
+
 // PRINT ARTICLE TO PAGE
 
 const printAllArticles = (allArticlesArray) => {

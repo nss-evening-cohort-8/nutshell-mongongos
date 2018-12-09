@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+@import '~bootstrap/scss/bootstrap';
+
+
+#weather-header {
+  background-color: rgb(115, 150, 196);
+}
+
+#weather-data {
+  background-color: rgb(115, 150, 196);
+  color: white;
+}
+
+#weather-buttons {
+  margin-left: 80px;
+  color: white;
+}
+
+#add-zipcode-button {
+  color: green;
+}
+
+#delete-zipcode-button {
+  color: red;
+  margin-left: 95px;
+}
+
+.temp {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.location {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+}
