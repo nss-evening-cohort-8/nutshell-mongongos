@@ -1,0 +1,75 @@
+@import '../../styles/variables';
+@import '~bootstrap/scss/bootstrap';
+
+
+#weather-header {
+  background-color: $weatherBackground;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#weather-data {
+  background-color: $weatherBackground;
+  color: $weatherText;
+  text-shadow: $textShadow;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#weather-buttons {
+  margin-left: 78px;
+  color: $weatherText;
+  text-shadow: $textShadow;
+  font-size: 20px;
+}
+
+#add-zipcode-button {
+  color: rgb(8, 185, 8);
+}
+
+#delete-zipcode-button {
+  color: red;
+  margin-left: 95px;
+}
+
+.temp {
+  font-size: 30px;
+  text-align: $centerText;
+  margin-bottom: 0;
+}
+
+.location {
+  text-align: $centerText;
+  margin-bottom: 5px;
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+}
+
+#add-header {
+  text-align: $centerText;
+}
+
+#zipcode-input {
+  text-align: $centerText;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#save-zipcode-button {
+  margin-bottom: 10px;
+  margin-right: 12px;
+  margin-left: 5px;
+}
+
+#cancel-zipcode-button {
+  margin-bottom: 10px;
+}
+
+#alert-zipcode {
+  position: absolute;
+  z-index: 999999;
+  margin-top: 100px;
+}

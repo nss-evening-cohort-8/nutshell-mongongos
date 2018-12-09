@@ -29,7 +29,6 @@ const bindComponents = () => {
   articlesPage.initializeArticles();
   weather.weatherComponent();
   losers.losersBuilder();
-  weather.buildWeatherHeader();
   addWeather.buildWeatherButtons();
   addEvents.buildEventButton();
 };
