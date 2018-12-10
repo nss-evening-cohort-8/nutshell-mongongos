@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import './events.scss';
 import 'bootstrap';
-import eventsData from './EventsData/eventsData';
+import eventsData from '../Helpers/Data/eventsData';
 import authHelpers from '../Helpers/authHelpers';
 
 const printSingleEvent = (event) => {
