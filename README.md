@@ -15,6 +15,7 @@ npm install
 ```
 * Rename apiKeys.json.example file to apiKeys.json.
 * Create a new project in Firebase and add your api keys to the apiKeys.json
+* Create a free account at www.weatherbit.io and add the api code to the apiKeys.json file.
 * Run the server in the terminal:
 ```sh
 npm start
