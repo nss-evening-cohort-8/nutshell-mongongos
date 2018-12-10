@@ -4,6 +4,8 @@ import authHelpers from '../authHelpers';
 
 const URL = apiKeys.firebaseKeys.databaseURL;
 
+// Gets friend requests based off a given friend id and returns an array
+
 const getPendingLosers = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${uid}"`)
     .then((data) => {
@@ -22,6 +24,8 @@ const getPendingLosers = uid => new Promise((resolve, reject) => {
     });
 });
 
+// Gets friend requests based on a given sender id and returns an array
+
 const getPendingLosersByUserUid = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/friendRequests.json?orderBy="userUid"&equalTo="${uid}"`)
     .then((data) => {
@@ -39,6 +43,9 @@ const getPendingLosersByUserUid = uid => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// Gets the list of users and filters out those who
+// are already friends or have pending friend requests
 
 const getOtherLosers = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/users.json`)
@@ -74,6 +81,8 @@ const getOtherLosers = uid => new Promise((resolve, reject) => {
     });
 });
 
+// Gets the key value of a user object by given uid
+
 const getUserTag = uid => new Promise((resolve, reject) => {
   axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${uid}"`)
     .then((data) => {
@@ -91,6 +100,8 @@ const getUserTag = uid => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// Gets current user and returns an array of the users friends
 
 const getMyLosers = () => new Promise((resolve, reject) => {
   axios.get(`${URL}/users.json?orderBy="uid"&equalTo="${authHelpers.getCurrentUid()}"`)
@@ -113,6 +124,8 @@ const getMyLosers = () => new Promise((resolve, reject) => {
     });
 });
 
+// gets a single user object based on the given key value
+
 const getOneUser = user => new Promise((resolve, reject) => {
   axios.get(`${URL}/users/${user}.json`)
     .then((data) => {
@@ -122,6 +135,8 @@ const getOneUser = user => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// creates a friend request with the current user uid and selected friend uid
 
 const sendLoserRequest = user => new Promise((resolve, reject) => {
   getOneUser(user)
@@ -144,6 +159,8 @@ const sendLoserRequest = user => new Promise((resolve, reject) => {
     });
 });
 
+// Gets users based on matching a given friend request
+
 const getUsersByRequests = requests => new Promise((resolve, reject) => {
   const usersArray = [];
   const promisesArray = [];
@@ -163,6 +180,8 @@ const getUsersByRequests = requests => new Promise((resolve, reject) => {
     });
 });
 
+// Gets friend requests sent by the current user
+
 const getRequestsByUser = () => new Promise((resolve, reject) => {
   axios.get(`${URL}/friendRequests.json?orderBy="friendUid"&equalTo="${authHelpers.getCurrentUid()}"`)
     .then((data) => {
@@ -181,10 +200,14 @@ const getRequestsByUser = () => new Promise((resolve, reject) => {
     });
 });
 
+// filters friend requests based on friend and user
+
 const filterRequests = (user, friend) => {
   user.filter(request => request.userUid.includes(friend));
   return user[0].requestId;
 };
+
+// Removes friend request following acceptance or declining
 
 const completeRequest = loser => new Promise((resolve, reject) => {
   getRequestsByUser()
@@ -201,6 +224,8 @@ const completeRequest = loser => new Promise((resolve, reject) => {
       console.log(err);
     });
 });
+
+// Adds friend object to user following becoming friends
 
 const addLoserToUser = loserUid => new Promise((resolve, reject) => {
   let userWithLoser;
@@ -245,6 +270,8 @@ const addLoserToUser = loserUid => new Promise((resolve, reject) => {
     });
 });
 
+// Adds user object to friend after becoming friends
+
 const addUserToLoser = (loserUid) => {
   let loserWithUser;
   getUserTag(authHelpers.getCurrentUid())
@@ -284,6 +311,8 @@ const addUserToLoser = (loserUid) => {
       console.log(err);
     });
 };
+
+// Removes a friend from the user and adds back an empty friend key if last friend deleted
 
 const deleteLoser = loserId => new Promise((resolve, reject) => {
   getUserTag(authHelpers.getCurrentUid())

@@ -14,6 +14,8 @@ const bindComponents = () => {
   addEvents.buildEventButton();
 };
 
+// Event for user sending a friend request
+
 const addOneLoserClicked = () => {
   $('.addOneLoserButton').on('click', (event) => {
     losersData.sendLoserRequest(event.target.dataset.loserKey)
@@ -29,12 +31,16 @@ const addOneLoserClicked = () => {
   });
 };
 
+// Event for user going to avatar page
+
 const addAvatarClicked = () => {
   $('#addAvatarButton').on('click', () => {
     // eslint-disable-next-line no-use-before-define
     avatarsBuilder();
   });
 };
+
+// Event for returning to friends page
 
 const returnToLosers = () => {
   $('#losersBackButton').on('click', () => {
@@ -43,12 +49,16 @@ const returnToLosers = () => {
   });
 };
 
+// Event for returning to friends page
+
 const returnToLosersFromAvatars = () => {
   $('#avatarBackButton').on('click', () => {
     // eslint-disable-next-line no-use-before-define
     losersBuilder();
   });
 };
+
+// Event for user uploading an avatar
 
 const uploadAvatarClicked = () => {
   $('#uploadAvatarButton').on('click', () => {
@@ -63,6 +73,8 @@ const uploadAvatarClicked = () => {
   });
 };
 
+// Event for user saving an avatar to profile
+
 const selectAvatarClicked = () => {
   $('#selectAvatarButton').on('click', () => {
     avatars.selectAvatar(avatars.getSelectedAvatar())
@@ -75,6 +87,8 @@ const selectAvatarClicked = () => {
       });
   });
 };
+
+// Event for user going to add friends page
 
 const addLosersClicked = () => {
   $('#addLosersButton').on('click', () => {
@@ -111,6 +125,8 @@ const addLosersClicked = () => {
   });
 };
 
+// Builds the friends page and applys events
+
 const losersBuilder = () => {
   const loserString = `
   <div class="modal-dialog" role="document">
@@ -140,6 +156,8 @@ const losersBuilder = () => {
   initializeLosers();
 };
 
+// Builds the avatars page and applys events
+
 const avatarsBuilder = () => {
   const avatarHeaderString = `<h5 class="modal-title" id='losersTitle'>Select an Avatar</h5>
                               <button type='button' id='avatarBackButton' class='btn btn-sm btn-secondary'>Return to friends</button>`;
@@ -163,6 +181,8 @@ const avatarsBuilder = () => {
   returnToLosersFromAvatars();
 };
 
+// Event for user deleting a friend
+
 const removeLoserClicked = () => {
   $('.removeLoserButton').on('click', (event) => {
     losersData.deleteLoser(event.target.dataset.loserUid)
@@ -175,6 +195,8 @@ const removeLoserClicked = () => {
       });
   });
 };
+
+// Event for user accepting a new friend
 
 const acceptLoser = () => {
   $('.acceptLoser').on('click', (event) => {
@@ -191,6 +213,8 @@ const acceptLoser = () => {
   });
 };
 
+// Event for user declining a friend request
+
 const declineLoser = () => {
   $('.declineLoser').on('click', (event) => {
     losersData.completeRequest(event.target.dataset.loserUid)
@@ -202,6 +226,8 @@ const declineLoser = () => {
       });
   });
 };
+
+// Builds the pending friend requests section of the friends page and applys events
 
 const pendingLoserRequests = () => {
   losersData.getPendingLosers(authHelpers.getCurrentUid())
@@ -237,6 +263,8 @@ const pendingLoserRequests = () => {
     });
 };
 
+// Builds the friends list within the friends page and applys events
+
 const losersListBuilder = () => {
   losersData.getMyLosers()
     .then((losersArray) => {
@@ -255,6 +283,8 @@ const losersListBuilder = () => {
       console.log(err);
     });
 };
+
+// Refreshes friends page
 
 const initializeLosers = () => {
   losersListBuilder();
