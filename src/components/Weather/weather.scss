@@ -2,10 +2,14 @@
 @import '~bootstrap/scss/bootstrap';
 
 
-#weather-header {
+.weather-background {
   background-color: $weatherBackground;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+}
+
+#dropdownMenuButton {
+  margin-left: 0;
 }
 
 #weather-data {
