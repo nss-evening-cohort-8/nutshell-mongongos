@@ -7,7 +7,7 @@ import weatherData from '../Helpers/Data/weatherData';
 const buildDropdown = (weatherArray) => {
   let domString = `<div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select Location
+          Select Weather Location
         </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (weatherArray.length) {
@@ -36,7 +36,6 @@ const printWeatherApi = (weather, locationId, currentLocation) => {
   }
   domString += `<div id="delete-zipcode-button" data-zip-id="${locationId}"<i class="far fa-trash-alt"></i></div>`;
   $('#weather-container').html(domString);
-  // ${weather.weather.description}
 };
 
 const weatherComponent = () => {
