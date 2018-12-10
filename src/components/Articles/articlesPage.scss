@@ -14,13 +14,12 @@ a:visited {
 // article size & scroll
 
 #article-section {
+  color: white;
   padding: 2%;
   height: 400px;
-  border: darkgrey double 4px;
 }
 
 .article-for-scroll, .outer-container {
-  opacity: .8;
   height: 400px;
   width: 250px;
   border-radius: 10px;
@@ -32,6 +31,7 @@ a:visited {
   object-fit: contain;
   position: relative;
   overflow: hidden;
+  border: darkgrey double 4px;
  }
 
  .inner-container {
@@ -62,13 +62,13 @@ a:visited {
 // article background colors
 
 .article-synopsis, .article-url {
+  align-content: center;
   display: flex;
   align-content: center;
   background-color: white;
-  z-index: -10;
   padding: 15px 15px 15px 15px;
   border-radius: 3px;
-  margin: 5px;
+  margin: 1px 10px 4px 0px;
 }
 
 .article-synopsis {
