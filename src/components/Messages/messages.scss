@@ -10,12 +10,12 @@
 // }
 
 .messages {
+  border: darkgrey double 4px;
   padding: 15px 15px 0 15px;
   width: 100%;
   background: rgba(0, 0, 0, 0.15);
-  background-color: $msgContainerBackgrnd;
+  background-image: url(../../e1.jpg);
   border-radius: 10px 10px 0 0;
-  box-shadow: 5px 5px $msgSentBackgrnd;
   ::-webkit-scrollbar,
   ::-webkit-scrollbar-button {
     display: none;
@@ -127,7 +127,7 @@ img{
   background-color: white;
   padding: 0 15px 0 15px;
   border-radius: 0 0 5px 5px;
-  box-shadow: 5px 5px $msgSentBackgrnd;
+  // box-shadow: 5px 5px $msgSentBackgrnd;
 }
 
 .msg-send-btn {
