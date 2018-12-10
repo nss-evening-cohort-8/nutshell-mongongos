@@ -80,7 +80,7 @@ const buildModal = (eventsArray) => {
 };
 const eventsComponent = () => {
   const uid = authHelpers.getCurrentUid();
-  eventsData.getAllEvents(uid)
+  eventsData.getAllEventsWithFriends(uid)
     .then((eventsArray) => {
       buildModal(eventsArray);
     })
