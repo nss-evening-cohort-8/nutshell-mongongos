@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import 'bootstrap';
+import '../events.scss';
 import authHelpers from '../../Helpers/authHelpers';
 import events from '../events';
 import eventsData from '../EventsData/eventsData';
@@ -8,7 +9,7 @@ const eventFormBuilder = (event) => {
   const form = `<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalHeader">Complete the form below:</h5>
+        <h5 class="modal-title" id="editModalHeader">Complete the form:</h5>
         <button type="button" id="add-close-button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -38,13 +39,13 @@ const buildAddFrom = () => {
     startDate: '',
     location: '',
   };
-  let domString = '<h2>Add New Event</h2>';
-  domString += eventFormBuilder(emptyEvent);
+  // let domString = '<h5>Add New Event</h5>';
+  let domString = eventFormBuilder(emptyEvent);
   domString += '<button id="add-event">Add Event</button>';
   $('#add-edit-event').html(domString).show();
 };
 const buildEventButton = () => {
-  const domString = '<button id="add-event-button">+</button>';
+  const domString = '<div id="add-event-button" class="far fa-plus-square"></div>';
   $('#event-button').html(domString);
   $('#add-event-button').on('click', buildAddFrom);
 };

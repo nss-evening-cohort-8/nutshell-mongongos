@@ -1,5 +1,24 @@
+@import '../../styles/variables';
 @import '~bootstrap/scss/bootstrap';
 
+#add-event-button {
+  color: rgb(8, 185, 8);
+}
+
+#delete-event-button {
+  color: red;
+  margin-left: 95px;
+}
+
+#edit-event {
+    color:blue;
+    margin-left: 95px;
+}
+
 #add-edit-event {
-    margin-top: -1px;
-};
+    margin-top: -200px;
+}
+
+#modal-header {
+    margin-top:-20px;
+}
