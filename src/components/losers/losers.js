@@ -85,8 +85,15 @@ const addLosersClicked = () => {
         let loserString = `
                           <div class="modal-body row" id='losersDiv'>`;
         losers.forEach((loser) => {
+          let avatar;
+          if (loser.avatar === undefined) {
+            avatar = 'https://firebasestorage.googleapis.com/v0/b/nutshell-mongos.appspot.com/o/mongongopic.jpg?alt=media&token=256d46f5-6eee-4bc8-8d09-dbcfe833bb2b';
+          } else {
+            // eslint-disable-next-line prefer-destructuring
+            avatar = loser.avatar;
+          }
           loserString += `<div class='oneLoserDiv col-4'>
-                            <img class='oneLoserAvatar avatarImage' src='${loser.avatar}'/>
+                            <img class='oneLoserAvatar avatarImage' src='${avatar}'/>
                             <p class='oneLoserName'>${loser.userName}</p>
                             <button type='button' class='btn btn-info btn-sm addOneLoserButton' data-loser-key='${loser.key}'>+</button>
                           </div>`;
@@ -204,8 +211,15 @@ const pendingLoserRequests = () => {
           let pendingLoserString = '';
           pendingLosers.forEach((pendingLoser) => {
             const loserKey = Object.keys(pendingLoser)[0];
+            let avatar;
+            if (pendingLoser[loserKey].avatar === undefined) {
+              avatar = 'https://firebasestorage.googleapis.com/v0/b/nutshell-mongos.appspot.com/o/mongongopic.jpg?alt=media&token=256d46f5-6eee-4bc8-8d09-dbcfe833bb2b';
+            } else {
+              // eslint-disable-next-line prefer-destructuring
+              avatar = pendingLoser[loserKey].avatar;
+            }
             pendingLoserString += `<div class='onePendingLoserDiv'>
-                                    <img class='onePendingLoserAvatar avatarImage' src='${pendingLoser[loserKey].avatar}'/>
+                                    <img class='onePendingLoserAvatar avatarImage' src='${avatar}'/>
                                     <p class='onePendingLoserName'>${pendingLoser[loserKey].userName}</p>
                                     <button type='button' class='btn btn-success btn-sm acceptLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Accept</button>
                                     <button type='button' class='btn btn-danger btn-sm declineLoser' data-loser-uid='${pendingLoser[loserKey].uid}'>Decline</button>`;
