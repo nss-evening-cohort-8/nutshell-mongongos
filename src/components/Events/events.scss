@@ -2,17 +2,21 @@
 @import '~bootstrap/scss/bootstrap';
 
 #add-event-button {
-  color: rgb(8, 185, 8);
+  color: rgb(16, 17, 16);
 }
 
 #delete-btn-event {
   color: red;
   margin-left: 95px;
+  cursor: pointer;
+
 }
 
 #edit-btn-event {
-    color:blue;
+    color: green;
     margin-left: 95px;
+    cursor: pointer;
+
 }
 
 #add-edit-event {
@@ -41,5 +45,12 @@
 }
 
 #event-button {
+    background-color: $msgSentBackgrnd;
+}
+
+.modal-header {
+   background-color: $msgSentBackgrnd;
+}
+#eventModalLabel {
     background-color: $msgSentBackgrnd;
 }
