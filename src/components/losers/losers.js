@@ -81,7 +81,7 @@ const addLosersClicked = () => {
     losersData.getOtherLosers(authHelpers.getCurrentUid())
       .then((losers) => {
         const losersHeaderString = `<h5 class="modal-title" id='losersTitle'>Add a Friend</h5>
-                                <button type='button' id='losersBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
+                                <button type='button' id='losersBackButton' class='btn btn-sm btn-secondary'>Return to friends</button>`;
         let loserString = `
                           <div class="modal-body row" id='losersDiv'>`;
         losers.forEach((loser) => {
@@ -117,7 +117,7 @@ const losersBuilder = () => {
       <div class='modal-body' id='losersBody'>
         <div>
           <button type='button' id='addLosersButton' class='btn btn-sm btn-info'>Add Friend</button>
-          <button type='button' id='addAvatarButton' class='btn btn-sm btn-warning'>Add Avatar</button>
+          <button type='button' id='addAvatarButton' class='btn btn-sm btn-secondary'>Add Avatar</button>
         </div>
         <div class="modal-body row" id='losersDiv'>
         </div>
@@ -135,7 +135,7 @@ const losersBuilder = () => {
 
 const avatarsBuilder = () => {
   const avatarHeaderString = `<h5 class="modal-title" id='losersTitle'>Select an Avatar</h5>
-                              <button type='button' id='avatarBackButton' class='btn btn-sm btn-warning'>Return to friends</button>`;
+                              <button type='button' id='avatarBackButton' class='btn btn-sm btn-secondary'>Return to friends</button>`;
   const avatarString = `<div class="input-group mb-3">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="addAvatarInput" accept='image/png, image/jpeg'/>
@@ -147,7 +147,7 @@ const avatarsBuilder = () => {
                         </div>
                         <h5>Select From Existing Avatars</h5>
                         <div id='avatarSelectDiv'></div>
-                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-success'>Save Selected Avatar</button>`;
+                        <button type='button' id='selectAvatarButton' class='btn btn-sm btn-info'>Save Selected Avatar</button>`;
   $('#loserModalHeader').html(avatarHeaderString);
   $('#losersBody').html(avatarString);
   avatars.selectAvatarBuilder();
