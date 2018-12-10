@@ -1,26 +1,88 @@
+@import '../../styles/variables';
+@import '~bootstrap/scss/bootstrap';
+
 // links
 
 a:link {
-  color: darkcyan;
+  color: $msgSentBackgrnd;
 }
 
 a:visited {
-  color: darkgoldenrod;
+  color: darkred;
 }
 
 // article size & scroll
 
 #article-section {
-  background-color: lightgrey;
-  box-shadow: inset 0 0 5px grey;
-  max-width: 30%;
-  margin: 4%;
   padding: 2%;
-  overflow: scroll;
   height: 400px;
-  width: 400px;
+  border: darkgrey double 4px;
 }
+
+.article-for-scroll, .outer-container {
+  opacity: .8;
+  height: 400px;
+  width: 250px;
+  border-radius: 10px;
+ }
+  
+ .outer-container {
+  color: white;
+  background-image: url(../../e1.jpg);
+  object-fit: contain;
+  position: relative;
+  overflow: hidden;
+ }
+  
+ .inner-container {
+  position: absolute;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+ }
+  
+ .inner-container::-webkit-scrollbar {
+  display: none;
+ }
 
 #modal-section {
   margin: 4%;
+}
+
+.btn {
+  background-color: $msgSentBackgrnd;
+  color: white;
+  margin-left: 20%;
+}
+
+.article-url {
+  color: $msgSentBackgrnd;
+}
+
+// article background colors
+
+.article-synopsis, .article-url {
+  display: flex;
+  align-content: center;
+  background-color: white;
+  z-index: -10;
+  padding: 15px 15px 15px 15px;
+  border-radius: 3px;
+  margin: 5px;
+}
+
+.article-synopsis {
+  color: black;
+}
+
+// edit & delete button 
+
+#edit-article-button {
+  color: green;
+  cursor: pointer;
+}
+
+#delete-article-button {
+  color: red;
+  cursor: pointer;
 }
