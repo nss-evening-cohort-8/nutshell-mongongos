@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiKeys from '../../../../db/apiKeys';
-import losersData from '../../Helpers/Data/losersData';
-import authHelpers from '../../Helpers/authHelpers';
+import losersData from './losersData';
+import authHelpers from '../authHelpers';
 
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
 
