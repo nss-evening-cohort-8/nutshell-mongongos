@@ -18,8 +18,8 @@ const printAllArticles = (allArticlesArray) => {
   allArticlesArray.forEach((article) => {
     domString += `
     <div class="news-articles-builder">
-      <button type="button" id="delete-article-button" class="btn btn btn-sm" data-delete-id=${article.id}>X</button>
-      <button type="button" id="edit-article-button" class="btn btn btn-sm edit-btn" data-edit-id=${article.id}>Edit</button>
+      <div id="delete-article-button" class="far fa-trash-alt" data-delete-id=${article.id}></div>
+      <div id="edit-article-button" class="fas fa-edit" data-edit-id=${article.id}></div>
       <h5 class="article-title">&#9758 ${article.title}</h5>
       <p class="article-synopsis">${article.synopsis}</p>
       <a class="article-url" href="${article.url}" target="_blank">Click here to view the article</a>
@@ -46,7 +46,7 @@ const articleComponent = () => {
 // FORM TO CREATE A NEW ARTICLE
 
 const modalFormBuilder = () => {
-  const domString = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
+  const domString = `<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
 <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -66,7 +66,7 @@ const modalFormBuilder = () => {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="save-new-article" class="btn btn-primary">Save changes</button>
+          <button type="button" id="save-new-article" class="btn btn-secondary">Save changes</button>
         </div>
     </div>
   </div>

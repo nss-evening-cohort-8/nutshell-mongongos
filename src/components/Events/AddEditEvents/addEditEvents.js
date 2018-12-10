@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import 'bootstrap';
+import '../events.scss';
 import authHelpers from '../../Helpers/authHelpers';
 import events from '../events';
 import eventsData from '../EventsData/eventsData';
@@ -7,25 +8,25 @@ import eventsData from '../EventsData/eventsData';
 const eventFormBuilder = (event) => {
   const form = `<div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalHeader">Complete the form below:</h5>
+      <div class="modal-header-sm">
+        <h5 class="modal-title" id="editModalHeader">Complete the form:</h5>
         <button type="button" id="add-close-button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
         <div class="modal-body"><div class="form-group">
       <label for="form-event-event">Event:</label>
-      <input type="text" class="form-control " value ="${event.event}"id="form-event-event"
+      <input type="text" class="form-control-sm" value ="${event.event}"id="form-event-event"
       placeholder="Titans Game">
     </div>
     <div class="form-group">
       <label for="form-event-location">Location:</label>
-      <input type="text" class="form-control" value ="${event.location}" id="form-event-location"
+      <input type="text" class="form-control-sm" value ="${event.location}" id="form-event-location"
       placeholder="NSS">
     </div>
-    <div class="form-group">
+    <div class="form-group input-sm">
     <label for="form-event-startDate">Date:</label>
-    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-startDate"
+    <input type="text" class="form-control-sm" value ="${event.startDate}" id="form-event-startDate"
     placeholder="10/23/2001">
 </div>
   `;
@@ -38,13 +39,13 @@ const buildAddFrom = () => {
     startDate: '',
     location: '',
   };
-  let domString = '<h2>Add New Event</h2>';
-  domString += eventFormBuilder(emptyEvent);
+  // let domString = '<h5>Add New Event</h5>';
+  let domString = eventFormBuilder(emptyEvent);
   domString += '<button id="add-event">Add Event</button>';
   $('#add-edit-event').html(domString).show();
 };
 const buildEventButton = () => {
-  const domString = '<button id="add-event-button">+</button>';
+  const domString = '<div id="add-event-button" class="far fa-plus-square"></div>';
   $('#event-button').html(domString);
   $('#add-event-button').on('click', buildAddFrom);
 };
