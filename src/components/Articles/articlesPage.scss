@@ -25,7 +25,7 @@ a:visited {
   width: 250px;
   border-radius: 10px;
  }
-  
+
  .outer-container {
   color: white;
   background-image: url(../../e1.jpg);
@@ -33,14 +33,14 @@ a:visited {
   position: relative;
   overflow: hidden;
  }
-  
+
  .inner-container {
   position: absolute;
   left: 0;
   overflow-x: hidden;
   overflow-y: scroll;
  }
-  
+
  .inner-container::-webkit-scrollbar {
   display: none;
  }
@@ -75,7 +75,7 @@ a:visited {
   color: black;
 }
 
-// edit & delete button 
+// edit & delete button
 
 #edit-article-button {
   color: green;
@@ -85,4 +85,7 @@ a:visited {
 #delete-article-button {
   color: red;
   cursor: pointer;
+}
+.modal-title {
+  background-color: white;
 }

@@ -32,7 +32,7 @@ const getSingleEvent = (e) => {
 };
 
 const buildModal = (eventsArray) => {
-  let modal = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
+  let modal = `<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#eventModal">
     Search Events
   </button>
   <!-- Modal -->
