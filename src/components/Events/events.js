@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import './events.scss';
 import 'bootstrap';
 import eventsData from './EventsData/eventsData';
 import authHelpers from '../Helpers/authHelpers';
@@ -31,8 +32,8 @@ const getSingleEvent = (e) => {
 };
 
 const buildModal = (eventsArray) => {
-  let modal = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
-    Pick Event
+  let modal = `<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#eventModal">
+    Search Events
   </button>
   <!-- Modal -->
   <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
