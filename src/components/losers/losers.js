@@ -114,7 +114,7 @@ const addLosersClicked = () => {
 const losersBuilder = () => {
   const loserString = `
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" id='losersContent'>
       <div class="modal-header" id='loserModalHeader'>
         <h5 class="modal-title" id='losersTitle'>Friends</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -152,7 +152,7 @@ const avatarsBuilder = () => {
                             <span class="input-group-text" id="uploadAvatarButton">Upload</span>
                           </div>
                         </div>
-                        <h5>Select From Existing Avatars</h5>
+                        <h5 id='avatarsHeader'>Select From Existing Avatars</h5>
                         <div id='avatarSelectDiv'></div>
                         <button type='button' id='selectAvatarButton' class='btn btn-sm btn-info'>Save Selected Avatar</button>`;
   $('#loserModalHeader').html(avatarHeaderString);

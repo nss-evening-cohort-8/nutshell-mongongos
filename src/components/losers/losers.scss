@@ -12,12 +12,28 @@
 }
 
 #loserModalHeader, #losersBody {
-  background-color: burlywood;
+  background: rgba(0, 0, 0, 0.15);
+  background-image: url(../../e1.jpg);
     .oneLoserDiv {
       background-color: white;
+    }
+    #losersTitle {
+      background-image: url(../../e1.jpg);
+      color: white;
     }
 }
 
 #avatarSelectDiv {
   border: 1px solid black;
+  border-radius: 4px;
+  background-color: burlywood;
+  margin-bottom: 10px;
+}
+
+#losersContent {
+  border: darkgrey double 4px;
+}
+
+#avatarsHeader{
+  color: white;
 }

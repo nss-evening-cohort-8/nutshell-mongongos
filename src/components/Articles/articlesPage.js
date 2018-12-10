@@ -46,7 +46,7 @@ const articleComponent = () => {
 // FORM TO CREATE A NEW ARTICLE
 
 const modalFormBuilder = () => {
-  const domString = `<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
+  const domString = `<button type="button" class="btn btn-sm btn-article" data-toggle="modal" data-target="#articleModalCenter">Add A New Article</button>
 <div class="modal fade" id="articleModalCenter" tabindex="-1" role="dialog" aria-labelledby="articleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -65,8 +65,8 @@ const modalFormBuilder = () => {
           <input type="text" class="form-control" id="url-input-form" placeholder="www.google.com">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="save-new-article" class="btn btn-secondary">Save changes</button>
+          <button type="button" class="btn btn-secondary btn-article" data-dismiss="modal">Close</button>
+          <button type="button" id="save-new-article" class="btn btn-secondary btn-article">Save changes</button>
         </div>
     </div>
   </div>
@@ -148,7 +148,7 @@ const showEditForm = (e) => {
     .then((singleArticle) => {
       let domString = '<h2>Edit Article</h2>';
       domString += editFormBuilder(singleArticle);
-      domString += `<button id="article-to-edit" data-edit-id=${singleArticle.id} class="btn btn btn-sm edit">Save Article Change</button>`;
+      domString += `<button id="article-to-edit" data-edit-id=${singleArticle.id} class="btn btn btn-sm edit btn-article">Save Article Change</button>`;
       $(`#${articleToEdit}`).html(domString);
     })
     .catch((error) => {
