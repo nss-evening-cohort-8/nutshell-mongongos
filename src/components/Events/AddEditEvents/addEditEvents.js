@@ -3,7 +3,7 @@ import 'bootstrap';
 import '../events.scss';
 import authHelpers from '../../Helpers/authHelpers';
 import events from '../events';
-import eventsData from '../EventsData/eventsData';
+import eventsData from '../../Helpers/Data/eventsData';
 
 const eventFormBuilder = (event) => {
   const form = `<div class="modal-dialog modal-dialog-centered" role="document">
