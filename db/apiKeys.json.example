@@ -6,5 +6,8 @@
     "projectId": "",
     "storageBucket": "",
     "messagingSenderId": ""
-  }
+  },
+"weatherbitKey": {
+  "apiKey": ""
+}
 }

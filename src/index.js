@@ -24,12 +24,11 @@ $('#bannerLogo').html(`<img src=${bannerLogo}>`);
 
 const bindComponents = () => {
   events.initializeEventsPage();
+  addWeather.buildWeatherButtons();
   weather.weatherComponent();
   messages.initMessages();
   articlesPage.initializeArticles();
-  weather.weatherComponent();
   losers.losersBuilder();
-  addWeather.buildWeatherButtons();
   addEvents.buildEventButton();
 };
 

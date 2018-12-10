@@ -36,7 +36,6 @@ const printWeatherApi = (weather, locationId, currentLocation) => {
   }
   domString += `<div id="delete-zipcode-button" data-zip-id="${locationId}"<i class="far fa-trash-alt"></i></div>`;
   $('#weather-container').html(domString);
-  // ${weather.weather.description}
 };
 
 const weatherComponent = () => {

@@ -30,13 +30,15 @@ const checkLoginStatus = (bindComponents) => {
       $('#nav-logout').show();
       $('#nav-friends').show();
       $('.outer-container').show();
+      $('#weather-header').addClass('weather-background');
       bindComponents();
     } else {
       $('#nav-logout').hide();
       $('#nav-friends').hide();
       $('#message-container').html('');
       $('#message-input').html('');
-      $('#weather-header').html('');
+      $('#weather-header').hide();
+      $('#weather-header').removeClass('weather-background');
       $('#weather-buttons').html('');
       $('#add-edit-zipcode').html('');
       $('#dropdown-container').html('');
