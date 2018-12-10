@@ -10,6 +10,8 @@ let selectedAvatar = '';
 
 const getSelectedAvatar = () => selectedAvatar;
 
+// Event for user choosing an avatar from the list
+
 const clickOnAvatar = () => {
   $('.avatarImage').on('click', (event) => {
     const selection = event.target;
@@ -18,6 +20,8 @@ const clickOnAvatar = () => {
     selectedAvatar = selection.dataset.avatarUrl;
   });
 };
+
+// Builds the list of avatars and applys events
 
 const selectAvatarBuilder = () => {
   avatarsData.getAvatars()
@@ -34,6 +38,8 @@ const selectAvatarBuilder = () => {
       console.log(err);
     });
 };
+
+// Adds the chosen avatar to the users profile
 
 const selectAvatar = selection => new Promise((resolve, reject) => {
   losersData.getUserTag(authHelpers.getCurrentUid())

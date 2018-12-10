@@ -6,6 +6,8 @@ import apiKeys from '../../../../db/apiKeys.json';
 const URL = apiKeys.firebaseKeys.databaseURL;
 // const storageURL = apiKeys.firebaseKeys.storageBucket;
 
+// Creates a cross-reference to the avatar path name when avatar is uploaded
+
 const addAvatarDatabaseRef = fileName => new Promise((resolve, reject) => {
   axios.post(`${URL}/avatarRef.json`, JSON.stringify(fileName))
     .then(() => {
@@ -15,6 +17,8 @@ const addAvatarDatabaseRef = fileName => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// Gets the avatar cross-references and returns an array
 
 const getAvatarDatabaseRef = () => new Promise((resolve, reject) => {
   axios.get(`${URL}/avatarRef.json`)
@@ -32,6 +36,8 @@ const getAvatarDatabaseRef = () => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// Uploads an avatar to the site storage and adds the cross-reference
 
 const addAvatar = () => new Promise((resolve, reject) => {
   const newAvatar = document.getElementById('addAvatarInput').files[0];
@@ -52,6 +58,8 @@ const addAvatar = () => new Promise((resolve, reject) => {
       reject(err);
     });
 });
+
+// Gets the links for each avatar image from the storage using the cross-references
 
 const getAvatars = () => new Promise((resolve, reject) => {
   const storage = firebase.storage();
