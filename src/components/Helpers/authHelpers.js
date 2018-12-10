@@ -29,7 +29,7 @@ const checkLoginStatus = (bindComponents) => {
       $('#login-page').html('');
       $('#nav-logout').show();
       $('#nav-friends').show();
-      $('#article-section').show();
+      $('.outer-container').show();
       bindComponents();
     } else {
       $('#nav-logout').hide();
@@ -48,7 +48,7 @@ const checkLoginStatus = (bindComponents) => {
       $('#events-modal-container').html('');
       $('#single-container').html('');
       $('#modal-section').html('');
-      $('#article-section').hide();
+      $('.outer-container').hide();
       auth.loginPage();
     }
   });
