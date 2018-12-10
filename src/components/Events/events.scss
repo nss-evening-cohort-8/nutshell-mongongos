@@ -5,20 +5,33 @@
   color: rgb(8, 185, 8);
 }
 
-#delete-event-button {
+#delete-btn-event {
   color: red;
   margin-left: 95px;
 }
 
-#edit-event {
+#edit-btn-event {
     color:blue;
     margin-left: 95px;
 }
 
 #add-edit-event {
-    margin-top: -200px;
+  margin-top:-200px;
+  }
+
+.form-group {
+    width: 238px;
 }
 
-#modal-header {
-    margin-top:-20px;
+.form-event-location{
+    margin-left: -20px;
+}
+
+#editModalHeader {
+    margin-bottom: -100px;
+}
+.modal-body {
+   margin: 0%;
+   padding: 0%;
+   border-radius: 0%;
 }
