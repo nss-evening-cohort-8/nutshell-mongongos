@@ -270,8 +270,15 @@ const losersListBuilder = () => {
     .then((losersArray) => {
       let loserListString = '';
       losersArray.forEach((loser) => {
+        let avatar;
+        if (loser.avatar === undefined) {
+          avatar = 'https://firebasestorage.googleapis.com/v0/b/nutshell-mongos.appspot.com/o/mongongopic.jpg?alt=media&token=256d46f5-6eee-4bc8-8d09-dbcfe833bb2b';
+        } else {
+          // eslint-disable-next-line prefer-destructuring
+          avatar = loser.avatar;
+        }
         loserListString += `<div class='oneLoserDiv col-4'>
-                              <img class='oneLoserAvatar avatarImage' src='${loser.avatar}'/>
+                              <img class='oneLoserAvatar avatarImage' src='${avatar}'/>
                               <p class='oneLoserName'>${loser.userName}</p>
                               <button type='button' class='btn btn-danger btn-sm removeLoserButton' data-loser-uid='${loser.uid}'>Remove</button>
                             </div>`;
