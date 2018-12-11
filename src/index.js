@@ -18,7 +18,7 @@ import addEvents from './components/Events/AddEditEvents/addEditEvents';
 import apiKeys from '../db/apiKeys.json';
 import './index.scss';
 
-import bannerLogo from './BannerConnect2.png';
+import bannerLogo from './images/BannerConnect2.png';
 
 $('#bannerLogo').html(`<img src=${bannerLogo}>`);
 
