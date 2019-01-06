@@ -9,6 +9,10 @@ This project was a group effort to create a single web page application with mul
 
 ### How to run this app
 
+* This app has been deployed to firebase and can be viewed here: https://nutshell-mongos.firebaseapp.com/
+
+### To run on localhost
+
 * Once you have a clone of the project install the web dependencies in the terminal:
 ```sh
 npm install
